@@ -1,0 +1,32 @@
+# PART B 스택. 하나라도 slim 이미지에서 빌드 실패하면 배포 직전이 아니라 지금 발견한다 (PART N).
+# Web / ASGI
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pydantic>=2.6
+pydantic-settings>=2.2
+
+# DB (SQLAlchemy 2.x + Alembic, async 드라이버 asyncpg)
+SQLAlchemy>=2.0
+alembic>=1.13
+asyncpg>=0.29
+psycopg2-binary>=2.9
+
+# Messaging (RabbitMQ)
+aio-pika>=9.4
+
+# HTTP / 회복탄력성
+httpx>=0.27
+tenacity>=8.2
+pybreaker>=1.2
+
+# Cache
+redis>=5.0
+
+# AWS (인스턴스 프로파일 자격증명, C-8)
+boto3>=1.34
+
+# NLP / 문서 / OCR
+kiwipiepy>=0.17
+pdfplumber>=0.11
+PyMuPDF>=1.24
+google-cloud-vision>=3.7
