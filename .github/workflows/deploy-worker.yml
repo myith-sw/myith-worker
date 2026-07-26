@@ -1,0 +1,123 @@
+name: Deploy Worker
+
+# myith-worker 저장소의 .github/workflows/deploy-worker.yml 로 저장한다.
+#
+# Core 와 다른 점:
+#   - JAR 빌드 없음 (Python 은 소스를 이미지에 복사)
+#   - ALB 에 등록돼 있지 않아 외부에서 헬스체크 불가
+#     -> 컨테이너 내부에서 /health 를 확인한다
+#   - RabbitMQ 는 건드리지 않는다 (--no-deps worker)
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [main, develop]
+  push:
+    branches: [main, develop]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  AWS_REGION: ap-northeast-2
+  ECR_REPOSITORY: myith-worker-app
+  INSTANCE_ID: i-0c449d1df357f7384 # Worker EC2 (프라이빗, SSM 전용)
+
+jobs:
+  test:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python -m pytest tests/ -q
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: deploy-worker
+      cancel-in-progress: true
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to ECR
+        id: ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build and push image
+        env:
+          REGISTRY: ${{ steps.ecr.outputs.registry }}
+        run: |
+          TAG=$(git rev-parse --short HEAD)
+          IMAGE="${REGISTRY}/${ECR_REPOSITORY}"
+          echo "IMAGE_TAG=${TAG}" >> "$GITHUB_ENV"
+          docker buildx build \
+            --platform linux/amd64 \
+            --cache-from type=gha \
+            --cache-to type=gha,mode=max \
+            -t "${IMAGE}:${TAG}" \
+            -t "${IMAGE}:latest" \
+            --push .
+
+      - name: Deploy to Worker EC2 via SSM
+        run: |
+          COMMAND_ID=$(aws ssm send-command \
+            --document-name "AWS-RunShellScript" \
+            --instance-ids "${INSTANCE_ID}" \
+            --region "${AWS_REGION}" \
+            --comment "deploy worker ${IMAGE_TAG}" \
+            --parameters commands="[
+              \"set -e\",
+              \"cd /home/ubuntu\",
+              \"aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${{ steps.ecr.outputs.registry }}\",
+              \"IMAGE_TAG=${IMAGE_TAG} docker compose -f docker-compose.worker.yml pull worker\",
+              \"IMAGE_TAG=${IMAGE_TAG} docker compose -f docker-compose.worker.yml up -d --no-deps worker\",
+              \"sleep 10\",
+              \"docker compose -f docker-compose.worker.yml exec -T worker curl -fsS http://localhost:8000/health\",
+              \"docker image prune -f\"
+            ]" \
+            --query "Command.CommandId" --output text)
+          echo "COMMAND_ID=${COMMAND_ID}" >> "$GITHUB_ENV"
+          echo "sent: ${COMMAND_ID}"
+
+      - name: Wait for SSM command
+        run: |
+          aws ssm wait command-executed \
+            --command-id "${COMMAND_ID}" \
+            --instance-id "${INSTANCE_ID}" \
+            --region "${AWS_REGION}" || true
+
+          STATUS=$(aws ssm get-command-invocation \
+            --command-id "${COMMAND_ID}" \
+            --instance-id "${INSTANCE_ID}" \
+            --region "${AWS_REGION}" \
+            --query "Status" --output text)
+
+          echo "--- stdout ---"
+          aws ssm get-command-invocation \
+            --command-id "${COMMAND_ID}" --instance-id "${INSTANCE_ID}" \
+            --region "${AWS_REGION}" \
+            --query "StandardOutputContent" --output text
+          echo "--- stderr ---"
+          aws ssm get-command-invocation \
+            --command-id "${COMMAND_ID}" --instance-id "${INSTANCE_ID}" \
+            --region "${AWS_REGION}" \
+            --query "StandardErrorContent" --output text
+
+          [ "$STATUS" = "Success" ] || { echo "deploy failed: $STATUS"; exit 1; }

@@ -569,7 +569,11 @@ LLM으로 매번 생성하지 않는다 (재현성·근거 확보).
 
 # PART G. 파이프라인 2 — 교차검증 진단
 
-`RoadmapGenerationRequested` 수신 시 실행.
+`RoadmapGenerationRequested` 수신 시 실행. payload는 D-2 참조.
+
+※ roadmapId·userId 는 숫자(Long)다. API 경로에 쓰이는 "rmp_42" 같은
+  접두사 문자열은 Core 컨트롤러 진입점에서만 변환되며, 메시지 payload
+  에는 적용되지 않는다. 접두사를 파싱하려 하지 말 것.
 
 ## G-1. 교차검증 구조
 

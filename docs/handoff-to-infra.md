@@ -4,7 +4,21 @@ Worker 저장소가 인프라(myith-infra)에 의존하거나, 인프라 쪽 변
 
 ---
 
-## [2026-07-25] 시크릿 환경변수가 worker 컨테이너에 주입되지 않는다
+## [2026-07-25] ✅ 종료 — 시크릿 환경변수가 worker 컨테이너에 주입되지 않는다
+
+**해결(2026-07-25):** `docker-compose.worker.yml`의 `worker.environment:`에 시크릿 6개가
+`${VAR:-}` 형식(미설정 시 빈 문자열)으로 추가됨: `LLM_API_KEY`, `LLM_MODEL`,
+`LLM_MODEL_LIGHT`, `NCS_SERVICE_KEY`, `WANTED_API_KEY`, `GITHUB_TOKEN`. O-3 표와 이름 일치 확인.
+
+- Worker 쪽 대응: `${VAR:-}`가 빈 문자열을 주입하므로 `settings.py`가 빈 문자열을 `None`으로
+  강등(`_empty_str_to_none`)하고, 모델명은 `llm_model`/`llm_model_light` 프로퍼티로 기본값 폴백.
+- **남은 항목(블로커 아님):** `GOOGLE_APPLICATION_CREDENTIALS`(Vision OCR, I-5)는 파일 경로 +
+  볼륨 마운트가 필요해 compose에 아직 없음. OCR/Vision(PART 9) 구현 시점에 파일 마운트와 함께 추가.
+  그전까지는 OCR 단계 스킵/폴백으로 정상 동작.
+
+---
+
+## [2026-07-25] (원본 기록) 시크릿 환경변수가 worker 컨테이너에 주입되지 않는다
 
 **발단:** PART N 1번(프로젝트 셋업) 후 `docker-compose.worker.yml`과 `settings.py`의 환경변수 계약(O-3)을 대조하던 중 발견.
 

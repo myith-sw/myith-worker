@@ -9,7 +9,13 @@
 
 from functools import lru_cache
 
+from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+# 모델명 기본값 (I-4). compose가 LLM_MODEL을 빈 문자열로 주입할 수 있어
+# 아래 프로퍼티에서 폴백한다.
+DEFAULT_LLM_MODEL = "claude-sonnet-4"
+DEFAULT_LLM_MODEL_LIGHT = "claude-haiku-4"
 
 
 class Settings(BaseSettings):
@@ -38,9 +44,10 @@ class Settings(BaseSettings):
     AWS_REGION: str = "ap-northeast-2"
 
     # ── 시크릿 (운영자 .env, 기본값 없음 → 없으면 폴백) ──────
+    # 모델명은 None으로 두고 아래 프로퍼티에서 기본값으로 폴백한다.
     LLM_API_KEY: str | None = None
-    LLM_MODEL: str = "claude-sonnet-4"  # 설정 기본값 (I-4)
-    LLM_MODEL_LIGHT: str = "claude-haiku-4"  # STAR 피드백용 경량 (H-2)
+    LLM_MODEL: str | None = None  # 설정 기본값 (I-4) → property llm_model
+    LLM_MODEL_LIGHT: str | None = None  # 경량 (H-2) → property llm_model_light
     NCS_SERVICE_KEY: str | None = None
     WANTED_API_KEY: str | None = None
     GITHUB_TOKEN: str | None = None
@@ -73,6 +80,29 @@ class Settings(BaseSettings):
     LLM_SCHEMA_RETRIES: int = 2
     DOC_MIN_CHARS_PER_PAGE: int = 50  # G-4 텍스트 충분 판정
     OCR_CONFIDENCE_MIN: float = 0.6
+
+    # compose의 `${VAR:-}`는 미설정 시 빈 문자열을 주입한다. 빈 문자열은
+    # "제공되지 않음"으로 취급해 None으로 바꾼다 → 폴백이 정상 동작한다 (O-3).
+    @field_validator(
+        "DATABASE_URL", "REDIS_HOST", "RABBITMQ_USER", "RABBITMQ_PASSWORD",
+        "S3_BUCKET", "LLM_API_KEY", "LLM_MODEL", "LLM_MODEL_LIGHT",
+        "NCS_SERVICE_KEY", "WANTED_API_KEY", "GITHUB_TOKEN",
+        "GOOGLE_APPLICATION_CREDENTIALS",
+        mode="before",
+    )
+    @classmethod
+    def _empty_str_to_none(cls, v: object) -> object:
+        if isinstance(v, str) and v.strip() == "":
+            return None
+        return v
+
+    @property
+    def llm_model(self) -> str:
+        return self.LLM_MODEL or DEFAULT_LLM_MODEL
+
+    @property
+    def llm_model_light(self) -> str:
+        return self.LLM_MODEL_LIGHT or DEFAULT_LLM_MODEL_LIGHT
 
     @property
     def async_database_url(self) -> str | None:

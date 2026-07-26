@@ -1,0 +1,32 @@
+[
+  {
+    "ncs_unit_code": "2001010102_23v1",
+    "cert_code": "1320",
+    "cert_name": "정보처리기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001010103_23v1",
+    "cert_code": "1320",
+    "cert_name": "정보처리기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001010103_23v1",
+    "cert_code": "1324",
+    "cert_name": "SQL개발자(SQLD)",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "2001010105_23v1",
+    "cert_code": "1181",
+    "cert_name": "정보보안기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001010105_23v1",
+    "cert_code": "1320",
+    "cert_name": "정보처리기사",
+    "unit_type": "선택"
+  }
+]
