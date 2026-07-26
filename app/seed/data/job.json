@@ -1,0 +1,39 @@
+[
+  {
+    "job_code": "backend",
+    "job_name": "백엔드 개발자",
+    "category_code": "it",
+    "category_name": "IT",
+    "tagline": "서버와 데이터를 다루며 서비스의 뼈대를 만드는 개발자",
+    "ncs_detail_code": "20010202"
+  },
+  {
+    "job_code": "frontend",
+    "job_name": "프론트엔드 개발자",
+    "category_code": "it",
+    "category_name": "IT",
+    "tagline": "사용자가 직접 만나는 화면과 경험을 구현하는 개발자",
+    "ncs_detail_code": "20010202"
+  },
+  {
+    "job_code": "data-engineer",
+    "job_name": "데이터 엔지니어",
+    "category_code": "it",
+    "category_name": "IT",
+    "tagline": "데이터 파이프라인과 저장소를 설계·운영하는 개발자"
+  },
+  {
+    "job_code": "devops",
+    "job_name": "DevOps·인프라 엔지니어",
+    "category_code": "it",
+    "category_name": "IT",
+    "tagline": "빌드·배포·운영을 자동화하고 인프라를 책임지는 엔지니어"
+  },
+  {
+    "job_code": "qa",
+    "job_name": "QA 엔지니어",
+    "category_code": "it",
+    "category_name": "IT",
+    "tagline": "품질을 설계하고 검증하는 소프트웨어 테스트 엔지니어"
+  }
+]

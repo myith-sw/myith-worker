@@ -1,14 +1,68 @@
 [
-  { "skill_code": "java",          "ncs_unit_code": "2001010106_23v1", "is_primary": true },
-  { "skill_code": "python",        "ncs_unit_code": "2001010106_23v1", "is_primary": true },
-  { "skill_code": "spring",        "ncs_unit_code": "2001010102_23v1", "is_primary": true },
-  { "skill_code": "rest",          "ncs_unit_code": "2001010102_23v1", "is_primary": true },
-  { "skill_code": "jpa",           "ncs_unit_code": "2001010103_23v1", "is_primary": true },
-  { "skill_code": "sql",           "ncs_unit_code": "2001010103_23v1", "is_primary": true },
-  { "skill_code": "redis",         "ncs_unit_code": "2001010103_23v1", "is_primary": true },
-  { "skill_code": "aws",           "ncs_unit_code": "2001010104_23v1", "is_primary": true },
-  { "skill_code": "system-design", "ncs_unit_code": "2001010101_23v1", "is_primary": true },
-  { "skill_code": "security",      "ncs_unit_code": "2001010105_23v1", "is_primary": true },
-  { "skill_code": "docker",        "ncs_unit_code": "2001010104_23v1", "is_primary": true },
-  { "skill_code": "docker",        "ncs_unit_code": "2001010105_23v1", "is_primary": false }
+  { "skill_code": "java",            "ncs_unit_code": "2001020231_23v5", "is_primary": true  },
+  { "skill_code": "python",          "ncs_unit_code": "2001020231_23v5", "is_primary": true  },
+  { "skill_code": "kotlin",          "ncs_unit_code": "2001020231_23v5", "is_primary": true  },
+  { "skill_code": "typescript",      "ncs_unit_code": "2001020231_23v5", "is_primary": true  },
+
+  { "skill_code": "oop",             "ncs_unit_code": "2001020230_23v5", "is_primary": true  },
+  { "skill_code": "functional",      "ncs_unit_code": "2001020230_23v5", "is_primary": true  },
+
+  { "skill_code": "spring",          "ncs_unit_code": "2001020211_23v6", "is_primary": true  },
+  { "skill_code": "spring-security", "ncs_unit_code": "2001020211_23v6", "is_primary": true  },
+  { "skill_code": "nodejs",          "ncs_unit_code": "2001020211_23v6", "is_primary": true  },
+  { "skill_code": "fastapi",         "ncs_unit_code": "2001020211_23v6", "is_primary": true  },
+
+  { "skill_code": "rest",            "ncs_unit_code": "2001020212_23v6", "is_primary": true  },
+  { "skill_code": "graphql",         "ncs_unit_code": "2001020212_23v6", "is_primary": true  },
+  { "skill_code": "grpc",            "ncs_unit_code": "2001020212_23v6", "is_primary": true  },
+  { "skill_code": "openapi",         "ncs_unit_code": "2001020212_23v6", "is_primary": true  },
+
+  { "skill_code": "sql",             "ncs_unit_code": "2001020205_23v6", "is_primary": true  },
+  { "skill_code": "jpa",             "ncs_unit_code": "2001020205_23v6", "is_primary": true  },
+  { "skill_code": "postgresql",      "ncs_unit_code": "2001020205_23v6", "is_primary": true  },
+  { "skill_code": "mysql",           "ncs_unit_code": "2001020205_23v6", "is_primary": true  },
+  { "skill_code": "mongodb",         "ncs_unit_code": "2001020205_23v6", "is_primary": true  },
+  { "skill_code": "redis",           "ncs_unit_code": "2001020205_23v6", "is_primary": true  },
+
+  { "skill_code": "kafka",           "ncs_unit_code": "2001020206_23v6", "is_primary": true  },
+  { "skill_code": "rabbitmq",        "ncs_unit_code": "2001020206_23v6", "is_primary": true  },
+  { "skill_code": "msa",             "ncs_unit_code": "2001020206_23v6", "is_primary": true  },
+
+  { "skill_code": "docker",          "ncs_unit_code": "2001020214_23v6", "is_primary": true  },
+  { "skill_code": "kubernetes",      "ncs_unit_code": "2001020214_23v6", "is_primary": true  },
+  { "skill_code": "ci-cd",           "ncs_unit_code": "2001020214_23v6", "is_primary": true  },
+
+  { "skill_code": "aws",             "ncs_unit_code": "2001020208_23v5", "is_primary": true  },
+  { "skill_code": "linux",           "ncs_unit_code": "2001020208_23v5", "is_primary": true  },
+  { "skill_code": "monitoring",      "ncs_unit_code": "2001020208_23v5", "is_primary": true  },
+
+  { "skill_code": "junit",           "ncs_unit_code": "2001020227_23v6", "is_primary": true  },
+  { "skill_code": "pytest",          "ncs_unit_code": "2001020227_23v6", "is_primary": true  },
+  { "skill_code": "tdd",             "ncs_unit_code": "2001020227_23v6", "is_primary": true  },
+
+  { "skill_code": "system-design",   "ncs_unit_code": "2001020221_23v6", "is_primary": true  },
+  { "skill_code": "ddd",             "ncs_unit_code": "2001020221_23v6", "is_primary": true  },
+
+  { "skill_code": "erd",             "ncs_unit_code": "2001020222_23v6", "is_primary": true  },
+  { "skill_code": "uml",             "ncs_unit_code": "2001020223_23v6", "is_primary": true  },
+
+  { "skill_code": "git",             "ncs_unit_code": "2001020233_23v5", "is_primary": true  },
+  { "skill_code": "ide",             "ncs_unit_code": "2001020233_23v5", "is_primary": true  },
+
+  { "skill_code": "refactoring",     "ncs_unit_code": "2001020217_23v6", "is_primary": true  },
+  { "skill_code": "clean-code",      "ncs_unit_code": "2001020217_23v6", "is_primary": true  },
+
+  { "skill_code": "agile",           "ncs_unit_code": "2001020229_23v6", "is_primary": true  },
+  { "skill_code": "algorithm",       "ncs_unit_code": "2001020235_23v1", "is_primary": true  },
+  { "skill_code": "os-network",      "ncs_unit_code": "2001020232_23v5", "is_primary": true  },
+
+  { "skill_code": "react",           "ncs_unit_code": "2001020225_23v6", "is_primary": true  },
+  { "skill_code": "vue",             "ncs_unit_code": "2001020225_23v6", "is_primary": true  },
+  { "skill_code": "html-css",        "ncs_unit_code": "2001020225_23v6", "is_primary": true  },
+  { "skill_code": "figma",           "ncs_unit_code": "2001020224_23v6", "is_primary": true  },
+
+  { "skill_code": "docker",          "ncs_unit_code": "2001020209_23v6", "is_primary": false },
+  { "skill_code": "spring",          "ncs_unit_code": "2001020221_23v6", "is_primary": false },
+  { "skill_code": "sql",             "ncs_unit_code": "2001020222_23v6", "is_primary": false },
+  { "skill_code": "rest",            "ncs_unit_code": "2001020218_23v6", "is_primary": false }
 ]

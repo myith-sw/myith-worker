@@ -1,0 +1,177 @@
+[
+  {
+    "job_code": "backend",
+    "version": 1,
+    "axes": [
+      { "axisCode": "dev-env",   "axisName": "개발자 환경 구축",   "ncsUnitCode": "2001020233_23v5", "order": 1 },
+      { "axisCode": "lang",      "axisName": "프로그래밍 언어 활용", "ncsUnitCode": "2001020231_23v5", "order": 2 },
+      { "axisCode": "data",      "axisName": "데이터 입출력 구현",  "ncsUnitCode": "2001020205_23v6", "order": 3 },
+      { "axisCode": "server",    "axisName": "서버프로그램 구현",   "ncsUnitCode": "2001020211_23v6", "order": 4 },
+      { "axisCode": "interface", "axisName": "인터페이스 구현",     "ncsUnitCode": "2001020212_23v6", "order": 5 },
+      { "axisCode": "integrate", "axisName": "통합 구현",          "ncsUnitCode": "2001020206_23v6", "order": 6 },
+      { "axisCode": "deploy",    "axisName": "애플리케이션 배포",   "ncsUnitCode": "2001020214_23v6", "order": 7 },
+      { "axisCode": "ops",       "axisName": "정보시스템 이행",     "ncsUnitCode": "2001020208_23v5", "order": 8 },
+      { "axisCode": "design",    "axisName": "애플리케이션 설계",   "ncsUnitCode": "2001020221_23v6", "order": 9 }
+    ],
+    "skills": [
+      { "skillCode": "git",           "skillName": "Git",       "axisCode": "dev-env",   "p": 1.00, "s": 0.20, "n": 0.1429, "d": 0.1257, "level": 1 },
+      { "skillCode": "java",          "skillName": "Java",      "axisCode": "lang",      "p": 0.95, "s": 0.30, "n": 0.1429, "d": 0.1857, "level": 1 },
+      { "skillCode": "sql",           "skillName": "SQL",       "axisCode": "data",      "p": 0.95, "s": 0.30, "n": 0.5714, "d": 0.2929, "level": 2 },
+      { "skillCode": "rest",          "skillName": "REST API",  "axisCode": "interface", "p": 0.88, "s": 0.40, "n": 0.5714, "d": 0.3589, "level": 3 },
+      { "skillCode": "docker",        "skillName": "Docker",    "axisCode": "deploy",    "p": 0.70, "s": 0.45, "n": 0.2857, "d": 0.3639, "level": 3 },
+      { "skillCode": "spring",        "skillName": "Spring",    "axisCode": "server",    "p": 0.90, "s": 0.45, "n": 0.5714, "d": 0.3754, "level": 3 },
+      { "skillCode": "jpa",           "skillName": "JPA",       "axisCode": "data",      "p": 0.65, "s": 0.50, "n": 0.5714, "d": 0.4729, "level": 4 },
+      { "skillCode": "aws",           "skillName": "AWS",       "axisCode": "ops",       "p": 0.60, "s": 0.55, "n": 0.5714, "d": 0.5104, "level": 4 },
+      { "skillCode": "redis",         "skillName": "Redis",     "axisCode": "data",      "p": 0.45, "s": 0.55, "n": 0.5714, "d": 0.5554, "level": 4 },
+      { "skillCode": "kafka",         "skillName": "Kafka",     "axisCode": "integrate", "p": 0.35, "s": 0.65, "n": 0.5714, "d": 0.6304, "level": 5 },
+      { "skillCode": "system-design", "skillName": "시스템 설계", "axisCode": "design",    "p": 0.40, "s": 0.70, "n": 0.7143, "d": 0.6736, "level": 5 }
+    ],
+    "levels": [
+      { "level": 1, "skillCodes": ["git", "java"] },
+      { "level": 2, "skillCodes": ["sql"] },
+      { "level": 3, "skillCodes": ["rest", "docker", "spring"] },
+      { "level": 4, "skillCodes": ["jpa", "aws", "redis"] },
+      { "level": 5, "skillCodes": ["kafka", "system-design"] }
+    ],
+    "prerequisites": [
+      { "from": "git",    "to": "spring" },
+      { "from": "java",   "to": "spring" },
+      { "from": "java",   "to": "jpa" },
+      { "from": "sql",    "to": "jpa" },
+      { "from": "spring", "to": "rest" },
+      { "from": "rest",   "to": "aws" },
+      { "from": "sql",    "to": "redis" },
+      { "from": "docker", "to": "aws" },
+      { "from": "spring", "to": "kafka" },
+      { "from": "spring", "to": "system-design" }
+    ],
+    "questions": [
+      { "skillCode": "git",           "axisCode": "dev-env",   "text": "Git으로 버전 관리를 해본 경험이 있나요?" },
+      { "skillCode": "java",          "axisCode": "lang",      "text": "Java로 실제 기능을 구현해 본 경험이 있나요?" },
+      { "skillCode": "sql",           "axisCode": "data",      "text": "SQL로 데이터를 조회·조작해 본 경험이 있나요?" },
+      { "skillCode": "spring",        "axisCode": "server",    "text": "Spring으로 서버 애플리케이션을 만들어 본 경험이 있나요?" },
+      { "skillCode": "rest",          "axisCode": "interface", "text": "REST API를 직접 설계·구현해 본 경험이 있나요?" },
+      { "skillCode": "docker",        "axisCode": "deploy",    "text": "Docker로 애플리케이션을 컨테이너화해 본 경험이 있나요?" },
+      { "skillCode": "aws",           "axisCode": "ops",       "text": "AWS에 애플리케이션을 배포·운영해 본 경험이 있나요?" },
+      { "skillCode": "system-design", "axisCode": "design",    "text": "시스템 구조를 스스로 설계해 본 경험이 있나요?" }
+    ],
+    "quest_templates": [
+      { "skillCode": "git", "ncsUnitCode": "2001020233_23v5", "title": "Git으로 버전 관리를 익힌다",
+        "completionCriteria": "브랜치를 나눠 작업하고 병합까지 한 사이클을 완성한다",
+        "guidance": { "none": "Git이 처음이라면 add·commit·push 흐름부터 익혀보세요.", "aware": "브랜치를 만들어 작업하고 병합해보세요.", "experienced": "이미 익숙하니 완료로 표시했습니다. 협업 전략(PR·리베이스)을 STAR로 기록해두세요.", "proficient": "능숙한 영역입니다. 팀 브랜치 전략을 설계한 사례를 STAR로 남겨보세요." } },
+      { "skillCode": "java", "ncsUnitCode": "2001020231_23v5", "title": "Java 기본기를 다진다",
+        "completionCriteria": "객체지향 개념을 적용한 프로그램을 하나 완성한다",
+        "guidance": { "none": "Java가 처음이라면 변수·조건·반복부터 익혀보세요.", "aware": "클래스와 객체를 직접 설계해 작은 프로그램을 만들어보세요.", "experienced": "이미 경험이 있으니 완료로 표시했습니다. 대표 프로젝트를 STAR로 기록해두면 취업 자산이 됩니다.", "proficient": "능숙하신 영역입니다. 제네릭·동시성까지 다룬 사례를 STAR로 남겨보세요." } },
+      { "skillCode": "sql", "ncsUnitCode": "2001020205_23v6", "title": "SQL로 데이터를 다룬다",
+        "completionCriteria": "조인과 집계를 포함한 조회 쿼리를 작성해 결과를 확인한다",
+        "guidance": { "none": "SELECT·WHERE부터 시작해 한 테이블 조회에 익숙해지세요.", "aware": "JOIN으로 여러 테이블을 엮고 GROUP BY로 집계해보세요.", "experienced": "경험이 있으니 완료로 표시했습니다. 쿼리 튜닝 사례를 STAR로 기록해두세요.", "proficient": "능숙한 영역입니다. 실행계획 최적화 경험을 STAR로 남겨보세요." } },
+      { "skillCode": "rest", "ncsUnitCode": "2001020212_23v6", "title": "REST API 서버를 구현한다",
+        "completionCriteria": "CRUD 엔드포인트를 만들고 동작을 확인한다",
+        "guidance": { "none": "REST가 처음이라면 HTTP 메서드부터 이해하고 시작하세요.", "aware": "회원 조회·등록 API 2개를 만들고 상태 코드를 설계해보세요.", "experienced": "경험이 있으니 완료로 표시했습니다. 에러 응답 표준화 사례를 STAR로 기록해두세요.", "proficient": "능숙한 영역입니다. API 버저닝·문서화까지 다룬 사례를 STAR로 남겨보세요." } },
+      { "skillCode": "docker", "ncsUnitCode": "2001020214_23v6", "title": "Docker로 컨테이너화한다",
+        "completionCriteria": "애플리케이션 이미지를 빌드해 컨테이너로 실행한다",
+        "guidance": { "none": "이미지와 컨테이너의 차이부터 이해하세요.", "aware": "Dockerfile을 작성해 앱을 이미지로 만들어보세요.", "experienced": "경험이 있으니 완료로 표시했습니다. compose로 여러 서비스를 묶은 사례를 STAR로 기록해두세요.", "proficient": "능숙한 영역입니다. 멀티스테이지 빌드·이미지 최적화 사례를 STAR로 남겨보세요." } },
+      { "skillCode": "spring", "ncsUnitCode": "2001020211_23v6", "title": "Spring으로 서버를 만든다",
+        "completionCriteria": "컨트롤러·서비스·레포지토리 계층으로 기능 하나를 완성한다",
+        "guidance": { "none": "의존성 주입과 빈 개념부터 이해하세요.", "aware": "계층을 나눠 기능 하나를 처음부터 끝까지 만들어보세요.", "experienced": "경험이 있으니 완료로 표시했습니다. 트랜잭션·예외 표준화 사례를 STAR로 기록해두세요.", "proficient": "능숙한 영역입니다. 대규모 서비스 설계 경험을 STAR로 남겨보세요." } },
+      { "skillCode": "jpa", "ncsUnitCode": "2001020205_23v6", "title": "JPA로 영속성을 다룬다",
+        "completionCriteria": "엔티티 연관관계를 매핑하고 조회·저장을 확인한다",
+        "guidance": { "none": "엔티티와 테이블 매핑 개념부터 익히세요.", "aware": "일대다·다대일 연관관계를 매핑해보세요.", "experienced": "경험이 있으니 완료로 표시했습니다. N+1 해결 사례를 STAR로 기록해두세요.", "proficient": "능숙한 영역입니다. 페치 전략·성능 최적화 사례를 STAR로 남겨보세요." } },
+      { "skillCode": "aws", "ncsUnitCode": "2001020208_23v5", "title": "AWS에 배포한다",
+        "completionCriteria": "애플리케이션을 클라우드에 올려 외부에서 접근되게 한다",
+        "guidance": { "none": "EC2에 앱을 한 번 띄워 보는 것부터 시작하세요.", "aware": "보안그룹·도메인 연결까지 구성해 배포해보세요.", "experienced": "경험이 있으니 완료로 표시했습니다. 운영 자동화 사례를 STAR로 기록해두세요.", "proficient": "능숙한 영역입니다. IaC·오토스케일 설계 경험을 STAR로 남겨보세요." } },
+      { "skillCode": "redis", "ncsUnitCode": "2001020205_23v6", "title": "Redis로 캐싱한다",
+        "completionCriteria": "조회 결과를 캐시에 저장해 응답을 개선한다",
+        "guidance": { "none": "키-값 저장 개념과 기본 명령부터 익히세요.", "aware": "조회 캐시를 적용하고 TTL을 설정해보세요.", "experienced": "경험이 있으니 완료로 표시했습니다. 캐시 무효화 전략 사례를 STAR로 기록해두세요.", "proficient": "능숙한 영역입니다. 분산 캐시·자료구조 활용 사례를 STAR로 남겨보세요." } },
+      { "skillCode": "kafka", "ncsUnitCode": "2001020206_23v6", "title": "Kafka로 비동기 연동한다",
+        "completionCriteria": "프로듀서·컨슈머로 메시지 흐름 하나를 구현한다",
+        "guidance": { "none": "메시지 큐와 이벤트 개념부터 이해하세요.", "aware": "간단한 프로듀서·컨슈머를 만들어 메시지를 주고받아보세요.", "experienced": "경험이 있으니 완료로 표시했습니다. 파티셔닝·순서 보장 사례를 STAR로 기록해두세요.", "proficient": "능숙한 영역입니다. 이벤트 기반 아키텍처 설계 경험을 STAR로 남겨보세요." } },
+      { "skillCode": "system-design", "ncsUnitCode": "2001020221_23v6", "title": "시스템을 설계한다",
+        "completionCriteria": "요구사항으로부터 컴포넌트 구조와 데이터 흐름을 설계한다",
+        "guidance": { "none": "기능을 컴포넌트로 나누는 연습부터 시작하세요.", "aware": "데이터 흐름과 책임을 다이어그램으로 정리해보세요.", "experienced": "경험이 있으니 완료로 표시했습니다. 확장성 고려 설계 사례를 STAR로 기록해두세요.", "proficient": "능숙한 영역입니다. 장애 대응·트레이드오프를 설명한 설계 경험을 STAR로 남겨보세요." } }
+    ],
+    "activity_quests": [
+      { "title": "CS 면접 질문을 정리한다", "axisCode": "lang", "level": 5, "completionCriteria": "핵심 CS 주제별 예상 질문과 답을 문서로 정리한다" },
+      { "title": "협업 프로젝트로 실전을 쌓는다", "axisCode": "server", "level": 5, "completionCriteria": "팀 프로젝트에서 API를 설계·구현하고 배포까지 경험한다" }
+    ]
+  },
+  {
+    "job_code": "frontend",
+    "version": 1,
+    "axes": [
+      { "axisCode": "dev-env",   "axisName": "개발자 환경 구축", "ncsUnitCode": "2001020233_23v5", "order": 1 },
+      { "axisCode": "lang",      "axisName": "프로그래밍 언어 활용", "ncsUnitCode": "2001020231_23v5", "order": 2 },
+      { "axisCode": "ui-impl",   "axisName": "화면 구현",       "ncsUnitCode": "2001020225_23v6", "order": 3 },
+      { "axisCode": "interface", "axisName": "인터페이스 구현",  "ncsUnitCode": "2001020212_23v6", "order": 4 },
+      { "axisCode": "deploy",    "axisName": "애플리케이션 배포", "ncsUnitCode": "2001020214_23v6", "order": 5 },
+      { "axisCode": "ui-design", "axisName": "화면 설계",       "ncsUnitCode": "2001020224_23v6", "order": 6 },
+      { "axisCode": "design",    "axisName": "애플리케이션 설계", "ncsUnitCode": "2001020221_23v6", "order": 7 }
+    ],
+    "skills": [
+      { "skillCode": "git",           "skillName": "Git",        "axisCode": "dev-env",   "p": 1.00, "s": 0.20, "n": 0.1429, "d": 0.1257, "level": 1 },
+      { "skillCode": "html-css",      "skillName": "HTML/CSS",   "axisCode": "ui-impl",   "p": 0.95, "s": 0.25, "n": 0.2857, "d": 0.1989, "level": 1 },
+      { "skillCode": "typescript",    "skillName": "TypeScript", "axisCode": "lang",      "p": 0.85, "s": 0.35, "n": 0.1429, "d": 0.2382, "level": 1 },
+      { "skillCode": "react",         "skillName": "React",      "axisCode": "ui-impl",   "p": 0.90, "s": 0.40, "n": 0.2857, "d": 0.2814, "level": 2 },
+      { "skillCode": "rest",          "skillName": "REST API",   "axisCode": "interface", "p": 0.80, "s": 0.40, "n": 0.5714, "d": 0.3829, "level": 2 },
+      { "skillCode": "ci-cd",         "skillName": "CI/CD",      "axisCode": "deploy",    "p": 0.55, "s": 0.50, "n": 0.2857, "d": 0.4314, "level": 3 },
+      { "skillCode": "figma",         "skillName": "Figma",      "axisCode": "ui-design", "p": 0.50, "s": 0.45, "n": 0.5714, "d": 0.4954, "level": 3 },
+      { "skillCode": "system-design", "skillName": "시스템 설계",  "axisCode": "design",    "p": 0.40, "s": 0.65, "n": 0.7143, "d": 0.6511, "level": 4 }
+    ],
+    "levels": [
+      { "level": 1, "skillCodes": ["git", "html-css", "typescript"] },
+      { "level": 2, "skillCodes": ["react", "rest"] },
+      { "level": 3, "skillCodes": ["ci-cd", "figma"] },
+      { "level": 4, "skillCodes": ["system-design"] }
+    ],
+    "prerequisites": [
+      { "from": "git",        "to": "react" },
+      { "from": "html-css",   "to": "react" },
+      { "from": "typescript", "to": "react" },
+      { "from": "react",      "to": "rest" },
+      { "from": "react",      "to": "ci-cd" },
+      { "from": "html-css",   "to": "figma" },
+      { "from": "react",      "to": "system-design" },
+      { "from": "rest",       "to": "system-design" }
+    ],
+    "questions": [
+      { "skillCode": "git",           "axisCode": "dev-env",   "text": "Git으로 버전 관리를 해본 경험이 있나요?" },
+      { "skillCode": "html-css",      "axisCode": "ui-impl",   "text": "HTML/CSS로 화면을 직접 만들어 본 경험이 있나요?" },
+      { "skillCode": "typescript",    "axisCode": "lang",      "text": "TypeScript로 타입을 적용해 개발해 본 경험이 있나요?" },
+      { "skillCode": "react",         "axisCode": "ui-impl",   "text": "React로 컴포넌트를 설계·구현해 본 경험이 있나요?" },
+      { "skillCode": "rest",          "axisCode": "interface", "text": "REST API를 연동해 데이터를 화면에 표시해 본 경험이 있나요?" },
+      { "skillCode": "ci-cd",         "axisCode": "deploy",    "text": "프론트엔드 빌드·배포 파이프라인을 구성해 본 경험이 있나요?" },
+      { "skillCode": "figma",         "axisCode": "ui-design", "text": "Figma로 화면을 설계해 본 경험이 있나요?" },
+      { "skillCode": "system-design", "axisCode": "design",    "text": "화면 구조와 상태 흐름을 스스로 설계해 본 경험이 있나요?" }
+    ],
+    "quest_templates": [
+      { "skillCode": "git", "ncsUnitCode": "2001020233_23v5", "title": "Git으로 버전 관리를 익힌다",
+        "completionCriteria": "브랜치를 나눠 작업하고 병합까지 한 사이클을 완성한다",
+        "guidance": { "none": "Git이 처음이라면 add·commit·push 흐름부터 익혀보세요.", "aware": "브랜치를 만들어 작업하고 병합해보세요.", "experienced": "이미 익숙하니 완료로 표시했습니다. 협업 전략을 STAR로 기록해두세요.", "proficient": "능숙한 영역입니다. 팀 브랜치 전략 설계 사례를 STAR로 남겨보세요." } },
+      { "skillCode": "html-css", "ncsUnitCode": "2001020225_23v6", "title": "HTML/CSS로 화면을 만든다",
+        "completionCriteria": "반응형 레이아웃을 갖춘 화면 하나를 완성한다",
+        "guidance": { "none": "태그와 박스 모델 개념부터 익혀보세요.", "aware": "Flexbox·Grid로 레이아웃을 잡아보세요.", "experienced": "경험이 있으니 완료로 표시했습니다. 반응형·접근성 사례를 STAR로 기록해두세요.", "proficient": "능숙한 영역입니다. 디자인 시스템 구축 사례를 STAR로 남겨보세요." } },
+      { "skillCode": "typescript", "ncsUnitCode": "2001020231_23v5", "title": "TypeScript로 타입을 다룬다",
+        "completionCriteria": "타입을 적용한 모듈을 하나 작성해 컴파일 오류 없이 동작시킨다",
+        "guidance": { "none": "기본 타입과 인터페이스부터 익혀보세요.", "aware": "함수·객체에 타입을 붙여보세요.", "experienced": "경험이 있으니 완료로 표시했습니다. 제네릭 활용 사례를 STAR로 기록해두세요.", "proficient": "능숙한 영역입니다. 타입 안전 설계 사례를 STAR로 남겨보세요." } },
+      { "skillCode": "react", "ncsUnitCode": "2001020225_23v6", "title": "React로 컴포넌트를 만든다",
+        "completionCriteria": "상태를 가진 컴포넌트로 기능 하나를 완성한다",
+        "guidance": { "none": "컴포넌트와 props 개념부터 익혀보세요.", "aware": "상태(useState)로 상호작용을 만들어보세요.", "experienced": "경험이 있으니 완료로 표시했습니다. 상태관리·성능 최적화 사례를 STAR로 기록해두세요.", "proficient": "능숙한 영역입니다. 컴포넌트 설계 원칙 적용 사례를 STAR로 남겨보세요." } },
+      { "skillCode": "rest", "ncsUnitCode": "2001020212_23v6", "title": "REST API를 연동한다",
+        "completionCriteria": "API를 호출해 데이터를 화면에 표시하고 로딩·에러를 처리한다",
+        "guidance": { "none": "fetch로 데이터를 받아오는 것부터 해보세요.", "aware": "로딩·에러 상태를 화면에 반영해보세요.", "experienced": "경험이 있으니 완료로 표시했습니다. 캐싱·재요청 전략 사례를 STAR로 기록해두세요.", "proficient": "능숙한 영역입니다. 데이터 페칭 아키텍처 사례를 STAR로 남겨보세요." } },
+      { "skillCode": "ci-cd", "ncsUnitCode": "2001020214_23v6", "title": "빌드·배포를 자동화한다",
+        "completionCriteria": "커밋 시 자동으로 빌드·배포되는 파이프라인을 구성한다",
+        "guidance": { "none": "빌드와 배포의 차이부터 이해하세요.", "aware": "정적 호스팅에 수동 배포부터 해보세요.", "experienced": "경험이 있으니 완료로 표시했습니다. 자동 배포 구성 사례를 STAR로 기록해두세요.", "proficient": "능숙한 영역입니다. 프리뷰 배포·롤백 전략 사례를 STAR로 남겨보세요." } },
+      { "skillCode": "figma", "ncsUnitCode": "2001020224_23v6", "title": "Figma로 화면을 설계한다",
+        "completionCriteria": "주요 화면의 와이어프레임과 흐름을 설계한다",
+        "guidance": { "none": "프레임과 컴포넌트 개념부터 익혀보세요.", "aware": "주요 화면 와이어프레임을 그려보세요.", "experienced": "경험이 있으니 완료로 표시했습니다. 디자인-개발 협업 사례를 STAR로 기록해두세요.", "proficient": "능숙한 영역입니다. 디자인 시스템 설계 사례를 STAR로 남겨보세요." } },
+      { "skillCode": "system-design", "ncsUnitCode": "2001020221_23v6", "title": "화면 구조를 설계한다",
+        "completionCriteria": "컴포넌트 구조와 상태 흐름을 설계한다",
+        "guidance": { "none": "화면을 컴포넌트로 나누는 연습부터 시작하세요.", "aware": "상태의 위치와 데이터 흐름을 정리해보세요.", "experienced": "경험이 있으니 완료로 표시했습니다. 상태관리 아키텍처 사례를 STAR로 기록해두세요.", "proficient": "능숙한 영역입니다. 대규모 프론트엔드 설계 사례를 STAR로 남겨보세요." } }
+    ],
+    "activity_quests": [
+      { "title": "포트폴리오 사이트를 만든다", "axisCode": "ui-impl", "level": 4, "completionCriteria": "본인 작업물을 소개하는 반응형 사이트를 만들어 배포한다" },
+      { "title": "접근성·성능을 점검한다", "axisCode": "design", "level": 4, "completionCriteria": "Lighthouse로 접근성·성능을 측정하고 개선한다" }
+    ]
+  }
+]
