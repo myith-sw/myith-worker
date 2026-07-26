@@ -12,8 +12,9 @@ def test_seed_parses():
     units = src.fetch_units()
     certs = src.fetch_certifications()
     maps = load_seed()
-    assert 5 <= len(units) <= 8  # 백엔드 직무 기준 5~8개 (제약)
-    assert len(certs) > 0
+    assert len(units) > 0
+    # 자격종목은 시드로 넣지 않는다 — /getNcsClCdJmList로만 적재한다 (확정 W2 D-3).
+    assert certs == []
     assert len(maps) > 0
 
 

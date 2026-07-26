@@ -60,3 +60,19 @@ def test_empty_string_env_treated_as_absent():
     # 실제 값이 주어지면 그대로 사용
     s2 = Settings(_env_file=None, LLM_MODEL="claude-opus-4")
     assert s2.llm_model == "claude-opus-4"
+
+
+def test_default_model_ids_are_real(monkeypatch):
+    # 확정 W2 D-2: sonnet-4/haiku-4는 실재하지 않는 ID다. 기본값이 실존 ID여야 한다.
+    from app.config.settings import DEFAULT_LLM_MODEL, DEFAULT_LLM_MODEL_LIGHT
+
+    assert DEFAULT_LLM_MODEL == "claude-sonnet-5"
+    assert DEFAULT_LLM_MODEL_LIGHT == "claude-haiku-4-5"
+
+
+def test_llm_provider_and_scoring_defaults():
+    from app.config.settings import Settings
+
+    s = Settings(_env_file=None)
+    assert s.LLM_PROVIDER == "vertex"  # 확정 W2 D-16
+    assert s.SCORING_DEFAULT_S == 0.5  # 확정 W2 A-4 (중립값)
