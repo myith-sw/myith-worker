@@ -34,3 +34,29 @@ def test_async_database_url_conversion():
 
     s2 = Settings(_env_file=None, DATABASE_URL=None)
     assert s2.async_database_url is None
+
+
+def test_empty_string_env_treated_as_absent():
+    # compose의 ${VAR:-} 가 빈 문자열을 주입해도 폴백이 동작해야 한다.
+    from app.config.settings import (
+        DEFAULT_LLM_MODEL,
+        DEFAULT_LLM_MODEL_LIGHT,
+        Settings,
+    )
+
+    s = Settings(
+        _env_file=None,
+        LLM_API_KEY="",
+        LLM_MODEL="",
+        LLM_MODEL_LIGHT="  ",
+        NCS_SERVICE_KEY="",
+    )
+    assert s.LLM_API_KEY is None
+    assert s.NCS_SERVICE_KEY is None
+    # 모델명은 빈 문자열이 아니라 기본값으로 폴백
+    assert s.llm_model == DEFAULT_LLM_MODEL
+    assert s.llm_model_light == DEFAULT_LLM_MODEL_LIGHT
+
+    # 실제 값이 주어지면 그대로 사용
+    s2 = Settings(_env_file=None, LLM_MODEL="claude-opus-4")
+    assert s2.llm_model == "claude-opus-4"

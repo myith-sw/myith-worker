@@ -1,0 +1,14 @@
+[
+  { "skill_code": "java",          "ncs_unit_code": "2001010106_23v1", "is_primary": true },
+  { "skill_code": "python",        "ncs_unit_code": "2001010106_23v1", "is_primary": true },
+  { "skill_code": "spring",        "ncs_unit_code": "2001010102_23v1", "is_primary": true },
+  { "skill_code": "rest",          "ncs_unit_code": "2001010102_23v1", "is_primary": true },
+  { "skill_code": "jpa",           "ncs_unit_code": "2001010103_23v1", "is_primary": true },
+  { "skill_code": "sql",           "ncs_unit_code": "2001010103_23v1", "is_primary": true },
+  { "skill_code": "redis",         "ncs_unit_code": "2001010103_23v1", "is_primary": true },
+  { "skill_code": "aws",           "ncs_unit_code": "2001010104_23v1", "is_primary": true },
+  { "skill_code": "system-design", "ncs_unit_code": "2001010101_23v1", "is_primary": true },
+  { "skill_code": "security",      "ncs_unit_code": "2001010105_23v1", "is_primary": true },
+  { "skill_code": "docker",        "ncs_unit_code": "2001010104_23v1", "is_primary": true },
+  { "skill_code": "docker",        "ncs_unit_code": "2001010105_23v1", "is_primary": false }
+]
