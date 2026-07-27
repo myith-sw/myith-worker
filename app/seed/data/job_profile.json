@@ -1,0 +1,4193 @@
+[
+  {
+    "jobCode": "backend",
+    "version": 1,
+    "ncsDetailCode": "20010202",
+    "axes": [
+      {
+        "axisCode": "dev-env",
+        "axisName": "개발환경",
+        "ncsUnitCode": "2001020233_23v5",
+        "ncsUnitName": "개발자 환경 구축",
+        "order": 1
+      },
+      {
+        "axisCode": "lang",
+        "axisName": "프로그래밍",
+        "ncsUnitCode": "2001020231_23v5",
+        "ncsUnitName": "프로그래밍 언어 활용",
+        "order": 2
+      },
+      {
+        "axisCode": "test",
+        "axisName": "테스트",
+        "ncsUnitCode": "2001020227_23v6",
+        "ncsUnitName": "애플리케이션 테스트 수행",
+        "order": 3
+      },
+      {
+        "axisCode": "deploy",
+        "axisName": "배포",
+        "ncsUnitCode": "2001020214_23v6",
+        "ncsUnitName": "애플리케이션 배포",
+        "order": 4
+      },
+      {
+        "axisCode": "data",
+        "axisName": "데이터",
+        "ncsUnitCode": "2001020205_23v6",
+        "ncsUnitName": "데이터 입출력 구현",
+        "order": 5
+      },
+      {
+        "axisCode": "server",
+        "axisName": "서버개발",
+        "ncsUnitCode": "2001020211_23v6",
+        "ncsUnitName": "서버프로그램 구현",
+        "order": 6
+      }
+    ],
+    "skills": [
+      {
+        "skillCode": "git",
+        "skillName": "Git 형상관리",
+        "axisCode": "dev-env",
+        "p": 1.0,
+        "s": 0.15,
+        "n": 0.1429,
+        "d": 0.1032,
+        "level": 1
+      },
+      {
+        "skillCode": "java",
+        "skillName": "Java",
+        "axisCode": "lang",
+        "p": 0.95,
+        "s": 0.25,
+        "n": 0.1429,
+        "d": 0.1632,
+        "level": 1
+      },
+      {
+        "skillCode": "sql",
+        "skillName": "SQL",
+        "axisCode": "data",
+        "p": 0.9,
+        "s": 0.3,
+        "n": 0.5714,
+        "d": 0.3079,
+        "level": 2
+      },
+      {
+        "skillCode": "spring",
+        "skillName": "Spring Boot",
+        "axisCode": "server",
+        "p": 0.95,
+        "s": 0.35,
+        "n": 0.5714,
+        "d": 0.3154,
+        "level": 2
+      },
+      {
+        "skillCode": "rest",
+        "skillName": "REST API 설계",
+        "axisCode": "server",
+        "p": 0.85,
+        "s": 0.3,
+        "n": 0.5714,
+        "d": 0.3229,
+        "level": 3
+      },
+      {
+        "skillCode": "docker",
+        "skillName": "Docker",
+        "axisCode": "deploy",
+        "p": 0.65,
+        "s": 0.5,
+        "n": 0.2857,
+        "d": 0.4014,
+        "level": 3
+      },
+      {
+        "skillCode": "jpa",
+        "skillName": "JPA/ORM",
+        "axisCode": "data",
+        "p": 0.7,
+        "s": 0.4,
+        "n": 0.5714,
+        "d": 0.4129,
+        "level": 4
+      },
+      {
+        "skillCode": "junit",
+        "skillName": "단위 테스트",
+        "axisCode": "test",
+        "p": 0.5,
+        "s": 0.45,
+        "n": 0.2857,
+        "d": 0.4239,
+        "level": 4
+      },
+      {
+        "skillCode": "aws",
+        "skillName": "AWS 배포",
+        "axisCode": "deploy",
+        "p": 0.6,
+        "s": 0.55,
+        "n": 0.2857,
+        "d": 0.4389,
+        "level": 5
+      },
+      {
+        "skillCode": "redis",
+        "skillName": "Redis 캐시",
+        "axisCode": "data",
+        "p": 0.45,
+        "s": 0.6,
+        "n": 0.5714,
+        "d": 0.5779,
+        "level": 5
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "skillCodes": [
+          "git",
+          "java"
+        ]
+      },
+      {
+        "level": 2,
+        "skillCodes": [
+          "sql",
+          "spring"
+        ]
+      },
+      {
+        "level": 3,
+        "skillCodes": [
+          "rest",
+          "docker"
+        ]
+      },
+      {
+        "level": 4,
+        "skillCodes": [
+          "jpa",
+          "junit"
+        ]
+      },
+      {
+        "level": 5,
+        "skillCodes": [
+          "aws",
+          "redis"
+        ]
+      }
+    ],
+    "prerequisites": [
+      {
+        "from": "sql",
+        "to": "jpa"
+      },
+      {
+        "from": "jpa",
+        "to": "redis"
+      },
+      {
+        "from": "spring",
+        "to": "rest"
+      },
+      {
+        "from": "docker",
+        "to": "aws"
+      }
+    ],
+    "questions": [
+      {
+        "skillCode": "git",
+        "axisCode": "dev-env",
+        "text": "Git 형상관리을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "java",
+        "axisCode": "lang",
+        "text": "Java을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "sql",
+        "axisCode": "data",
+        "text": "SQL을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "spring",
+        "axisCode": "server",
+        "text": "Spring Boot을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "junit",
+        "axisCode": "test",
+        "text": "단위 테스트을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "docker",
+        "axisCode": "deploy",
+        "text": "Docker을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "rest",
+        "axisCode": "server",
+        "text": "REST API 설계을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "jpa",
+        "axisCode": "data",
+        "text": "JPA/ORM을(를) 실제로 사용해 본 경험이 있나요?"
+      }
+    ],
+    "questTemplates": [
+      {
+        "skillCode": "git",
+        "title": "Git 브랜치 전략을 적용한다",
+        "completionCriteria": "Git Flow 또는 GitHub Flow로 브랜치를 운영한 저장소를 만든다.",
+        "ncsUnitCode": "2001020233_23v5",
+        "guidance": {
+          "none": "Git 형상관리이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "Git 형상관리을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "java",
+        "title": "Java 객체지향 기초를 익힌다",
+        "completionCriteria": "클래스·상속·인터페이스를 사용한 콘솔 프로그램을 완성한다.",
+        "ncsUnitCode": "2001020231_23v5",
+        "guidance": {
+          "none": "Java이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "Java을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "sql",
+        "title": "SQL로 데이터를 조회한다",
+        "completionCriteria": "조인과 조건절이 포함된 조회 쿼리를 5개 이상 작성한다.",
+        "ncsUnitCode": "2001020205_23v6",
+        "guidance": {
+          "none": "SQL이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "SQL을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "spring",
+        "title": "Spring Boot로 서버를 만든다",
+        "completionCriteria": "CRUD가 동작하는 REST 서버를 실행하고 확인한다.",
+        "ncsUnitCode": "2001020211_23v6",
+        "guidance": {
+          "none": "Spring Boot이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "Spring Boot을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "rest",
+        "title": "REST API를 설계한다",
+        "completionCriteria": "리소스 중심 URL과 상태코드 규칙을 정하고 문서로 남긴다.",
+        "ncsUnitCode": "2001020211_23v6",
+        "guidance": {
+          "none": "REST API 설계이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "REST API 설계을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "docker",
+        "title": "Docker로 컨테이너를 만든다",
+        "completionCriteria": "Dockerfile을 작성해 앱을 이미지로 빌드하고 실행한다.",
+        "ncsUnitCode": "2001020214_23v6",
+        "guidance": {
+          "none": "Docker이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "Docker을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "jpa",
+        "title": "JPA로 엔티티를 매핑한다",
+        "completionCriteria": "연관관계 매핑을 포함한 도메인을 구현하고 N+1을 해결한다.",
+        "ncsUnitCode": "2001020205_23v6",
+        "guidance": {
+          "none": "JPA/ORM이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "JPA/ORM을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "junit",
+        "title": "단위 테스트를 작성한다",
+        "completionCriteria": "핵심 비즈니스 로직에 대한 테스트를 5개 이상 통과시킨다.",
+        "ncsUnitCode": "2001020227_23v6",
+        "guidance": {
+          "none": "단위 테스트이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "단위 테스트을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "aws",
+        "title": "AWS에 서비스를 배포한다",
+        "completionCriteria": "EC2 또는 관리형 서비스에 배포해 외부에서 접속되는지 확인한다.",
+        "ncsUnitCode": "2001020214_23v6",
+        "guidance": {
+          "none": "AWS 배포이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "AWS 배포을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "redis",
+        "title": "Redis로 캐시를 적용한다",
+        "completionCriteria": "조회 API에 캐시를 적용하고 TTL 정책을 문서화한다.",
+        "ncsUnitCode": "2001020205_23v6",
+        "guidance": {
+          "none": "Redis 캐시이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "Redis 캐시을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      }
+    ],
+    "activityQuests": [
+      {
+        "title": "백엔드 개발자 직무의 면접 질문을 정리한다",
+        "axisCode": "data",
+        "level": 4,
+        "completionCriteria": "자주 나오는 질문 10개와 자신의 답변을 문서로 정리한다."
+      },
+      {
+        "title": "협업 프로젝트로 실전 경험을 쌓는다",
+        "axisCode": "server",
+        "level": 5,
+        "completionCriteria": "2인 이상 팀 프로젝트를 완주하고 맡은 역할을 STAR로 기록한다."
+      }
+    ]
+  },
+  {
+    "jobCode": "frontend",
+    "version": 1,
+    "ncsDetailCode": "20010202",
+    "axes": [
+      {
+        "axisCode": "dev-env",
+        "axisName": "개발환경",
+        "ncsUnitCode": "2001020233_23v5",
+        "ncsUnitName": "개발자 환경 구축",
+        "order": 1
+      },
+      {
+        "axisCode": "lang",
+        "axisName": "프로그래밍",
+        "ncsUnitCode": "2001020231_23v5",
+        "ncsUnitName": "프로그래밍 언어 활용",
+        "order": 2
+      },
+      {
+        "axisCode": "ui-impl",
+        "axisName": "화면구현",
+        "ncsUnitCode": "2001020225_23v6",
+        "ncsUnitName": "화면 구현",
+        "order": 3
+      },
+      {
+        "axisCode": "deploy",
+        "axisName": "배포",
+        "ncsUnitCode": "2001020214_23v6",
+        "ncsUnitName": "애플리케이션 배포",
+        "order": 4
+      },
+      {
+        "axisCode": "ui-design",
+        "axisName": "화면설계",
+        "ncsUnitCode": "2001020224_23v6",
+        "ncsUnitName": "화면 설계",
+        "order": 5
+      },
+      {
+        "axisCode": "interface",
+        "axisName": "API연동",
+        "ncsUnitCode": "2001020212_23v6",
+        "ncsUnitName": "인터페이스 구현",
+        "order": 6
+      }
+    ],
+    "skills": [
+      {
+        "skillCode": "git",
+        "skillName": "Git 형상관리",
+        "axisCode": "dev-env",
+        "p": 1.0,
+        "s": 0.15,
+        "n": 0.1429,
+        "d": 0.1032,
+        "level": 1
+      },
+      {
+        "skillCode": "html-css",
+        "skillName": "HTML/CSS",
+        "axisCode": "ui-impl",
+        "p": 1.0,
+        "s": 0.1,
+        "n": 0.2857,
+        "d": 0.1164,
+        "level": 1
+      },
+      {
+        "skillCode": "react",
+        "skillName": "React",
+        "axisCode": "ui-impl",
+        "p": 0.95,
+        "s": 0.3,
+        "n": 0.2857,
+        "d": 0.2214,
+        "level": 2
+      },
+      {
+        "skillCode": "typescript",
+        "skillName": "TypeScript",
+        "axisCode": "lang",
+        "p": 0.85,
+        "s": 0.35,
+        "n": 0.1429,
+        "d": 0.2382,
+        "level": 2
+      },
+      {
+        "skillCode": "api-integration",
+        "skillName": "API 연동",
+        "axisCode": "interface",
+        "p": 0.8,
+        "s": 0.35,
+        "n": 0.5714,
+        "d": 0.3604,
+        "level": 3
+      },
+      {
+        "skillCode": "vercel",
+        "skillName": "프론트 배포",
+        "axisCode": "deploy",
+        "p": 0.5,
+        "s": 0.35,
+        "n": 0.2857,
+        "d": 0.3789,
+        "level": 3
+      },
+      {
+        "skillCode": "figma",
+        "skillName": "Figma",
+        "axisCode": "ui-design",
+        "p": 0.55,
+        "s": 0.3,
+        "n": 0.5714,
+        "d": 0.4129,
+        "level": 4
+      },
+      {
+        "skillCode": "nextjs",
+        "skillName": "Next.js",
+        "axisCode": "ui-impl",
+        "p": 0.6,
+        "s": 0.5,
+        "n": 0.2857,
+        "d": 0.4164,
+        "level": 4
+      },
+      {
+        "skillCode": "ux",
+        "skillName": "UX 기초",
+        "axisCode": "ui-design",
+        "p": 0.4,
+        "s": 0.45,
+        "n": 0.5714,
+        "d": 0.5254,
+        "level": 5
+      },
+      {
+        "skillCode": "graphql",
+        "skillName": "GraphQL",
+        "axisCode": "interface",
+        "p": 0.3,
+        "s": 0.6,
+        "n": 0.5714,
+        "d": 0.6229,
+        "level": 5
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "skillCodes": [
+          "git",
+          "html-css"
+        ]
+      },
+      {
+        "level": 2,
+        "skillCodes": [
+          "react",
+          "typescript"
+        ]
+      },
+      {
+        "level": 3,
+        "skillCodes": [
+          "api-integration",
+          "vercel"
+        ]
+      },
+      {
+        "level": 4,
+        "skillCodes": [
+          "figma",
+          "nextjs"
+        ]
+      },
+      {
+        "level": 5,
+        "skillCodes": [
+          "ux",
+          "graphql"
+        ]
+      }
+    ],
+    "prerequisites": [
+      {
+        "from": "html-css",
+        "to": "react"
+      },
+      {
+        "from": "react",
+        "to": "nextjs"
+      },
+      {
+        "from": "api-integration",
+        "to": "graphql"
+      },
+      {
+        "from": "figma",
+        "to": "ux"
+      }
+    ],
+    "questions": [
+      {
+        "skillCode": "git",
+        "axisCode": "dev-env",
+        "text": "Git 형상관리을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "typescript",
+        "axisCode": "lang",
+        "text": "TypeScript을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "html-css",
+        "axisCode": "ui-impl",
+        "text": "HTML/CSS을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "figma",
+        "axisCode": "ui-design",
+        "text": "Figma을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "api-integration",
+        "axisCode": "interface",
+        "text": "API 연동을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "vercel",
+        "axisCode": "deploy",
+        "text": "프론트 배포을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "react",
+        "axisCode": "ui-impl",
+        "text": "React을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "nextjs",
+        "axisCode": "ui-impl",
+        "text": "Next.js을(를) 실제로 사용해 본 경험이 있나요?"
+      }
+    ],
+    "questTemplates": [
+      {
+        "skillCode": "git",
+        "title": "Git 브랜치 전략을 적용한다",
+        "completionCriteria": "Git Flow 또는 GitHub Flow로 브랜치를 운영한 저장소를 만든다.",
+        "ncsUnitCode": "2001020233_23v5",
+        "guidance": {
+          "none": "Git 형상관리이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "Git 형상관리을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "html-css",
+        "title": "HTML/CSS로 레이아웃을 만든다",
+        "completionCriteria": "반응형 페이지를 1개 완성하고 모바일에서 확인한다.",
+        "ncsUnitCode": "2001020225_23v6",
+        "guidance": {
+          "none": "HTML/CSS이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "HTML/CSS을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "react",
+        "title": "React로 컴포넌트를 만든다",
+        "completionCriteria": "상태 관리가 포함된 화면을 3개 이상 구현한다.",
+        "ncsUnitCode": "2001020225_23v6",
+        "guidance": {
+          "none": "React이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "React을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "typescript",
+        "title": "TypeScript로 타입을 적용한다",
+        "completionCriteria": "주요 데이터 구조에 타입을 정의하고 빌드 에러를 없앤다.",
+        "ncsUnitCode": "2001020231_23v5",
+        "guidance": {
+          "none": "TypeScript이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "TypeScript을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "api-integration",
+        "title": "API를 화면에 연동한다",
+        "completionCriteria": "실제 API를 호출해 목록·상세 화면에 데이터를 표시한다.",
+        "ncsUnitCode": "2001020212_23v6",
+        "guidance": {
+          "none": "API 연동이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "API 연동을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "vercel",
+        "title": "프론트엔드를 배포한다",
+        "completionCriteria": "빌드 후 배포해 공개 URL에서 동작을 확인한다.",
+        "ncsUnitCode": "2001020214_23v6",
+        "guidance": {
+          "none": "프론트 배포이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "프론트 배포을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "figma",
+        "title": "Figma로 화면을 설계한다",
+        "completionCriteria": "주요 화면 3개의 시안을 만들고 컴포넌트로 정리한다.",
+        "ncsUnitCode": "2001020224_23v6",
+        "guidance": {
+          "none": "Figma이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "Figma을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "nextjs",
+        "title": "Next.js로 라우팅을 구성한다",
+        "completionCriteria": "페이지 라우팅과 데이터 페칭이 동작하는 앱을 만든다.",
+        "ncsUnitCode": "2001020225_23v6",
+        "guidance": {
+          "none": "Next.js이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "Next.js을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "ux",
+        "title": "UX 기본 원칙을 적용한다",
+        "completionCriteria": "사용자 흐름을 그리고 개선점 3가지를 문서로 남긴다.",
+        "ncsUnitCode": "2001020224_23v6",
+        "guidance": {
+          "none": "UX 기초이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "UX 기초을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "graphql",
+        "title": "GraphQL로 데이터를 조회한다",
+        "completionCriteria": "쿼리를 작성해 필요한 필드만 받아 화면에 연결한다.",
+        "ncsUnitCode": "2001020212_23v6",
+        "guidance": {
+          "none": "GraphQL이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "GraphQL을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      }
+    ],
+    "activityQuests": [
+      {
+        "title": "프론트엔드 개발자 직무의 면접 질문을 정리한다",
+        "axisCode": "ui-design",
+        "level": 4,
+        "completionCriteria": "자주 나오는 질문 10개와 자신의 답변을 문서로 정리한다."
+      },
+      {
+        "title": "협업 프로젝트로 실전 경험을 쌓는다",
+        "axisCode": "interface",
+        "level": 5,
+        "completionCriteria": "2인 이상 팀 프로젝트를 완주하고 맡은 역할을 STAR로 기록한다."
+      }
+    ]
+  },
+  {
+    "jobCode": "security",
+    "version": 1,
+    "ncsDetailCode": "20010206",
+    "axes": [
+      {
+        "axisCode": "sec-device",
+        "axisName": "보안장비",
+        "ncsUnitCode": "2001060113_19v3",
+        "ncsUnitName": "보안 장비 운용",
+        "order": 1
+      },
+      {
+        "axisCode": "sec-dev",
+        "axisName": "개발보안",
+        "ncsUnitCode": "2001020611_25v6",
+        "ncsUnitName": "SW개발 보안 구축",
+        "order": 2
+      },
+      {
+        "axisCode": "sec-sys",
+        "axisName": "시스템보안",
+        "ncsUnitCode": "2001020613_25v6",
+        "ncsUnitName": "시스템 보안 구축",
+        "order": 3
+      },
+      {
+        "axisCode": "sec-net",
+        "axisName": "네트워크보안",
+        "ncsUnitCode": "2001020614_25v6",
+        "ncsUnitName": "네트워크 보안 구축",
+        "order": 4
+      },
+      {
+        "axisCode": "sec-db",
+        "axisName": "DB보안",
+        "ncsUnitCode": "2001020612_25v6",
+        "ncsUnitName": "DB보안 구축",
+        "order": 5
+      },
+      {
+        "axisCode": "sec-risk",
+        "axisName": "위험관리",
+        "ncsUnitCode": "2001060105_19v2",
+        "ncsUnitName": "보안 위험관리",
+        "order": 6
+      }
+    ],
+    "skills": [
+      {
+        "skillCode": "firewall",
+        "skillName": "방화벽 운용",
+        "axisCode": "sec-device",
+        "p": 0.7,
+        "s": 0.4,
+        "n": 0.2857,
+        "d": 0.3414,
+        "level": 1
+      },
+      {
+        "skillCode": "owasp",
+        "skillName": "웹 취약점(OWASP)",
+        "axisCode": "sec-dev",
+        "p": 0.85,
+        "s": 0.4,
+        "n": 0.5714,
+        "d": 0.3679,
+        "level": 1
+      },
+      {
+        "skillCode": "secure-coding",
+        "skillName": "시큐어 코딩",
+        "axisCode": "sec-dev",
+        "p": 0.8,
+        "s": 0.45,
+        "n": 0.5714,
+        "d": 0.4054,
+        "level": 1
+      },
+      {
+        "skillCode": "network-security",
+        "skillName": "네트워크 보안",
+        "axisCode": "sec-net",
+        "p": 0.8,
+        "s": 0.45,
+        "n": 0.5714,
+        "d": 0.4054,
+        "level": 2
+      },
+      {
+        "skillCode": "linux-hardening",
+        "skillName": "리눅스 보안 설정",
+        "axisCode": "sec-sys",
+        "p": 0.75,
+        "s": 0.5,
+        "n": 0.5714,
+        "d": 0.4429,
+        "level": 2
+      },
+      {
+        "skillCode": "vuln-scan",
+        "skillName": "취약점 진단",
+        "axisCode": "sec-sys",
+        "p": 0.6,
+        "s": 0.5,
+        "n": 0.5714,
+        "d": 0.4879,
+        "level": 3
+      },
+      {
+        "skillCode": "siem",
+        "skillName": "SIEM 로그 분석",
+        "axisCode": "sec-device",
+        "p": 0.35,
+        "s": 0.6,
+        "n": 0.2857,
+        "d": 0.5364,
+        "level": 3
+      },
+      {
+        "skillCode": "packet-analysis",
+        "skillName": "패킷 분석",
+        "axisCode": "sec-net",
+        "p": 0.5,
+        "s": 0.55,
+        "n": 0.5714,
+        "d": 0.5404,
+        "level": 4
+      },
+      {
+        "skillCode": "db-encryption",
+        "skillName": "DB 암호화",
+        "axisCode": "sec-db",
+        "p": 0.55,
+        "s": 0.6,
+        "n": 0.5714,
+        "d": 0.5479,
+        "level": 4
+      },
+      {
+        "skillCode": "risk-assessment",
+        "skillName": "위험 평가",
+        "axisCode": "sec-risk",
+        "p": 0.5,
+        "s": 0.7,
+        "n": 0.8571,
+        "d": 0.6793,
+        "level": 5
+      },
+      {
+        "skillCode": "isms",
+        "skillName": "ISMS 인증 실무",
+        "axisCode": "sec-risk",
+        "p": 0.4,
+        "s": 0.75,
+        "n": 0.8571,
+        "d": 0.7318,
+        "level": 5
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "skillCodes": [
+          "firewall",
+          "owasp",
+          "secure-coding"
+        ]
+      },
+      {
+        "level": 2,
+        "skillCodes": [
+          "network-security",
+          "linux-hardening"
+        ]
+      },
+      {
+        "level": 3,
+        "skillCodes": [
+          "vuln-scan",
+          "siem"
+        ]
+      },
+      {
+        "level": 4,
+        "skillCodes": [
+          "packet-analysis",
+          "db-encryption"
+        ]
+      },
+      {
+        "level": 5,
+        "skillCodes": [
+          "risk-assessment",
+          "isms"
+        ]
+      }
+    ],
+    "prerequisites": [
+      {
+        "from": "firewall",
+        "to": "siem"
+      },
+      {
+        "from": "owasp",
+        "to": "secure-coding"
+      },
+      {
+        "from": "network-security",
+        "to": "packet-analysis"
+      },
+      {
+        "from": "linux-hardening",
+        "to": "vuln-scan"
+      },
+      {
+        "from": "risk-assessment",
+        "to": "isms"
+      }
+    ],
+    "questions": [
+      {
+        "skillCode": "firewall",
+        "axisCode": "sec-device",
+        "text": "방화벽 운용을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "owasp",
+        "axisCode": "sec-dev",
+        "text": "웹 취약점(OWASP)을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "linux-hardening",
+        "axisCode": "sec-sys",
+        "text": "리눅스 보안 설정을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "network-security",
+        "axisCode": "sec-net",
+        "text": "네트워크 보안을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "db-encryption",
+        "axisCode": "sec-db",
+        "text": "DB 암호화을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "risk-assessment",
+        "axisCode": "sec-risk",
+        "text": "위험 평가을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "secure-coding",
+        "axisCode": "sec-dev",
+        "text": "시큐어 코딩을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "vuln-scan",
+        "axisCode": "sec-sys",
+        "text": "취약점 진단을(를) 실제로 사용해 본 경험이 있나요?"
+      }
+    ],
+    "questTemplates": [
+      {
+        "skillCode": "firewall",
+        "title": "방화벽 운용을(를) 실습한다",
+        "completionCriteria": "방화벽 운용을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001060113_19v3",
+        "guidance": {
+          "none": "방화벽 운용이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "방화벽 운용을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "owasp",
+        "title": "웹 취약점(OWASP)을(를) 실습한다",
+        "completionCriteria": "웹 취약점(OWASP)을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020611_25v6",
+        "guidance": {
+          "none": "웹 취약점(OWASP)이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "웹 취약점(OWASP)을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "secure-coding",
+        "title": "시큐어 코딩을(를) 실습한다",
+        "completionCriteria": "시큐어 코딩을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020611_25v6",
+        "guidance": {
+          "none": "시큐어 코딩이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "시큐어 코딩을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "network-security",
+        "title": "네트워크 보안을(를) 실습한다",
+        "completionCriteria": "네트워크 보안을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020614_25v6",
+        "guidance": {
+          "none": "네트워크 보안이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "네트워크 보안을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "linux-hardening",
+        "title": "리눅스 보안 설정을(를) 실습한다",
+        "completionCriteria": "리눅스 보안 설정을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020613_25v6",
+        "guidance": {
+          "none": "리눅스 보안 설정이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "리눅스 보안 설정을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "vuln-scan",
+        "title": "취약점 진단을(를) 실습한다",
+        "completionCriteria": "취약점 진단을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020613_25v6",
+        "guidance": {
+          "none": "취약점 진단이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "취약점 진단을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "siem",
+        "title": "SIEM 로그 분석을(를) 실습한다",
+        "completionCriteria": "SIEM 로그 분석을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001060113_19v3",
+        "guidance": {
+          "none": "SIEM 로그 분석이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "SIEM 로그 분석을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "packet-analysis",
+        "title": "패킷 분석을(를) 실습한다",
+        "completionCriteria": "패킷 분석을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020614_25v6",
+        "guidance": {
+          "none": "패킷 분석이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "패킷 분석을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "db-encryption",
+        "title": "DB 암호화을(를) 실습한다",
+        "completionCriteria": "DB 암호화을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020612_25v6",
+        "guidance": {
+          "none": "DB 암호화이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "DB 암호화을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "risk-assessment",
+        "title": "위험 평가을(를) 실습한다",
+        "completionCriteria": "위험 평가을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001060105_19v2",
+        "guidance": {
+          "none": "위험 평가이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "위험 평가을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "isms",
+        "title": "ISMS 인증 실무을(를) 실습한다",
+        "completionCriteria": "ISMS 인증 실무을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001060105_19v2",
+        "guidance": {
+          "none": "ISMS 인증 실무이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "ISMS 인증 실무을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      }
+    ],
+    "activityQuests": [
+      {
+        "title": "보안 엔지니어 직무의 면접 질문을 정리한다",
+        "axisCode": "sec-db",
+        "level": 4,
+        "completionCriteria": "자주 나오는 질문 10개와 자신의 답변을 문서로 정리한다."
+      },
+      {
+        "title": "협업 프로젝트로 실전 경험을 쌓는다",
+        "axisCode": "sec-risk",
+        "level": 5,
+        "completionCriteria": "2인 이상 팀 프로젝트를 완주하고 맡은 역할을 STAR로 기록한다."
+      }
+    ]
+  },
+  {
+    "jobCode": "database",
+    "version": 1,
+    "ncsDetailCode": "20010204",
+    "axes": [
+      {
+        "axisCode": "sql-write",
+        "axisName": "SQL작성",
+        "ncsUnitCode": "2001020415_19v1",
+        "ncsUnitName": "SQL작성",
+        "order": 1
+      },
+      {
+        "axisCode": "sql-use",
+        "axisName": "SQL활용",
+        "ncsUnitCode": "2001020413_19v4",
+        "ncsUnitName": "SQL활용",
+        "order": 2
+      },
+      {
+        "axisCode": "db-impl",
+        "axisName": "DB구현",
+        "ncsUnitCode": "2001020405_19v4",
+        "ncsUnitName": "데이터베이스 구현",
+        "order": 3
+      },
+      {
+        "axisCode": "sql-adv",
+        "axisName": "SQL응용",
+        "ncsUnitCode": "2001020414_19v4",
+        "ncsUnitName": "SQL응용",
+        "order": 4
+      },
+      {
+        "axisCode": "db-logical",
+        "axisName": "논리설계",
+        "ncsUnitCode": "2001020403_19v4",
+        "ncsUnitName": "논리 데이터베이스 설계",
+        "order": 5
+      },
+      {
+        "axisCode": "db-perf",
+        "axisName": "성능",
+        "ncsUnitCode": "2001020408_19v4",
+        "ncsUnitName": "데이터베이스 성능확보",
+        "order": 6
+      }
+    ],
+    "skills": [
+      {
+        "skillCode": "sql-basic",
+        "skillName": "SQL 기초",
+        "axisCode": "sql-write",
+        "p": 1.0,
+        "s": 0.1,
+        "n": 0.1429,
+        "d": 0.0807,
+        "level": 1
+      },
+      {
+        "skillCode": "ddl-dml",
+        "skillName": "DDL/DML",
+        "axisCode": "sql-write",
+        "p": 0.9,
+        "s": 0.15,
+        "n": 0.1429,
+        "d": 0.1332,
+        "level": 1
+      },
+      {
+        "skillCode": "aggregate",
+        "skillName": "집계·그룹화",
+        "axisCode": "sql-use",
+        "p": 0.85,
+        "s": 0.2,
+        "n": 0.2857,
+        "d": 0.2064,
+        "level": 1
+      },
+      {
+        "skillCode": "join-subquery",
+        "skillName": "조인·서브쿼리",
+        "axisCode": "sql-use",
+        "p": 0.9,
+        "s": 0.25,
+        "n": 0.2857,
+        "d": 0.2139,
+        "level": 2
+      },
+      {
+        "skillCode": "dbms-install",
+        "skillName": "DBMS 구축",
+        "axisCode": "db-impl",
+        "p": 0.5,
+        "s": 0.35,
+        "n": 0.4286,
+        "d": 0.4146,
+        "level": 2
+      },
+      {
+        "skillCode": "normalization",
+        "skillName": "정규화",
+        "axisCode": "db-logical",
+        "p": 0.7,
+        "s": 0.4,
+        "n": 0.7143,
+        "d": 0.4486,
+        "level": 3
+      },
+      {
+        "skillCode": "erd",
+        "skillName": "ERD 모델링",
+        "axisCode": "db-logical",
+        "p": 0.75,
+        "s": 0.45,
+        "n": 0.7143,
+        "d": 0.4561,
+        "level": 3
+      },
+      {
+        "skillCode": "backup-recovery",
+        "skillName": "백업·복구",
+        "axisCode": "db-impl",
+        "p": 0.55,
+        "s": 0.5,
+        "n": 0.4286,
+        "d": 0.4671,
+        "level": 3
+      },
+      {
+        "skillCode": "window-function",
+        "skillName": "윈도우 함수",
+        "axisCode": "sql-adv",
+        "p": 0.6,
+        "s": 0.5,
+        "n": 0.5714,
+        "d": 0.4879,
+        "level": 4
+      },
+      {
+        "skillCode": "stored-procedure",
+        "skillName": "프로시저",
+        "axisCode": "sql-adv",
+        "p": 0.5,
+        "s": 0.55,
+        "n": 0.5714,
+        "d": 0.5404,
+        "level": 4
+      },
+      {
+        "skillCode": "index-tuning",
+        "skillName": "인덱스 튜닝",
+        "axisCode": "db-perf",
+        "p": 0.65,
+        "s": 0.65,
+        "n": 0.7143,
+        "d": 0.5761,
+        "level": 5
+      },
+      {
+        "skillCode": "execution-plan",
+        "skillName": "실행계획 분석",
+        "axisCode": "db-perf",
+        "p": 0.55,
+        "s": 0.7,
+        "n": 0.7143,
+        "d": 0.6286,
+        "level": 5
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "skillCodes": [
+          "sql-basic",
+          "ddl-dml",
+          "aggregate"
+        ]
+      },
+      {
+        "level": 2,
+        "skillCodes": [
+          "join-subquery",
+          "dbms-install"
+        ]
+      },
+      {
+        "level": 3,
+        "skillCodes": [
+          "normalization",
+          "erd",
+          "backup-recovery"
+        ]
+      },
+      {
+        "level": 4,
+        "skillCodes": [
+          "window-function",
+          "stored-procedure"
+        ]
+      },
+      {
+        "level": 5,
+        "skillCodes": [
+          "index-tuning",
+          "execution-plan"
+        ]
+      }
+    ],
+    "prerequisites": [
+      {
+        "from": "sql-basic",
+        "to": "ddl-dml"
+      },
+      {
+        "from": "aggregate",
+        "to": "join-subquery"
+      },
+      {
+        "from": "dbms-install",
+        "to": "backup-recovery"
+      },
+      {
+        "from": "normalization",
+        "to": "erd"
+      },
+      {
+        "from": "window-function",
+        "to": "stored-procedure"
+      },
+      {
+        "from": "index-tuning",
+        "to": "execution-plan"
+      }
+    ],
+    "questions": [
+      {
+        "skillCode": "sql-basic",
+        "axisCode": "sql-write",
+        "text": "SQL 기초을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "join-subquery",
+        "axisCode": "sql-use",
+        "text": "조인·서브쿼리을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "backup-recovery",
+        "axisCode": "db-impl",
+        "text": "백업·복구을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "window-function",
+        "axisCode": "sql-adv",
+        "text": "윈도우 함수을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "erd",
+        "axisCode": "db-logical",
+        "text": "ERD 모델링을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "index-tuning",
+        "axisCode": "db-perf",
+        "text": "인덱스 튜닝을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "ddl-dml",
+        "axisCode": "sql-write",
+        "text": "DDL/DML을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "aggregate",
+        "axisCode": "sql-use",
+        "text": "집계·그룹화을(를) 실제로 사용해 본 경험이 있나요?"
+      }
+    ],
+    "questTemplates": [
+      {
+        "skillCode": "sql-basic",
+        "title": "SQL 기초을(를) 실습한다",
+        "completionCriteria": "SQL 기초을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020415_19v1",
+        "guidance": {
+          "none": "SQL 기초이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "SQL 기초을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "ddl-dml",
+        "title": "DDL/DML을(를) 실습한다",
+        "completionCriteria": "DDL/DML을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020415_19v1",
+        "guidance": {
+          "none": "DDL/DML이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "DDL/DML을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "aggregate",
+        "title": "집계·그룹화을(를) 실습한다",
+        "completionCriteria": "집계·그룹화을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020413_19v4",
+        "guidance": {
+          "none": "집계·그룹화이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "집계·그룹화을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "join-subquery",
+        "title": "조인·서브쿼리을(를) 실습한다",
+        "completionCriteria": "조인·서브쿼리을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020413_19v4",
+        "guidance": {
+          "none": "조인·서브쿼리이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "조인·서브쿼리을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "dbms-install",
+        "title": "DBMS 구축을(를) 실습한다",
+        "completionCriteria": "DBMS 구축을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020405_19v4",
+        "guidance": {
+          "none": "DBMS 구축이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "DBMS 구축을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "normalization",
+        "title": "정규화을(를) 실습한다",
+        "completionCriteria": "정규화을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020403_19v4",
+        "guidance": {
+          "none": "정규화이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "정규화을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "erd",
+        "title": "ERD 모델링을(를) 실습한다",
+        "completionCriteria": "ERD 모델링을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020403_19v4",
+        "guidance": {
+          "none": "ERD 모델링이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "ERD 모델링을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "backup-recovery",
+        "title": "백업·복구을(를) 실습한다",
+        "completionCriteria": "백업·복구을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020405_19v4",
+        "guidance": {
+          "none": "백업·복구이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "백업·복구을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "window-function",
+        "title": "윈도우 함수을(를) 실습한다",
+        "completionCriteria": "윈도우 함수을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020414_19v4",
+        "guidance": {
+          "none": "윈도우 함수이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "윈도우 함수을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "stored-procedure",
+        "title": "프로시저을(를) 실습한다",
+        "completionCriteria": "프로시저을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020414_19v4",
+        "guidance": {
+          "none": "프로시저이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "프로시저을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "index-tuning",
+        "title": "인덱스 튜닝을(를) 실습한다",
+        "completionCriteria": "인덱스 튜닝을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020408_19v4",
+        "guidance": {
+          "none": "인덱스 튜닝이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "인덱스 튜닝을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "execution-plan",
+        "title": "실행계획 분석을(를) 실습한다",
+        "completionCriteria": "실행계획 분석을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020408_19v4",
+        "guidance": {
+          "none": "실행계획 분석이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "실행계획 분석을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      }
+    ],
+    "activityQuests": [
+      {
+        "title": "데이터베이스 엔지니어 직무의 면접 질문을 정리한다",
+        "axisCode": "db-logical",
+        "level": 4,
+        "completionCriteria": "자주 나오는 질문 10개와 자신의 답변을 문서로 정리한다."
+      },
+      {
+        "title": "협업 프로젝트로 실전 경험을 쌓는다",
+        "axisCode": "db-perf",
+        "level": 5,
+        "completionCriteria": "2인 이상 팀 프로젝트를 완주하고 맡은 역할을 STAR로 기록한다."
+      }
+    ]
+  },
+  {
+    "jobCode": "hr",
+    "version": 1,
+    "ncsDetailCode": "02020201",
+    "axes": [
+      {
+        "axisCode": "hr-payroll",
+        "axisName": "급여",
+        "ncsUnitCode": "0202020109_23v5",
+        "ncsUnitName": "급여지급",
+        "order": 1
+      },
+      {
+        "axisCode": "hr-train",
+        "axisName": "교육",
+        "ncsUnitCode": "0202020107_23v4",
+        "ncsUnitName": "교육훈련운영",
+        "order": 2
+      },
+      {
+        "axisCode": "hr-benefit",
+        "axisName": "복리후생",
+        "ncsUnitCode": "0202020110_23v4",
+        "ncsUnitName": "복리후생관리",
+        "order": 3
+      },
+      {
+        "axisCode": "hr-recruit",
+        "axisName": "채용",
+        "ncsUnitCode": "0202020103_23v4",
+        "ncsUnitName": "인력채용",
+        "order": 4
+      },
+      {
+        "axisCode": "hr-eval",
+        "axisName": "평가",
+        "ncsUnitCode": "0202020105_23v3",
+        "ncsUnitName": "인사평가",
+        "order": 5
+      },
+      {
+        "axisCode": "hr-plan",
+        "axisName": "인사기획",
+        "ncsUnitCode": "0202020101_23v3",
+        "ncsUnitName": "인사기획",
+        "order": 6
+      }
+    ],
+    "skills": [
+      {
+        "skillCode": "payroll-calc",
+        "skillName": "급여 계산",
+        "axisCode": "hr-payroll",
+        "p": 0.7,
+        "s": 0.3,
+        "n": 0.2857,
+        "d": 0.2964,
+        "level": 1
+      },
+      {
+        "skillCode": "jd-writing",
+        "skillName": "직무기술서 작성",
+        "axisCode": "hr-recruit",
+        "p": 0.8,
+        "s": 0.3,
+        "n": 0.5714,
+        "d": 0.3379,
+        "level": 1
+      },
+      {
+        "skillCode": "labor-law",
+        "skillName": "노동법 실무",
+        "axisCode": "hr-payroll",
+        "p": 0.75,
+        "s": 0.45,
+        "n": 0.2857,
+        "d": 0.3489,
+        "level": 1
+      },
+      {
+        "skillCode": "onboarding",
+        "skillName": "온보딩 운영",
+        "axisCode": "hr-train",
+        "p": 0.55,
+        "s": 0.3,
+        "n": 0.4286,
+        "d": 0.3771,
+        "level": 2
+      },
+      {
+        "skillCode": "training-plan",
+        "skillName": "교육 기획",
+        "axisCode": "hr-train",
+        "p": 0.6,
+        "s": 0.4,
+        "n": 0.4286,
+        "d": 0.4071,
+        "level": 2
+      },
+      {
+        "skillCode": "interview",
+        "skillName": "면접 설계·진행",
+        "axisCode": "hr-recruit",
+        "p": 0.85,
+        "s": 0.5,
+        "n": 0.5714,
+        "d": 0.4129,
+        "level": 3
+      },
+      {
+        "skillCode": "benefit-admin",
+        "skillName": "복리후생 운영",
+        "axisCode": "hr-benefit",
+        "p": 0.5,
+        "s": 0.35,
+        "n": 0.4286,
+        "d": 0.4146,
+        "level": 3
+      },
+      {
+        "skillCode": "ats",
+        "skillName": "채용 시스템 운영",
+        "axisCode": "hr-recruit",
+        "p": 0.45,
+        "s": 0.4,
+        "n": 0.5714,
+        "d": 0.4879,
+        "level": 3
+      },
+      {
+        "skillCode": "kpi-design",
+        "skillName": "평가지표 설계",
+        "axisCode": "hr-eval",
+        "p": 0.6,
+        "s": 0.6,
+        "n": 0.5714,
+        "d": 0.5329,
+        "level": 4
+      },
+      {
+        "skillCode": "hr-analytics",
+        "skillName": "인사 데이터 분석",
+        "axisCode": "hr-eval",
+        "p": 0.4,
+        "s": 0.65,
+        "n": 0.5714,
+        "d": 0.6154,
+        "level": 4
+      },
+      {
+        "skillCode": "workforce-plan",
+        "skillName": "인력 계획",
+        "axisCode": "hr-plan",
+        "p": 0.5,
+        "s": 0.7,
+        "n": 0.7143,
+        "d": 0.6436,
+        "level": 5
+      },
+      {
+        "skillCode": "hr-strategy",
+        "skillName": "인사 전략",
+        "axisCode": "hr-plan",
+        "p": 0.45,
+        "s": 0.75,
+        "n": 0.7143,
+        "d": 0.6811,
+        "level": 5
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "skillCodes": [
+          "payroll-calc",
+          "jd-writing",
+          "labor-law"
+        ]
+      },
+      {
+        "level": 2,
+        "skillCodes": [
+          "onboarding",
+          "training-plan"
+        ]
+      },
+      {
+        "level": 3,
+        "skillCodes": [
+          "interview",
+          "benefit-admin",
+          "ats"
+        ]
+      },
+      {
+        "level": 4,
+        "skillCodes": [
+          "kpi-design",
+          "hr-analytics"
+        ]
+      },
+      {
+        "level": 5,
+        "skillCodes": [
+          "workforce-plan",
+          "hr-strategy"
+        ]
+      }
+    ],
+    "prerequisites": [
+      {
+        "from": "payroll-calc",
+        "to": "labor-law"
+      },
+      {
+        "from": "jd-writing",
+        "to": "interview"
+      },
+      {
+        "from": "interview",
+        "to": "ats"
+      },
+      {
+        "from": "onboarding",
+        "to": "training-plan"
+      },
+      {
+        "from": "kpi-design",
+        "to": "hr-analytics"
+      },
+      {
+        "from": "workforce-plan",
+        "to": "hr-strategy"
+      }
+    ],
+    "questions": [
+      {
+        "skillCode": "labor-law",
+        "axisCode": "hr-payroll",
+        "text": "노동법 실무을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "training-plan",
+        "axisCode": "hr-train",
+        "text": "교육 기획을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "benefit-admin",
+        "axisCode": "hr-benefit",
+        "text": "복리후생 운영을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "interview",
+        "axisCode": "hr-recruit",
+        "text": "면접 설계·진행을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "kpi-design",
+        "axisCode": "hr-eval",
+        "text": "평가지표 설계을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "workforce-plan",
+        "axisCode": "hr-plan",
+        "text": "인력 계획을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "jd-writing",
+        "axisCode": "hr-recruit",
+        "text": "직무기술서 작성을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "payroll-calc",
+        "axisCode": "hr-payroll",
+        "text": "급여 계산을(를) 실제로 사용해 본 경험이 있나요?"
+      }
+    ],
+    "questTemplates": [
+      {
+        "skillCode": "payroll-calc",
+        "title": "급여 계산을(를) 실습한다",
+        "completionCriteria": "급여 계산을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0202020109_23v5",
+        "guidance": {
+          "none": "급여 계산이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "급여 계산을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "jd-writing",
+        "title": "직무기술서 작성을(를) 실습한다",
+        "completionCriteria": "직무기술서 작성을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0202020103_23v4",
+        "guidance": {
+          "none": "직무기술서 작성이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "직무기술서 작성을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "labor-law",
+        "title": "노동법 실무을(를) 실습한다",
+        "completionCriteria": "노동법 실무을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0202020109_23v5",
+        "guidance": {
+          "none": "노동법 실무이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "노동법 실무을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "onboarding",
+        "title": "온보딩 운영을(를) 실습한다",
+        "completionCriteria": "온보딩 운영을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0202020107_23v4",
+        "guidance": {
+          "none": "온보딩 운영이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "온보딩 운영을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "training-plan",
+        "title": "교육 기획을(를) 실습한다",
+        "completionCriteria": "교육 기획을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0202020107_23v4",
+        "guidance": {
+          "none": "교육 기획이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "교육 기획을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "interview",
+        "title": "면접 설계·진행을(를) 실습한다",
+        "completionCriteria": "면접 설계·진행을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0202020103_23v4",
+        "guidance": {
+          "none": "면접 설계·진행이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "면접 설계·진행을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "benefit-admin",
+        "title": "복리후생 운영을(를) 실습한다",
+        "completionCriteria": "복리후생 운영을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0202020110_23v4",
+        "guidance": {
+          "none": "복리후생 운영이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "복리후생 운영을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "ats",
+        "title": "채용 시스템 운영을(를) 실습한다",
+        "completionCriteria": "채용 시스템 운영을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0202020103_23v4",
+        "guidance": {
+          "none": "채용 시스템 운영이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "채용 시스템 운영을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "kpi-design",
+        "title": "평가지표 설계을(를) 실습한다",
+        "completionCriteria": "평가지표 설계을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0202020105_23v3",
+        "guidance": {
+          "none": "평가지표 설계이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "평가지표 설계을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "hr-analytics",
+        "title": "인사 데이터 분석을(를) 실습한다",
+        "completionCriteria": "인사 데이터 분석을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0202020105_23v3",
+        "guidance": {
+          "none": "인사 데이터 분석이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "인사 데이터 분석을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "workforce-plan",
+        "title": "인력 계획을(를) 실습한다",
+        "completionCriteria": "인력 계획을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0202020101_23v3",
+        "guidance": {
+          "none": "인력 계획이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "인력 계획을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "hr-strategy",
+        "title": "인사 전략을(를) 실습한다",
+        "completionCriteria": "인사 전략을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0202020101_23v3",
+        "guidance": {
+          "none": "인사 전략이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "인사 전략을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      }
+    ],
+    "activityQuests": [
+      {
+        "title": "인사 담당자 직무의 면접 질문을 정리한다",
+        "axisCode": "hr-eval",
+        "level": 4,
+        "completionCriteria": "자주 나오는 질문 10개와 자신의 답변을 문서로 정리한다."
+      },
+      {
+        "title": "협업 프로젝트로 실전 경험을 쌓는다",
+        "axisCode": "hr-plan",
+        "level": 5,
+        "completionCriteria": "2인 이상 팀 프로젝트를 완주하고 맡은 역할을 STAR로 기록한다."
+      }
+    ]
+  },
+  {
+    "jobCode": "accounting",
+    "version": 1,
+    "ncsDetailCode": "02030201",
+    "axes": [
+      {
+        "axisCode": "acc-voucher",
+        "axisName": "전표",
+        "ncsUnitCode": "0203020101_20v4",
+        "ncsUnitName": "전표관리",
+        "order": 1
+      },
+      {
+        "axisCode": "acc-close",
+        "axisName": "결산",
+        "ncsUnitCode": "0203020104_23v5",
+        "ncsUnitName": "결산처리",
+        "order": 2
+      },
+      {
+        "axisCode": "acc-stmt",
+        "axisName": "재무제표",
+        "ncsUnitCode": "0203020112_23v5",
+        "ncsUnitName": "재무제표작성",
+        "order": 3
+      },
+      {
+        "axisCode": "acc-ratio",
+        "axisName": "재무분석",
+        "ncsUnitCode": "0203020106_20v4",
+        "ncsUnitName": "재무비율분석",
+        "order": 4
+      },
+      {
+        "axisCode": "acc-audit",
+        "axisName": "감사",
+        "ncsUnitCode": "0203020107_20v4",
+        "ncsUnitName": "회계감사",
+        "order": 5
+      },
+      {
+        "axisCode": "acc-comb",
+        "axisName": "사업결합",
+        "ncsUnitCode": "0203020108_20v4",
+        "ncsUnitName": "사업결합회계",
+        "order": 6
+      }
+    ],
+    "skills": [
+      {
+        "skillCode": "double-entry",
+        "skillName": "복식부기",
+        "axisCode": "acc-voucher",
+        "p": 1.0,
+        "s": 0.1,
+        "n": 0.1429,
+        "d": 0.0807,
+        "level": 1
+      },
+      {
+        "skillCode": "erp-entry",
+        "skillName": "ERP 전표 입력",
+        "axisCode": "acc-voucher",
+        "p": 0.8,
+        "s": 0.2,
+        "n": 0.1429,
+        "d": 0.1857,
+        "level": 1
+      },
+      {
+        "skillCode": "trial-balance",
+        "skillName": "시산표 작성",
+        "axisCode": "acc-close",
+        "p": 0.85,
+        "s": 0.25,
+        "n": 0.1429,
+        "d": 0.1932,
+        "level": 1
+      },
+      {
+        "skillCode": "adjusting-entry",
+        "skillName": "결산 수정분개",
+        "axisCode": "acc-close",
+        "p": 0.75,
+        "s": 0.35,
+        "n": 0.1429,
+        "d": 0.2682,
+        "level": 2
+      },
+      {
+        "skillCode": "excel-modeling",
+        "skillName": "엑셀 재무모델링",
+        "axisCode": "acc-ratio",
+        "p": 0.7,
+        "s": 0.3,
+        "n": 0.2857,
+        "d": 0.2964,
+        "level": 2
+      },
+      {
+        "skillCode": "fs-preparation",
+        "skillName": "재무제표 작성",
+        "axisCode": "acc-stmt",
+        "p": 0.8,
+        "s": 0.4,
+        "n": 0.2857,
+        "d": 0.3114,
+        "level": 3
+      },
+      {
+        "skillCode": "ratio-analysis",
+        "skillName": "재무비율 분석",
+        "axisCode": "acc-ratio",
+        "p": 0.65,
+        "s": 0.45,
+        "n": 0.2857,
+        "d": 0.3789,
+        "level": 3
+      },
+      {
+        "skillCode": "kifrs",
+        "skillName": "K-IFRS 적용",
+        "axisCode": "acc-stmt",
+        "p": 0.6,
+        "s": 0.55,
+        "n": 0.2857,
+        "d": 0.4389,
+        "level": 4
+      },
+      {
+        "skillCode": "internal-control",
+        "skillName": "내부통제",
+        "axisCode": "acc-audit",
+        "p": 0.5,
+        "s": 0.65,
+        "n": 0.5714,
+        "d": 0.5854,
+        "level": 4
+      },
+      {
+        "skillCode": "audit-procedure",
+        "skillName": "감사 절차",
+        "axisCode": "acc-audit",
+        "p": 0.4,
+        "s": 0.7,
+        "n": 0.5714,
+        "d": 0.6379,
+        "level": 5
+      },
+      {
+        "skillCode": "consolidation",
+        "skillName": "연결회계",
+        "axisCode": "acc-comb",
+        "p": 0.35,
+        "s": 0.8,
+        "n": 0.7143,
+        "d": 0.7336,
+        "level": 5
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "skillCodes": [
+          "double-entry",
+          "erp-entry",
+          "trial-balance"
+        ]
+      },
+      {
+        "level": 2,
+        "skillCodes": [
+          "adjusting-entry",
+          "excel-modeling"
+        ]
+      },
+      {
+        "level": 3,
+        "skillCodes": [
+          "fs-preparation",
+          "ratio-analysis"
+        ]
+      },
+      {
+        "level": 4,
+        "skillCodes": [
+          "kifrs",
+          "internal-control"
+        ]
+      },
+      {
+        "level": 5,
+        "skillCodes": [
+          "audit-procedure",
+          "consolidation"
+        ]
+      }
+    ],
+    "prerequisites": [
+      {
+        "from": "double-entry",
+        "to": "erp-entry"
+      },
+      {
+        "from": "trial-balance",
+        "to": "adjusting-entry"
+      },
+      {
+        "from": "excel-modeling",
+        "to": "ratio-analysis"
+      },
+      {
+        "from": "fs-preparation",
+        "to": "kifrs"
+      },
+      {
+        "from": "internal-control",
+        "to": "audit-procedure"
+      }
+    ],
+    "questions": [
+      {
+        "skillCode": "double-entry",
+        "axisCode": "acc-voucher",
+        "text": "복식부기을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "trial-balance",
+        "axisCode": "acc-close",
+        "text": "시산표 작성을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "fs-preparation",
+        "axisCode": "acc-stmt",
+        "text": "재무제표 작성을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "excel-modeling",
+        "axisCode": "acc-ratio",
+        "text": "엑셀 재무모델링을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "internal-control",
+        "axisCode": "acc-audit",
+        "text": "내부통제을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "consolidation",
+        "axisCode": "acc-comb",
+        "text": "연결회계을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "erp-entry",
+        "axisCode": "acc-voucher",
+        "text": "ERP 전표 입력을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "adjusting-entry",
+        "axisCode": "acc-close",
+        "text": "결산 수정분개을(를) 실제로 사용해 본 경험이 있나요?"
+      }
+    ],
+    "questTemplates": [
+      {
+        "skillCode": "double-entry",
+        "title": "복식부기을(를) 실습한다",
+        "completionCriteria": "복식부기을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0203020101_20v4",
+        "guidance": {
+          "none": "복식부기이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "복식부기을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "erp-entry",
+        "title": "ERP 전표 입력을(를) 실습한다",
+        "completionCriteria": "ERP 전표 입력을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0203020101_20v4",
+        "guidance": {
+          "none": "ERP 전표 입력이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "ERP 전표 입력을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "trial-balance",
+        "title": "시산표 작성을(를) 실습한다",
+        "completionCriteria": "시산표 작성을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0203020104_23v5",
+        "guidance": {
+          "none": "시산표 작성이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "시산표 작성을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "adjusting-entry",
+        "title": "결산 수정분개을(를) 실습한다",
+        "completionCriteria": "결산 수정분개을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0203020104_23v5",
+        "guidance": {
+          "none": "결산 수정분개이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "결산 수정분개을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "excel-modeling",
+        "title": "엑셀 재무모델링을(를) 실습한다",
+        "completionCriteria": "엑셀 재무모델링을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0203020106_20v4",
+        "guidance": {
+          "none": "엑셀 재무모델링이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "엑셀 재무모델링을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "fs-preparation",
+        "title": "재무제표 작성을(를) 실습한다",
+        "completionCriteria": "재무제표 작성을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0203020112_23v5",
+        "guidance": {
+          "none": "재무제표 작성이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "재무제표 작성을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "ratio-analysis",
+        "title": "재무비율 분석을(를) 실습한다",
+        "completionCriteria": "재무비율 분석을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0203020106_20v4",
+        "guidance": {
+          "none": "재무비율 분석이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "재무비율 분석을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "kifrs",
+        "title": "K-IFRS 적용을(를) 실습한다",
+        "completionCriteria": "K-IFRS 적용을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0203020112_23v5",
+        "guidance": {
+          "none": "K-IFRS 적용이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "K-IFRS 적용을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "internal-control",
+        "title": "내부통제을(를) 실습한다",
+        "completionCriteria": "내부통제을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0203020107_20v4",
+        "guidance": {
+          "none": "내부통제이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "내부통제을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "audit-procedure",
+        "title": "감사 절차을(를) 실습한다",
+        "completionCriteria": "감사 절차을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0203020107_20v4",
+        "guidance": {
+          "none": "감사 절차이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "감사 절차을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "consolidation",
+        "title": "연결회계을(를) 실습한다",
+        "completionCriteria": "연결회계을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0203020108_20v4",
+        "guidance": {
+          "none": "연결회계이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "연결회계을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      }
+    ],
+    "activityQuests": [
+      {
+        "title": "회계 담당자 직무의 면접 질문을 정리한다",
+        "axisCode": "acc-audit",
+        "level": 4,
+        "completionCriteria": "자주 나오는 질문 10개와 자신의 답변을 문서로 정리한다."
+      },
+      {
+        "title": "협업 프로젝트로 실전 경험을 쌓는다",
+        "axisCode": "acc-comb",
+        "level": 5,
+        "completionCriteria": "2인 이상 팀 프로젝트를 완주하고 맡은 역할을 STAR로 기록한다."
+      }
+    ]
+  },
+  {
+    "jobCode": "marketer",
+    "version": 1,
+    "ncsDetailCode": "02010301",
+    "axes": [
+      {
+        "axisCode": "mkt-research",
+        "axisName": "시장분석",
+        "ncsUnitCode": "0201030109_21v4",
+        "ncsUnitName": "마케팅 시장 환경 분석",
+        "order": 1
+      },
+      {
+        "axisCode": "mkt-stp",
+        "axisName": "STP",
+        "ncsUnitCode": "0201030116_21v4",
+        "ncsUnitName": "STP 전략 수립",
+        "order": 2
+      },
+      {
+        "axisCode": "mkt-mix",
+        "axisName": "마케팅믹스",
+        "ncsUnitCode": "0201030117_21v4",
+        "ncsUnitName": "마케팅 믹스 전략 수립",
+        "order": 3
+      },
+      {
+        "axisCode": "mkt-product",
+        "axisName": "상품기획",
+        "ncsUnitCode": "0201030102_21v5",
+        "ncsUnitName": "신상품 기획",
+        "order": 4
+      },
+      {
+        "axisCode": "mkt-plan",
+        "axisName": "전략수립",
+        "ncsUnitCode": "0201030108_21v4",
+        "ncsUnitName": "마케팅 전략 계획 수립",
+        "order": 5
+      },
+      {
+        "axisCode": "mkt-perf",
+        "axisName": "성과관리",
+        "ncsUnitCode": "0201030118_21v4",
+        "ncsUnitName": "마케팅 성과 관리",
+        "order": 6
+      }
+    ],
+    "skills": [
+      {
+        "skillCode": "market-research",
+        "skillName": "시장 조사",
+        "axisCode": "mkt-research",
+        "p": 0.85,
+        "s": 0.25,
+        "n": 0.2857,
+        "d": 0.2289,
+        "level": 1
+      },
+      {
+        "skillCode": "competitor-analysis",
+        "skillName": "경쟁사 분석",
+        "axisCode": "mkt-research",
+        "p": 0.8,
+        "s": 0.3,
+        "n": 0.2857,
+        "d": 0.2664,
+        "level": 1
+      },
+      {
+        "skillCode": "content-planning",
+        "skillName": "콘텐츠 기획",
+        "axisCode": "mkt-mix",
+        "p": 0.75,
+        "s": 0.25,
+        "n": 0.4286,
+        "d": 0.2946,
+        "level": 1
+      },
+      {
+        "skillCode": "persona",
+        "skillName": "페르소나 설계",
+        "axisCode": "mkt-stp",
+        "p": 0.7,
+        "s": 0.35,
+        "n": 0.4286,
+        "d": 0.3546,
+        "level": 2
+      },
+      {
+        "skillCode": "ga-analytics",
+        "skillName": "GA 데이터 분석",
+        "axisCode": "mkt-perf",
+        "p": 0.8,
+        "s": 0.35,
+        "n": 0.5714,
+        "d": 0.3604,
+        "level": 2
+      },
+      {
+        "skillCode": "channel-strategy",
+        "skillName": "채널 전략",
+        "axisCode": "mkt-mix",
+        "p": 0.7,
+        "s": 0.4,
+        "n": 0.4286,
+        "d": 0.3771,
+        "level": 3
+      },
+      {
+        "skillCode": "performance-ads",
+        "skillName": "퍼포먼스 광고 운영",
+        "axisCode": "mkt-perf",
+        "p": 0.75,
+        "s": 0.4,
+        "n": 0.5714,
+        "d": 0.3979,
+        "level": 3
+      },
+      {
+        "skillCode": "segmentation",
+        "skillName": "시장 세분화",
+        "axisCode": "mkt-stp",
+        "p": 0.65,
+        "s": 0.45,
+        "n": 0.4286,
+        "d": 0.4146,
+        "level": 3
+      },
+      {
+        "skillCode": "campaign-plan",
+        "skillName": "캠페인 기획",
+        "axisCode": "mkt-plan",
+        "p": 0.7,
+        "s": 0.45,
+        "n": 0.5714,
+        "d": 0.4354,
+        "level": 4
+      },
+      {
+        "skillCode": "pricing",
+        "skillName": "가격 전략",
+        "axisCode": "mkt-mix",
+        "p": 0.5,
+        "s": 0.55,
+        "n": 0.4286,
+        "d": 0.5046,
+        "level": 4
+      },
+      {
+        "skillCode": "ab-test",
+        "skillName": "A/B 테스트",
+        "axisCode": "mkt-perf",
+        "p": 0.5,
+        "s": 0.55,
+        "n": 0.5714,
+        "d": 0.5404,
+        "level": 5
+      },
+      {
+        "skillCode": "product-concept",
+        "skillName": "상품 콘셉트 기획",
+        "axisCode": "mkt-product",
+        "p": 0.45,
+        "s": 0.6,
+        "n": 0.5714,
+        "d": 0.5779,
+        "level": 5
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "skillCodes": [
+          "market-research",
+          "competitor-analysis",
+          "content-planning"
+        ]
+      },
+      {
+        "level": 2,
+        "skillCodes": [
+          "persona",
+          "ga-analytics"
+        ]
+      },
+      {
+        "level": 3,
+        "skillCodes": [
+          "channel-strategy",
+          "performance-ads",
+          "segmentation"
+        ]
+      },
+      {
+        "level": 4,
+        "skillCodes": [
+          "campaign-plan",
+          "pricing"
+        ]
+      },
+      {
+        "level": 5,
+        "skillCodes": [
+          "ab-test",
+          "product-concept"
+        ]
+      }
+    ],
+    "prerequisites": [
+      {
+        "from": "market-research",
+        "to": "competitor-analysis"
+      },
+      {
+        "from": "content-planning",
+        "to": "channel-strategy"
+      },
+      {
+        "from": "channel-strategy",
+        "to": "pricing"
+      },
+      {
+        "from": "persona",
+        "to": "segmentation"
+      },
+      {
+        "from": "ga-analytics",
+        "to": "performance-ads"
+      },
+      {
+        "from": "performance-ads",
+        "to": "ab-test"
+      }
+    ],
+    "questions": [
+      {
+        "skillCode": "market-research",
+        "axisCode": "mkt-research",
+        "text": "시장 조사을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "persona",
+        "axisCode": "mkt-stp",
+        "text": "페르소나 설계을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "content-planning",
+        "axisCode": "mkt-mix",
+        "text": "콘텐츠 기획을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "product-concept",
+        "axisCode": "mkt-product",
+        "text": "상품 콘셉트 기획을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "campaign-plan",
+        "axisCode": "mkt-plan",
+        "text": "캠페인 기획을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "ga-analytics",
+        "axisCode": "mkt-perf",
+        "text": "GA 데이터 분석을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "competitor-analysis",
+        "axisCode": "mkt-research",
+        "text": "경쟁사 분석을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "performance-ads",
+        "axisCode": "mkt-perf",
+        "text": "퍼포먼스 광고 운영을(를) 실제로 사용해 본 경험이 있나요?"
+      }
+    ],
+    "questTemplates": [
+      {
+        "skillCode": "market-research",
+        "title": "시장 조사을(를) 실습한다",
+        "completionCriteria": "시장 조사을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0201030109_21v4",
+        "guidance": {
+          "none": "시장 조사이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "시장 조사을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "competitor-analysis",
+        "title": "경쟁사 분석을(를) 실습한다",
+        "completionCriteria": "경쟁사 분석을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0201030109_21v4",
+        "guidance": {
+          "none": "경쟁사 분석이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "경쟁사 분석을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "content-planning",
+        "title": "콘텐츠 기획을(를) 실습한다",
+        "completionCriteria": "콘텐츠 기획을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0201030117_21v4",
+        "guidance": {
+          "none": "콘텐츠 기획이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "콘텐츠 기획을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "persona",
+        "title": "페르소나 설계을(를) 실습한다",
+        "completionCriteria": "페르소나 설계을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0201030116_21v4",
+        "guidance": {
+          "none": "페르소나 설계이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "페르소나 설계을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "ga-analytics",
+        "title": "GA 데이터 분석을(를) 실습한다",
+        "completionCriteria": "GA 데이터 분석을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0201030118_21v4",
+        "guidance": {
+          "none": "GA 데이터 분석이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "GA 데이터 분석을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "channel-strategy",
+        "title": "채널 전략을(를) 실습한다",
+        "completionCriteria": "채널 전략을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0201030117_21v4",
+        "guidance": {
+          "none": "채널 전략이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "채널 전략을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "performance-ads",
+        "title": "퍼포먼스 광고 운영을(를) 실습한다",
+        "completionCriteria": "퍼포먼스 광고 운영을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0201030118_21v4",
+        "guidance": {
+          "none": "퍼포먼스 광고 운영이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "퍼포먼스 광고 운영을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "segmentation",
+        "title": "시장 세분화을(를) 실습한다",
+        "completionCriteria": "시장 세분화을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0201030116_21v4",
+        "guidance": {
+          "none": "시장 세분화이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "시장 세분화을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "campaign-plan",
+        "title": "캠페인 기획을(를) 실습한다",
+        "completionCriteria": "캠페인 기획을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0201030108_21v4",
+        "guidance": {
+          "none": "캠페인 기획이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "캠페인 기획을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "pricing",
+        "title": "가격 전략을(를) 실습한다",
+        "completionCriteria": "가격 전략을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0201030117_21v4",
+        "guidance": {
+          "none": "가격 전략이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "가격 전략을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "ab-test",
+        "title": "A/B 테스트을(를) 실습한다",
+        "completionCriteria": "A/B 테스트을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0201030118_21v4",
+        "guidance": {
+          "none": "A/B 테스트이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "A/B 테스트을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "product-concept",
+        "title": "상품 콘셉트 기획을(를) 실습한다",
+        "completionCriteria": "상품 콘셉트 기획을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "0201030102_21v5",
+        "guidance": {
+          "none": "상품 콘셉트 기획이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "상품 콘셉트 기획을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      }
+    ],
+    "activityQuests": [
+      {
+        "title": "디지털 마케터 직무의 면접 질문을 정리한다",
+        "axisCode": "mkt-plan",
+        "level": 4,
+        "completionCriteria": "자주 나오는 질문 10개와 자신의 답변을 문서로 정리한다."
+      },
+      {
+        "title": "협업 프로젝트로 실전 경험을 쌓는다",
+        "axisCode": "mkt-perf",
+        "level": 5,
+        "completionCriteria": "2인 이상 팀 프로젝트를 완주하고 맡은 역할을 STAR로 기록한다."
+      }
+    ]
+  },
+  {
+    "jobCode": "sales",
+    "version": 1,
+    "ncsDetailCode": "10010102",
+    "axes": [
+      {
+        "axisCode": "os-contract",
+        "axisName": "계약관리",
+        "ncsUnitCode": "1001010208_20v2",
+        "ncsUnitName": "해외영업 계약 이행 관리",
+        "order": 1
+      },
+      {
+        "axisCode": "os-lead",
+        "axisName": "고객발굴",
+        "ncsUnitCode": "1001010204_20v2",
+        "ncsUnitName": "해외 잠재고객 발굴",
+        "order": 2
+      },
+      {
+        "axisCode": "os-proposal",
+        "axisName": "제안",
+        "ncsUnitCode": "1001010205_20v2",
+        "ncsUnitName": "해외거래 제안",
+        "order": 3
+      },
+      {
+        "axisCode": "os-research",
+        "axisName": "시장조사",
+        "ncsUnitCode": "1001010201_20v2",
+        "ncsUnitName": "해외시장 조사",
+        "order": 4
+      },
+      {
+        "axisCode": "os-nego",
+        "axisName": "협상",
+        "ncsUnitCode": "1001010206_20v2",
+        "ncsUnitName": "해외고객 협상",
+        "order": 5
+      },
+      {
+        "axisCode": "os-strategy",
+        "axisName": "전략",
+        "ncsUnitCode": "1001010203_20v2",
+        "ncsUnitName": "해외마케팅 전략수립",
+        "order": 6
+      }
+    ],
+    "skills": [
+      {
+        "skillCode": "business-english",
+        "skillName": "비즈니스 영어",
+        "axisCode": "os-proposal",
+        "p": 0.9,
+        "s": 0.4,
+        "n": 0.2857,
+        "d": 0.2814,
+        "level": 1
+      },
+      {
+        "skillCode": "trade-docs",
+        "skillName": "무역 서류 실무",
+        "axisCode": "os-contract",
+        "p": 0.7,
+        "s": 0.35,
+        "n": 0.1429,
+        "d": 0.2832,
+        "level": 1
+      },
+      {
+        "skillCode": "proposal-writing",
+        "skillName": "제안서 작성",
+        "axisCode": "os-proposal",
+        "p": 0.75,
+        "s": 0.35,
+        "n": 0.2857,
+        "d": 0.3039,
+        "level": 1
+      },
+      {
+        "skillCode": "lead-generation",
+        "skillName": "잠재고객 발굴",
+        "axisCode": "os-lead",
+        "p": 0.65,
+        "s": 0.3,
+        "n": 0.2857,
+        "d": 0.3114,
+        "level": 2
+      },
+      {
+        "skillCode": "crm-tool",
+        "skillName": "CRM 운영",
+        "axisCode": "os-lead",
+        "p": 0.55,
+        "s": 0.3,
+        "n": 0.2857,
+        "d": 0.3414,
+        "level": 2
+      },
+      {
+        "skillCode": "incoterms",
+        "skillName": "인코텀즈",
+        "axisCode": "os-contract",
+        "p": 0.6,
+        "s": 0.45,
+        "n": 0.1429,
+        "d": 0.3582,
+        "level": 3
+      },
+      {
+        "skillCode": "market-entry",
+        "skillName": "진출 전략 분석",
+        "axisCode": "os-research",
+        "p": 0.6,
+        "s": 0.5,
+        "n": 0.4286,
+        "d": 0.4521,
+        "level": 3
+      },
+      {
+        "skillCode": "negotiation",
+        "skillName": "협상",
+        "axisCode": "os-nego",
+        "p": 0.7,
+        "s": 0.6,
+        "n": 0.5714,
+        "d": 0.5029,
+        "level": 4
+      },
+      {
+        "skillCode": "country-risk",
+        "skillName": "국가 리스크 분석",
+        "axisCode": "os-research",
+        "p": 0.45,
+        "s": 0.55,
+        "n": 0.4286,
+        "d": 0.5196,
+        "level": 4
+      },
+      {
+        "skillCode": "contract-law",
+        "skillName": "국제계약 실무",
+        "axisCode": "os-nego",
+        "p": 0.4,
+        "s": 0.7,
+        "n": 0.5714,
+        "d": 0.6379,
+        "level": 5
+      },
+      {
+        "skillCode": "global-strategy",
+        "skillName": "해외마케팅 전략",
+        "axisCode": "os-strategy",
+        "p": 0.4,
+        "s": 0.75,
+        "n": 0.7143,
+        "d": 0.6961,
+        "level": 5
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "skillCodes": [
+          "business-english",
+          "trade-docs",
+          "proposal-writing"
+        ]
+      },
+      {
+        "level": 2,
+        "skillCodes": [
+          "lead-generation",
+          "crm-tool"
+        ]
+      },
+      {
+        "level": 3,
+        "skillCodes": [
+          "incoterms",
+          "market-entry"
+        ]
+      },
+      {
+        "level": 4,
+        "skillCodes": [
+          "negotiation",
+          "country-risk"
+        ]
+      },
+      {
+        "level": 5,
+        "skillCodes": [
+          "contract-law",
+          "global-strategy"
+        ]
+      }
+    ],
+    "prerequisites": [
+      {
+        "from": "business-english",
+        "to": "proposal-writing"
+      },
+      {
+        "from": "trade-docs",
+        "to": "incoterms"
+      },
+      {
+        "from": "lead-generation",
+        "to": "crm-tool"
+      },
+      {
+        "from": "market-entry",
+        "to": "country-risk"
+      },
+      {
+        "from": "negotiation",
+        "to": "contract-law"
+      }
+    ],
+    "questions": [
+      {
+        "skillCode": "trade-docs",
+        "axisCode": "os-contract",
+        "text": "무역 서류 실무을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "lead-generation",
+        "axisCode": "os-lead",
+        "text": "잠재고객 발굴을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "business-english",
+        "axisCode": "os-proposal",
+        "text": "비즈니스 영어을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "market-entry",
+        "axisCode": "os-research",
+        "text": "진출 전략 분석을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "negotiation",
+        "axisCode": "os-nego",
+        "text": "협상을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "global-strategy",
+        "axisCode": "os-strategy",
+        "text": "해외마케팅 전략을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "proposal-writing",
+        "axisCode": "os-proposal",
+        "text": "제안서 작성을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "incoterms",
+        "axisCode": "os-contract",
+        "text": "인코텀즈을(를) 실제로 사용해 본 경험이 있나요?"
+      }
+    ],
+    "questTemplates": [
+      {
+        "skillCode": "business-english",
+        "title": "비즈니스 영어을(를) 실습한다",
+        "completionCriteria": "비즈니스 영어을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "1001010205_20v2",
+        "guidance": {
+          "none": "비즈니스 영어이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "비즈니스 영어을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "trade-docs",
+        "title": "무역 서류 실무을(를) 실습한다",
+        "completionCriteria": "무역 서류 실무을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "1001010208_20v2",
+        "guidance": {
+          "none": "무역 서류 실무이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "무역 서류 실무을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "proposal-writing",
+        "title": "제안서 작성을(를) 실습한다",
+        "completionCriteria": "제안서 작성을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "1001010205_20v2",
+        "guidance": {
+          "none": "제안서 작성이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "제안서 작성을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "lead-generation",
+        "title": "잠재고객 발굴을(를) 실습한다",
+        "completionCriteria": "잠재고객 발굴을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "1001010204_20v2",
+        "guidance": {
+          "none": "잠재고객 발굴이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "잠재고객 발굴을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "crm-tool",
+        "title": "CRM 운영을(를) 실습한다",
+        "completionCriteria": "CRM 운영을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "1001010204_20v2",
+        "guidance": {
+          "none": "CRM 운영이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "CRM 운영을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "incoterms",
+        "title": "인코텀즈을(를) 실습한다",
+        "completionCriteria": "인코텀즈을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "1001010208_20v2",
+        "guidance": {
+          "none": "인코텀즈이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "인코텀즈을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "market-entry",
+        "title": "진출 전략 분석을(를) 실습한다",
+        "completionCriteria": "진출 전략 분석을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "1001010201_20v2",
+        "guidance": {
+          "none": "진출 전략 분석이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "진출 전략 분석을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "negotiation",
+        "title": "협상을(를) 실습한다",
+        "completionCriteria": "협상을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "1001010206_20v2",
+        "guidance": {
+          "none": "협상이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "협상을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "country-risk",
+        "title": "국가 리스크 분석을(를) 실습한다",
+        "completionCriteria": "국가 리스크 분석을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "1001010201_20v2",
+        "guidance": {
+          "none": "국가 리스크 분석이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "국가 리스크 분석을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "contract-law",
+        "title": "국제계약 실무을(를) 실습한다",
+        "completionCriteria": "국제계약 실무을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "1001010206_20v2",
+        "guidance": {
+          "none": "국제계약 실무이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "국제계약 실무을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "global-strategy",
+        "title": "해외마케팅 전략을(를) 실습한다",
+        "completionCriteria": "해외마케팅 전략을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "1001010203_20v2",
+        "guidance": {
+          "none": "해외마케팅 전략이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "해외마케팅 전략을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      }
+    ],
+    "activityQuests": [
+      {
+        "title": "해외영업 담당자 직무의 면접 질문을 정리한다",
+        "axisCode": "os-nego",
+        "level": 4,
+        "completionCriteria": "자주 나오는 질문 10개와 자신의 답변을 문서로 정리한다."
+      },
+      {
+        "title": "협업 프로젝트로 실전 경험을 쌓는다",
+        "axisCode": "os-strategy",
+        "level": 5,
+        "completionCriteria": "2인 이상 팀 프로젝트를 완주하고 맡은 역할을 STAR로 기록한다."
+      }
+    ]
+  },
+  {
+    "jobCode": "mechanical",
+    "version": 1,
+    "ncsDetailCode": "15010201",
+    "axes": [
+      {
+        "axisCode": "me-2d",
+        "axisName": "2D도면",
+        "ncsUnitCode": "1501020111_16v3",
+        "ncsUnitName": "2D도면작업",
+        "order": 1
+      },
+      {
+        "axisCode": "me-3d",
+        "axisName": "3D모델링",
+        "ncsUnitCode": "1501020113_16v3",
+        "ncsUnitName": "3D형상모델링작업",
+        "order": 2
+      },
+      {
+        "axisCode": "me-read",
+        "axisName": "도면해석",
+        "ncsUnitCode": "1501020115_16v3",
+        "ncsUnitName": "도면분석",
+        "order": 3
+      },
+      {
+        "axisCode": "me-fastener",
+        "axisName": "체결요소",
+        "ncsUnitCode": "1501020106_16v3",
+        "ncsUnitName": "체결요소설계",
+        "order": 4
+      },
+      {
+        "axisCode": "me-tolerance",
+        "axisName": "공차",
+        "ncsUnitCode": "1501020104_19v3",
+        "ncsUnitName": "요소공차검토",
+        "order": 5
+      },
+      {
+        "axisCode": "me-verify",
+        "axisName": "설계검증",
+        "ncsUnitCode": "1501020110_19v3",
+        "ncsUnitName": "요소설계검증",
+        "order": 6
+      }
+    ],
+    "skills": [
+      {
+        "skillCode": "drawing-reading",
+        "skillName": "도면 해독",
+        "axisCode": "me-read",
+        "p": 0.9,
+        "s": 0.15,
+        "n": 0.2857,
+        "d": 0.1689,
+        "level": 1
+      },
+      {
+        "skillCode": "autocad",
+        "skillName": "AutoCAD",
+        "axisCode": "me-2d",
+        "p": 0.85,
+        "s": 0.2,
+        "n": 0.1429,
+        "d": 0.1707,
+        "level": 1
+      },
+      {
+        "skillCode": "drafting-standard",
+        "skillName": "제도 규격",
+        "axisCode": "me-2d",
+        "p": 0.8,
+        "s": 0.25,
+        "n": 0.1429,
+        "d": 0.2082,
+        "level": 1
+      },
+      {
+        "skillCode": "solidworks",
+        "skillName": "SolidWorks",
+        "axisCode": "me-3d",
+        "p": 0.8,
+        "s": 0.3,
+        "n": 0.1429,
+        "d": 0.2307,
+        "level": 2
+      },
+      {
+        "skillCode": "bolt-design",
+        "skillName": "체결부 설계",
+        "axisCode": "me-fastener",
+        "p": 0.55,
+        "s": 0.4,
+        "n": 0.2857,
+        "d": 0.3864,
+        "level": 2
+      },
+      {
+        "skillCode": "material-select",
+        "skillName": "재질 선정",
+        "axisCode": "me-fastener",
+        "p": 0.6,
+        "s": 0.45,
+        "n": 0.2857,
+        "d": 0.3939,
+        "level": 3
+      },
+      {
+        "skillCode": "catia",
+        "skillName": "CATIA",
+        "axisCode": "me-3d",
+        "p": 0.5,
+        "s": 0.5,
+        "n": 0.1429,
+        "d": 0.4107,
+        "level": 3
+      },
+      {
+        "skillCode": "gd-t",
+        "skillName": "기하공차(GD&T)",
+        "axisCode": "me-read",
+        "p": 0.6,
+        "s": 0.5,
+        "n": 0.2857,
+        "d": 0.4164,
+        "level": 3
+      },
+      {
+        "skillCode": "fit-clearance",
+        "skillName": "끼워맞춤",
+        "axisCode": "me-tolerance",
+        "p": 0.45,
+        "s": 0.5,
+        "n": 0.4286,
+        "d": 0.4971,
+        "level": 4
+      },
+      {
+        "skillCode": "tolerance-analysis",
+        "skillName": "공차 해석",
+        "axisCode": "me-tolerance",
+        "p": 0.5,
+        "s": 0.55,
+        "n": 0.4286,
+        "d": 0.5046,
+        "level": 4
+      },
+      {
+        "skillCode": "design-review",
+        "skillName": "설계 검증",
+        "axisCode": "me-verify",
+        "p": 0.45,
+        "s": 0.65,
+        "n": 0.7143,
+        "d": 0.6361,
+        "level": 5
+      },
+      {
+        "skillCode": "fem-analysis",
+        "skillName": "구조 해석(FEM)",
+        "axisCode": "me-verify",
+        "p": 0.4,
+        "s": 0.7,
+        "n": 0.7143,
+        "d": 0.6736,
+        "level": 5
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "skillCodes": [
+          "drawing-reading",
+          "autocad",
+          "drafting-standard"
+        ]
+      },
+      {
+        "level": 2,
+        "skillCodes": [
+          "solidworks",
+          "bolt-design"
+        ]
+      },
+      {
+        "level": 3,
+        "skillCodes": [
+          "material-select",
+          "catia",
+          "gd-t"
+        ]
+      },
+      {
+        "level": 4,
+        "skillCodes": [
+          "fit-clearance",
+          "tolerance-analysis"
+        ]
+      },
+      {
+        "level": 5,
+        "skillCodes": [
+          "design-review",
+          "fem-analysis"
+        ]
+      }
+    ],
+    "prerequisites": [
+      {
+        "from": "drawing-reading",
+        "to": "gd-t"
+      },
+      {
+        "from": "autocad",
+        "to": "drafting-standard"
+      },
+      {
+        "from": "solidworks",
+        "to": "catia"
+      },
+      {
+        "from": "bolt-design",
+        "to": "material-select"
+      },
+      {
+        "from": "fit-clearance",
+        "to": "tolerance-analysis"
+      },
+      {
+        "from": "design-review",
+        "to": "fem-analysis"
+      }
+    ],
+    "questions": [
+      {
+        "skillCode": "autocad",
+        "axisCode": "me-2d",
+        "text": "AutoCAD을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "solidworks",
+        "axisCode": "me-3d",
+        "text": "SolidWorks을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "drawing-reading",
+        "axisCode": "me-read",
+        "text": "도면 해독을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "material-select",
+        "axisCode": "me-fastener",
+        "text": "재질 선정을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "tolerance-analysis",
+        "axisCode": "me-tolerance",
+        "text": "공차 해석을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "design-review",
+        "axisCode": "me-verify",
+        "text": "설계 검증을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "drafting-standard",
+        "axisCode": "me-2d",
+        "text": "제도 규격을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "gd-t",
+        "axisCode": "me-read",
+        "text": "기하공차(GD&T)을(를) 실제로 사용해 본 경험이 있나요?"
+      }
+    ],
+    "questTemplates": [
+      {
+        "skillCode": "drawing-reading",
+        "title": "도면 해독을(를) 실습한다",
+        "completionCriteria": "도면 해독을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "1501020115_16v3",
+        "guidance": {
+          "none": "도면 해독이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "도면 해독을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "autocad",
+        "title": "AutoCAD을(를) 실습한다",
+        "completionCriteria": "AutoCAD을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "1501020111_16v3",
+        "guidance": {
+          "none": "AutoCAD이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "AutoCAD을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "drafting-standard",
+        "title": "제도 규격을(를) 실습한다",
+        "completionCriteria": "제도 규격을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "1501020111_16v3",
+        "guidance": {
+          "none": "제도 규격이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "제도 규격을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "solidworks",
+        "title": "SolidWorks을(를) 실습한다",
+        "completionCriteria": "SolidWorks을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "1501020113_16v3",
+        "guidance": {
+          "none": "SolidWorks이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "SolidWorks을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "bolt-design",
+        "title": "체결부 설계을(를) 실습한다",
+        "completionCriteria": "체결부 설계을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "1501020106_16v3",
+        "guidance": {
+          "none": "체결부 설계이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "체결부 설계을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "material-select",
+        "title": "재질 선정을(를) 실습한다",
+        "completionCriteria": "재질 선정을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "1501020106_16v3",
+        "guidance": {
+          "none": "재질 선정이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "재질 선정을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "catia",
+        "title": "CATIA을(를) 실습한다",
+        "completionCriteria": "CATIA을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "1501020113_16v3",
+        "guidance": {
+          "none": "CATIA이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "CATIA을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "gd-t",
+        "title": "기하공차(GD&T)을(를) 실습한다",
+        "completionCriteria": "기하공차(GD&T)을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "1501020115_16v3",
+        "guidance": {
+          "none": "기하공차(GD&T)이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "기하공차(GD&T)을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "fit-clearance",
+        "title": "끼워맞춤을(를) 실습한다",
+        "completionCriteria": "끼워맞춤을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "1501020104_19v3",
+        "guidance": {
+          "none": "끼워맞춤이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "끼워맞춤을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "tolerance-analysis",
+        "title": "공차 해석을(를) 실습한다",
+        "completionCriteria": "공차 해석을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "1501020104_19v3",
+        "guidance": {
+          "none": "공차 해석이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "공차 해석을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "design-review",
+        "title": "설계 검증을(를) 실습한다",
+        "completionCriteria": "설계 검증을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "1501020110_19v3",
+        "guidance": {
+          "none": "설계 검증이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "설계 검증을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "fem-analysis",
+        "title": "구조 해석(FEM)을(를) 실습한다",
+        "completionCriteria": "구조 해석(FEM)을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "1501020110_19v3",
+        "guidance": {
+          "none": "구조 해석(FEM)이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "구조 해석(FEM)을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      }
+    ],
+    "activityQuests": [
+      {
+        "title": "기계설계 엔지니어 직무의 면접 질문을 정리한다",
+        "axisCode": "me-tolerance",
+        "level": 4,
+        "completionCriteria": "자주 나오는 질문 10개와 자신의 답변을 문서로 정리한다."
+      },
+      {
+        "title": "협업 프로젝트로 실전 경험을 쌓는다",
+        "axisCode": "me-verify",
+        "level": 5,
+        "completionCriteria": "2인 이상 팀 프로젝트를 완주하고 맡은 역할을 STAR로 기록한다."
+      }
+    ]
+  },
+  {
+    "jobCode": "uiux",
+    "version": 1,
+    "ncsDetailCode": "20010207",
+    "axes": [
+      {
+        "axisCode": "ux-produce",
+        "axisName": "UI제작",
+        "ncsUnitCode": "2001020712_25v4",
+        "ncsUnitName": "UI 제작",
+        "order": 1
+      },
+      {
+        "axisCode": "ux-gui",
+        "axisName": "GUI디자인",
+        "ncsUnitCode": "2001020711_25v4",
+        "ncsUnitName": "GUI 상세디자인",
+        "order": 2
+      },
+      {
+        "axisCode": "ux-test",
+        "axisName": "UI테스트",
+        "ncsUnitCode": "2001020709_25v4",
+        "ncsUnitName": "UI 테스트",
+        "order": 3
+      },
+      {
+        "axisCode": "ux-visual",
+        "axisName": "UI디자인",
+        "ncsUnitCode": "2001020707_25v4",
+        "ncsUnitName": "UI 디자인",
+        "order": 4
+      },
+      {
+        "axisCode": "ux-req",
+        "axisName": "요구분석",
+        "ncsUnitCode": "2001020704_25v4",
+        "ncsUnitName": "UI/UX 요구 분석",
+        "order": 5
+      },
+      {
+        "axisCode": "ux-research",
+        "axisName": "사용자리서치",
+        "ncsUnitCode": "2001020703_25v4",
+        "ncsUnitName": "사용자 리서치",
+        "order": 6
+      }
+    ],
+    "skills": [
+      {
+        "skillCode": "figma-basic",
+        "skillName": "Figma 기초",
+        "axisCode": "ux-produce",
+        "p": 1.0,
+        "s": 0.1,
+        "n": 0.1429,
+        "d": 0.0807,
+        "level": 1
+      },
+      {
+        "skillCode": "prototyping",
+        "skillName": "프로토타이핑",
+        "axisCode": "ux-produce",
+        "p": 0.8,
+        "s": 0.25,
+        "n": 0.1429,
+        "d": 0.2082,
+        "level": 1
+      },
+      {
+        "skillCode": "visual-hierarchy",
+        "skillName": "시각 위계",
+        "axisCode": "ux-gui",
+        "p": 0.7,
+        "s": 0.3,
+        "n": 0.2857,
+        "d": 0.2964,
+        "level": 1
+      },
+      {
+        "skillCode": "ui-pattern",
+        "skillName": "UI 패턴",
+        "axisCode": "ux-visual",
+        "p": 0.8,
+        "s": 0.3,
+        "n": 0.4286,
+        "d": 0.3021,
+        "level": 2
+      },
+      {
+        "skillCode": "design-system",
+        "skillName": "디자인 시스템",
+        "axisCode": "ux-gui",
+        "p": 0.65,
+        "s": 0.45,
+        "n": 0.2857,
+        "d": 0.3789,
+        "level": 2
+      },
+      {
+        "skillCode": "usability-test",
+        "skillName": "사용성 테스트",
+        "axisCode": "ux-test",
+        "p": 0.55,
+        "s": 0.45,
+        "n": 0.2857,
+        "d": 0.4089,
+        "level": 3
+      },
+      {
+        "skillCode": "interaction-design",
+        "skillName": "인터랙션 설계",
+        "axisCode": "ux-visual",
+        "p": 0.65,
+        "s": 0.45,
+        "n": 0.4286,
+        "d": 0.4146,
+        "level": 3
+      },
+      {
+        "skillCode": "user-flow",
+        "skillName": "사용자 플로우",
+        "axisCode": "ux-req",
+        "p": 0.7,
+        "s": 0.45,
+        "n": 0.5714,
+        "d": 0.4354,
+        "level": 3
+      },
+      {
+        "skillCode": "accessibility",
+        "skillName": "접근성",
+        "axisCode": "ux-test",
+        "p": 0.45,
+        "s": 0.5,
+        "n": 0.2857,
+        "d": 0.4614,
+        "level": 4
+      },
+      {
+        "skillCode": "user-interview",
+        "skillName": "사용자 인터뷰",
+        "axisCode": "ux-research",
+        "p": 0.55,
+        "s": 0.55,
+        "n": 0.7143,
+        "d": 0.5611,
+        "level": 4
+      },
+      {
+        "skillCode": "requirement-workshop",
+        "skillName": "요구사항 워크숍",
+        "axisCode": "ux-req",
+        "p": 0.4,
+        "s": 0.6,
+        "n": 0.5714,
+        "d": 0.5929,
+        "level": 5
+      },
+      {
+        "skillCode": "persona-journey",
+        "skillName": "여정 지도",
+        "axisCode": "ux-research",
+        "p": 0.5,
+        "s": 0.6,
+        "n": 0.7143,
+        "d": 0.5986,
+        "level": 5
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "skillCodes": [
+          "figma-basic",
+          "prototyping",
+          "visual-hierarchy"
+        ]
+      },
+      {
+        "level": 2,
+        "skillCodes": [
+          "ui-pattern",
+          "design-system"
+        ]
+      },
+      {
+        "level": 3,
+        "skillCodes": [
+          "usability-test",
+          "interaction-design",
+          "user-flow"
+        ]
+      },
+      {
+        "level": 4,
+        "skillCodes": [
+          "accessibility",
+          "user-interview"
+        ]
+      },
+      {
+        "level": 5,
+        "skillCodes": [
+          "requirement-workshop",
+          "persona-journey"
+        ]
+      }
+    ],
+    "prerequisites": [
+      {
+        "from": "figma-basic",
+        "to": "prototyping"
+      },
+      {
+        "from": "visual-hierarchy",
+        "to": "design-system"
+      },
+      {
+        "from": "ui-pattern",
+        "to": "interaction-design"
+      },
+      {
+        "from": "usability-test",
+        "to": "accessibility"
+      },
+      {
+        "from": "user-flow",
+        "to": "requirement-workshop"
+      },
+      {
+        "from": "user-interview",
+        "to": "persona-journey"
+      }
+    ],
+    "questions": [
+      {
+        "skillCode": "figma-basic",
+        "axisCode": "ux-produce",
+        "text": "Figma 기초을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "visual-hierarchy",
+        "axisCode": "ux-gui",
+        "text": "시각 위계을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "usability-test",
+        "axisCode": "ux-test",
+        "text": "사용성 테스트을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "ui-pattern",
+        "axisCode": "ux-visual",
+        "text": "UI 패턴을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "user-flow",
+        "axisCode": "ux-req",
+        "text": "사용자 플로우을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "user-interview",
+        "axisCode": "ux-research",
+        "text": "사용자 인터뷰을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "prototyping",
+        "axisCode": "ux-produce",
+        "text": "프로토타이핑을(를) 실제로 사용해 본 경험이 있나요?"
+      },
+      {
+        "skillCode": "design-system",
+        "axisCode": "ux-gui",
+        "text": "디자인 시스템을(를) 실제로 사용해 본 경험이 있나요?"
+      }
+    ],
+    "questTemplates": [
+      {
+        "skillCode": "figma-basic",
+        "title": "Figma 기초을(를) 실습한다",
+        "completionCriteria": "Figma 기초을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020712_25v4",
+        "guidance": {
+          "none": "Figma 기초이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "Figma 기초을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "prototyping",
+        "title": "프로토타이핑을(를) 실습한다",
+        "completionCriteria": "프로토타이핑을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020712_25v4",
+        "guidance": {
+          "none": "프로토타이핑이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "프로토타이핑을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "visual-hierarchy",
+        "title": "시각 위계을(를) 실습한다",
+        "completionCriteria": "시각 위계을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020711_25v4",
+        "guidance": {
+          "none": "시각 위계이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "시각 위계을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "ui-pattern",
+        "title": "UI 패턴을(를) 실습한다",
+        "completionCriteria": "UI 패턴을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020707_25v4",
+        "guidance": {
+          "none": "UI 패턴이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "UI 패턴을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "design-system",
+        "title": "디자인 시스템을(를) 실습한다",
+        "completionCriteria": "디자인 시스템을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020711_25v4",
+        "guidance": {
+          "none": "디자인 시스템이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "디자인 시스템을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "usability-test",
+        "title": "사용성 테스트을(를) 실습한다",
+        "completionCriteria": "사용성 테스트을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020709_25v4",
+        "guidance": {
+          "none": "사용성 테스트이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "사용성 테스트을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "interaction-design",
+        "title": "인터랙션 설계을(를) 실습한다",
+        "completionCriteria": "인터랙션 설계을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020707_25v4",
+        "guidance": {
+          "none": "인터랙션 설계이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "인터랙션 설계을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "user-flow",
+        "title": "사용자 플로우을(를) 실습한다",
+        "completionCriteria": "사용자 플로우을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020704_25v4",
+        "guidance": {
+          "none": "사용자 플로우이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "사용자 플로우을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "accessibility",
+        "title": "접근성을(를) 실습한다",
+        "completionCriteria": "접근성을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020709_25v4",
+        "guidance": {
+          "none": "접근성이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "접근성을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "user-interview",
+        "title": "사용자 인터뷰을(를) 실습한다",
+        "completionCriteria": "사용자 인터뷰을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020703_25v4",
+        "guidance": {
+          "none": "사용자 인터뷰이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "사용자 인터뷰을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "requirement-workshop",
+        "title": "요구사항 워크숍을(를) 실습한다",
+        "completionCriteria": "요구사항 워크숍을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020704_25v4",
+        "guidance": {
+          "none": "요구사항 워크숍이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "요구사항 워크숍을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      },
+      {
+        "skillCode": "persona-journey",
+        "title": "여정 지도을(를) 실습한다",
+        "completionCriteria": "여정 지도을(를) 적용한 결과물을 1개 이상 만들고 확인한다.",
+        "ncsUnitCode": "2001020703_25v4",
+        "guidance": {
+          "none": "여정 지도이(가) 처음이라면 기본 개념부터 차근히 익혀보세요.",
+          "aware": "여정 지도을(를) 들어보셨다면 이제 직접 만들어볼 차례입니다.",
+          "experienced": "이미 경험이 있으니 완료로 표시했습니다. STAR로 기록해두면 취업 자산이 됩니다.",
+          "proficient": "능숙하신 영역입니다. 깊이 있는 사례를 STAR로 남겨 차별점을 만들어보세요."
+        }
+      }
+    ],
+    "activityQuests": [
+      {
+        "title": "UI/UX 디자이너 직무의 면접 질문을 정리한다",
+        "axisCode": "ux-req",
+        "level": 4,
+        "completionCriteria": "자주 나오는 질문 10개와 자신의 답변을 문서로 정리한다."
+      },
+      {
+        "title": "협업 프로젝트로 실전 경험을 쌓는다",
+        "axisCode": "ux-research",
+        "level": 5,
+        "completionCriteria": "2인 이상 팀 프로젝트를 완주하고 맡은 역할을 STAR로 기록한다."
+      }
+    ]
+  }
+]

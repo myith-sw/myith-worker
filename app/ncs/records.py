@@ -8,6 +8,7 @@ class NcsUnitRecord:
     code: str
     name: str
     level: int  # 1~8 (I-2)
+    is_verified: bool = False  # 실제 NCS 코드 검증 여부 (확정 D-17). 시드 TBD 코드는 False
     description: str | None = None
     major_name: str | None = None
     middle_name: str | None = None

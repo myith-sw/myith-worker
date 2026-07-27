@@ -12,10 +12,10 @@ from functools import lru_cache
 from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-# 모델명 기본값 (I-4). compose가 LLM_MODEL을 빈 문자열로 주입할 수 있어
-# 아래 프로퍼티에서 폴백한다.
-DEFAULT_LLM_MODEL = "claude-sonnet-4"
-DEFAULT_LLM_MODEL_LIGHT = "claude-haiku-4"
+# 모델명 기본값 (I-4, 확정 W2 D-2·D-15). compose가 LLM_MODEL을 빈 문자열로 주입할 수
+# 있어 아래 프로퍼티에서 폴백한다. 기존 sonnet-4/haiku-4는 실재하지 않아 400을 낸다.
+DEFAULT_LLM_MODEL = "claude-sonnet-5"  # 역량 추출(G-5), Vision(G-4), 문구 개인화(H-1)
+DEFAULT_LLM_MODEL_LIGHT = "claude-haiku-4-5"  # AI 보완(H-2), 템플릿 문구(F-9)
 
 
 class Settings(BaseSettings):
@@ -43,6 +43,11 @@ class Settings(BaseSettings):
     S3_BUCKET: str | None = None  # 랜덤 접미어. 하드코딩 금지 (O-3)
     AWS_REGION: str = "ap-northeast-2"
 
+    # ── LLM 공급자 (확정 W2 D-2·D-16, Vertex 우선) ──────────
+    LLM_PROVIDER: str = "vertex"  # "vertex" | "anthropic"
+    GCP_PROJECT_ID: str | None = None  # vertex 인증(ADC)용
+    GCP_REGION: str = "us-east5"
+
     # ── 시크릿 (운영자 .env, 기본값 없음 → 없으면 폴백) ──────
     # 모델명은 None으로 두고 아래 프로퍼티에서 기본값으로 폴백한다.
     LLM_API_KEY: str | None = None
@@ -64,10 +69,22 @@ class Settings(BaseSettings):
     SCORING_WEIGHT_S: float = 0.45
     SCORING_WEIGHT_P: float = 0.30
     SCORING_WEIGHT_N: float = 0.25
+    # 표본에 신입수용 신호가 전무하면 S를 이 값으로 폴백 (확정 W2 A-4). 0이 아니라
+    # 0.5 = "정보 없음 = 중립". 0이면 "전 직무가 신입 100% 수용"이 되어 D가 왜곡된다.
+    SCORING_DEFAULT_S: float = 0.5
+    NCS_LEVEL_FALLBACK: int = 4  # 미매핑 스킬 N값 대체 기본 수준 (§1-3)
+    NCS_API_DELAY_MS: int = 200  # 자격종목 API 호출 간 지연 (Step 2)
 
     # ── 정책값: 수집·밴딩·재빌드 임계 (F-1, F-7, F-8, F-10) ──
     COLLECT_SAMPLE_SIZE: int = 50
     SKILL_CAP: int = 25
+    # 레이더 축 고정 수 (F-4/F-7). 프론트 레이더가 육각형 고정이라 6으로 묶는다.
+    # TODO(F-4): 그룹핑 파이프라인 구현 시 이 값으로 축을 자른다.
+    #   초과 → 축별 P합 상위 PROFILE_AXIS_COUNT개만, 잘린 축·스킬을 log로 남긴다(조용히 버리지 않는다).
+    #   미만 → 억지로 채우지 않는다. 스킬 없는 축은 완료율이 영구 0%라 다각형이 더 찌그러진다.
+    #   자르는 기준이 P합인 이유: 수준(N)으로 자르면 어려운 축만 남아 실무와 멀어진다.
+    #   (현재 시드 프로필은 이미 전부 6축이라 런타임 강제 대상 없음. 원티드 실데이터가 흐르면 필요.)
+    PROFILE_AXIS_COUNT: int = 6
     LEVEL_BAND_MIN: int = 4
     LEVEL_BAND_MAX: int = 7
     PREREQ_THETA: float = 0.3  # F-6 비대칭성 임계
@@ -87,7 +104,7 @@ class Settings(BaseSettings):
         "DATABASE_URL", "REDIS_HOST", "RABBITMQ_USER", "RABBITMQ_PASSWORD",
         "S3_BUCKET", "LLM_API_KEY", "LLM_MODEL", "LLM_MODEL_LIGHT",
         "NCS_SERVICE_KEY", "WANTED_API_KEY", "GITHUB_TOKEN",
-        "GOOGLE_APPLICATION_CREDENTIALS",
+        "GOOGLE_APPLICATION_CREDENTIALS", "GCP_PROJECT_ID",
         mode="before",
     )
     @classmethod

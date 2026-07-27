@@ -4,6 +4,26 @@ Worker 저장소가 인프라(myith-infra)에 의존하거나, 인프라 쪽 변
 
 ---
 
+## [2026-07-26] Vertex/GCP 환경변수 3개 compose 주입 필요 (확정 W2 D-16)
+
+**발단:** LLM 공급자를 Vertex AI 경유로 확정(D-16). `settings.py`가 아래를 O-3 이름으로 읽는다.
+
+**저쪽이 제공해야 할 것:** `docker-compose.worker.yml`의 `worker` 서비스에 추가 —
+```yaml
+    environment:
+      LLM_PROVIDER: ${LLM_PROVIDER:-vertex}
+      GCP_PROJECT_ID: ${GCP_PROJECT_ID:-}
+      GCP_REGION: ${GCP_REGION:-us-east5}
+```
+`vertex` 경로는 GCP ADC로 인증한다 — `GOOGLE_APPLICATION_CREDENTIALS`(서비스계정 JSON)를
+컨테이너에 볼륨 마운트하면 Vertex LLM + Vision OCR이 **하나의 자격증명**을 공유한다.
+
+**없을 때(폴백):** `GCP_PROJECT_ID` 미주입 시 vertex 경로 불가 → LLM 규칙 기반 폴백(C-3). 기동은 정상.
+
+**미결:** 운영자가 `LLM_PROVIDER=vertex`로 갈지 `anthropic`(+`LLM_API_KEY`)로 갈지 결정.
+
+---
+
 ## [2026-07-25] ✅ 종료 — 시크릿 환경변수가 worker 컨테이너에 주입되지 않는다
 
 **해결(2026-07-25):** `docker-compose.worker.yml`의 `worker.environment:`에 시크릿 6개가

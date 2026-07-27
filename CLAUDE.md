@@ -151,11 +151,15 @@ app/
 
 읽기만 (그것도 최소한으로): `users`, `character`, `roadmap`, `quest`, `star_record`, `dashboard_snapshot`, `user_diagnosis`
 
-Worker 소유·쓰기: `job_profile`, `skill_stat`, `unmapped_skill`, `user_competency`, `job_profile_build_lock`, `processed_event`, `collection_cursor`
+Worker 소유·쓰기: `job_profile`, `skill_stat`, `unmapped_skill`, `user_competency`, `job_profile_build_lock`, `collection_cursor`, `worker_processed_event`
 
-오프라인 배치 소유(이 저장소, 별도 스크립트): `ncs_unit`, `ncs_certification`, `skill_ncs_map`
+오프라인 배치 소유(이 저장소, 별도 스크립트): `job`, `ncs_unit`, `ncs_certification`, `skill_ncs_map`, `ncs_load_cursor`
 
-Core 소유 테이블의 DDL은 Core 저장소에 속한다. 여기 Alembic 마이그레이션에 넣지 않는다.
+**DDL 소유권(확정 D-13, W2):** 위 Worker/배치 소유 테이블 12개의 DDL은 **이 저장소 Alembic이 소유한다** — job, job_profile, ncs_unit, ncs_certification, skill_ncs_map, user_competency, skill_stat, unmapped_skill, job_profile_build_lock, collection_cursor, worker_processed_event, ncs_load_cursor. Core Flyway는 더 이상 이 테이블들을 만들지 않는다. Core 소유 테이블(`users`, `roadmap`, `quest`, ...)의 DDL은 절대 여기 Alembic에 넣지 않는다 — 필요하면 raw SQL/읽기 전용으로 조회만 한다.
+
+**멱등 이벤트 테이블 — 확정 W2 A-1:** `processed_event`는 **Core Flyway 소유**다(Core가 fanout 소비 멱등에 쓴다). Worker는 수신 멱등(D-6)을 **`worker_processed_event`**(이 저장소 Alembic 소유, 위 목록에 포함)에 둔다. 이름이 다르므로 같은 DB를 공유해도 eventId 공간이 충돌하지 않는다. Core 소유 `processed_event`에는 절대 쓰지 않는다(C-1). 멱등 체크는 **DB 고유 제약으로만** 한다 — SELECT 후 INSERT는 동시 수신 시 뚫린다.
+
+**마이그레이션 실행 순서(확정 D-13):** 개발 DB 리셋 → Worker `alembic upgrade head` + `python -m app.seed.load_all` → Core Flyway → Core 기동. Core의 `ddl-auto: validate`가 읽기 전용 엔티티(JobProfile, NcsUnit 등)를 검증하므로 Worker가 먼저 돌지 않으면 Core가 기동에 실패한다.
 
 ## C-2. AI가 구조를 결정하게 하지 않는다
 
@@ -224,7 +228,7 @@ Core가 Outbox로 발행한다. Worker 인스턴스가 여러 개면 **하나만
 |---|---|---|
 | `JobProfileBuildRequested` | `{ jobCode, reason }` | 주1회 스케줄러 또는 온디맨드 |
 | `RoadmapGenerationRequested` | `{ userId, roadmapId, jobCode, profileVersion, answers[], narrative?, repoUrl?, fileKey? }` | 사용자가 로드맵 생성 |
-| `StarFeedbackRequested` | `{ userId, starRecordId, star{s,t,a,r}, questContext }` | 사용자가 피드백 버튼 클릭 |
+| `AiEnhancementRequested` | `{ requestId, questId, roadmapId, userId, star{situation,task,action,result}, locale?, style? }` | 사용자가 '피드백 받기' 클릭 (확정 W2 C-1) |
 
 `reason`은 `scheduled` 또는 `on_demand`.
 
@@ -237,7 +241,18 @@ Core가 Outbox로 발행한다. Worker 인스턴스가 여러 개면 **하나만
 | `RoadmapGenerationProgress` | `{ roadmapId, step, percent }` | 각 처리 단계 완료 |
 | `CompetencyExtracted` | `{ userId, roadmapId, competencies[] }` | 역량 분석 완료 |
 | `JobProfileBuilt` | `{ jobCode, profileVersion }` | 프로필 빌드 완료 |
-| `StarFeedbackCompleted` | `{ starRecordId, feedback }` | 피드백 생성 완료 |
+| `AiEnhancementCompleted` | `{ requestId★, roadmapId★, questId, status, enhancedStar\|null, feedback[], resumeDraft, createdAt, errorCode }` | 보완 완료/실패 (확정 W2 C-2). ★필수 — 없으면 화면 미도달. 실패도 반드시 발행 |
+
+**`CompetencyExtracted.competencies[]` 원소 구조 (확정 W3, Core 합의됨):** 원소는 정확히 **4필드** — `{ skillCode, mastery, confidence, evidence }`. `user_competency` 테이블 row와 1:1 대응한다. axisCode·previousMastery·source는 **넣지 않는다**(각각 job_profile로 파생 가능 / Core 소유 user_diagnosis에 있음 / 저장 컬럼·소비처 없음). 규칙:
+- **근거 있는 스킬만 포함.** evidence 없는 스킬은 배열에서 빠진다(테이블에 row가 없으므로 — G-1).
+- **부분 upsert 시맨틱.** 배열에 없는 `skill_code`는 "변경 없음"이지 삭제가 아니다. Worker는 DELETE하지 않는다.
+- **`mastery`·`confidence` 범위 0.00~1.00** (1.00 포함, proficient). `> 1.0`은 데이터 오류.
+- **`competencies: []`(빈 배열)도 발행한다** — "추출 완료, 근거 0건, 자가진단만으로 즉시 조립하라" 신호. Core는 빈 배열을 에러가 아니라 폴백 조립 트리거로 처리한다(D-5 정합성 스케줄러와 동일 경로).
+- 이벤트는 **트리거 + 편의 미러**일 뿐, 병합의 실제 데이터는 Core가 `user_competency` 테이블에서 읽는다(D-4). 봉투 `version`은 1 고정, 미지 필드 무시로 전방 호환.
+
+**봉투 `eventId` 재사용 (확정 W2 C-3):** Core는 `AiEnhancementCompleted`·`CompetencyExtracted`·`JobProfileBuilt` 수신 시 봉투 `eventId`를 자기 `processed_event`에 저장해 멱등 처리한다. **Worker는 재발행 시 같은 `eventId`를 써야 한다** — (이벤트종류+대상ID)로 결정론적으로 만들거나 최초 생성 시 저장해 재사용. `requestId`(Core가 준 값)와 `eventId`(Worker가 만드는 봉투 ID)는 **다른 값이다.**
+
+**레거시:** `StarFeedbackRequested`/`StarFeedbackCompleted`는 폐기됐다. Core에 핸들러가 남아 있어도 **발행하지 않는다.**
 
 진행률 규약:
 
@@ -313,7 +328,7 @@ job_profile
   levels           jsonb    -- [{level, skillCodes[]}]
   prerequisites    jsonb    -- [{from, to}]
   questions        jsonb    -- [{skillCode, text, axisCode}]
-  quest_templates  jsonb    -- [{skillCode, title, completionCriteria, ncsUnitCode}]
+  quest_templates  jsonb    -- [{skillCode, title, completionCriteria, ncsUnitCode, guidance:{none,aware,experienced,proficient}}] (확정 §1-4, W2 B-1: 4종)
   activity_quests  jsonb    -- [{title, axisCode, level, completionCriteria}]
   built_at         timestamptz
   primary key (job_code, version)
@@ -332,6 +347,7 @@ unmapped_skill                 -- NCS 매핑 없는 신규 스킬
   occurrence    int
   first_seen_at timestamptz
   status        varchar        -- PENDING | MAPPED | IGNORED
+  suggested_ncs_unit_code varchar null  -- 동시 출현 힌트(확정 §1-3). 자동 확정 아님
   primary key (skill_code, job_code)
 
 user_competency                -- AI 보정 결과
@@ -348,11 +364,11 @@ job_profile_build_lock         -- 중복 빌드 방지
   started_at timestamptz
   status     varchar           -- IN_PROGRESS | DONE | FAILED
 
-processed_event
-  event_id    uuid primary key
+worker_processed_event         -- Worker 수신 멱등 (확정 W2 A-1). Core `processed_event`와 별개.
+  event_id    uuid primary key --   멱등 체크는 DB 고유 제약으로만. Core 소유 processed_event엔 쓰지 않는다(C-1).
   consumed_at timestamptz
 
-collection_cursor              -- 증분 수집 커서
+collection_cursor              -- 채용 소스 증분 수집 커서 (F-1)
   job_code    varchar primary key
   last_cursor varchar
   updated_at  timestamptz
@@ -363,6 +379,7 @@ collection_cursor              -- 증분 수집 커서
 ```sql
 ncs_unit
   code varchar pk, name varchar, description text, level int,
+  is_verified boolean not null default false,  -- 실제 NCS 코드 검증 여부(확정 D-17). 시드는 20010202 실데이터라 true
   major_name, middle_name, minor_name, detail_name varchar
 
 ncs_certification
@@ -374,7 +391,13 @@ skill_ncs_map
   primary key (skill_code, ncs_unit_code)
 
 job                            -- 직무 마스터 (운영)
-  job_code, job_name, category_code, category_name, tagline
+  job_code, job_name, category_code, category_name, tagline,
+  ncs_detail_code varchar null  -- 직무↔NCS 세분류 (확정 W2 C-6). backend·frontend='20010202'
+
+ncs_load_cursor                -- NCS 오프라인 배치 재개 커서 (확정 W2 D-3). 자격 API 1,000/일
+  loader_name    varchar pk    -- 'certification'
+  last_unit_code varchar null  -- 이 코드 이후부터 재개. 완주 시 NULL 리셋
+  updated_at     timestamptz
 ```
 
 ## 읽기 전용 (Core 소유)
@@ -475,6 +498,8 @@ N = (ncs_unit.level − 1) / 7                   NCS 1~8단계를 0~1로 정규�
 ```
 
 가중치는 **설정값**이다. IT 직군의 NCS 능력단위 수준이 실측상 4~5에 몰려 변별력이 낮다는 분석에 근거해, 변별력이 높은 시장 신호에 더 큰 비중을 뒀다. 하드코딩하지 않고 임의로 바꾸지 않는다.
+
+**S값 폴백 (확정 W2 A-4):** `Posting.accepts_entry_level`은 nullable이다. 직무 표본에서 이 값이 **전부 None**이면(소스가 신입수용 정보를 주지 않음) S를 `SCORING_DEFAULT_S`(기본 **0.5 = 중립**)로 고정하고 WARNING 로그를 남긴다. **0으로 두지 않는다** — 0이면 "전 직무가 신입 100% 수용"이 되어 D가 통째로 왜곡된다. 신호가 하나라도 있으면 공식대로 계산한다. `total_count/entry_level_count`는 `skill_stat`에 그대로 기록해 나중에 재산출 가능하게 한다. (구현: `app.pipeline.scoring.compute_s`)
 
 `ScoringStrategy` 인터페이스로 분리한다.
 
@@ -692,42 +717,47 @@ clone은 디스크·시간을 쓰고 신뢰할 수 없는 저장소에 대한 �
 
 ## H-1. 퀘스트 문구 개인화
 
-로드맵 조립 직전, 사용자 수준에 맞춰 안내 문구를 조정한다.
+로드맵 조립 직전, 사용자 수준에 맞춰 안내 문구를 조정한다. **규칙 우선, LLM은 선택**(확정 §1-4, W2 B-1).
 
 ```
-층1 템플릿(공통) : job_profile.quest_templates의 제목·완료 기준 기본형
-층2 AI 개인화    : 자가진단 M값·서술형 맥락을 반영해 안내 문구 조정
-폴백            : 실패 시 템플릿 그대로
+층1 (규칙, LLM 0회) : quest_templates[].guidance에 M값 구간별 문구 4종을 미리 저장.
+                     사용자 M값으로 규칙 선택 (app.pipeline.guidance.guidance_tier):
+                       M < 0.33        → none          전혀 모름
+                       0.33 ≤ M < 0.66 → aware         들어봤다
+                       0.66 ≤ M < 1.0  → experienced   해본 적 있다   (ALREADY_KNOWN)
+                       M ≥ 1.0         → proficient    능숙하다       (ALREADY_KNOWN)
+층2 (LLM, 선택)     : narrative가 있을 때만 선택된 문구를 다듬는다.
+                     output_config={"effort":"low"}, max_tokens=300. title/완료기준/level/axis 불변.
+폴백               : 실패·타임아웃·스키마 이탈 → 층1 결과 그대로. LLM_PERSONALIZE_ENABLED로 통째로 off.
 ```
 
-예시 — 같은 REST 퀘스트라도:
+**guidance는 4종이다.** 0.66(experienced)과 1.0(proficient)을 합치지 않는다 — 둘 다 ALREADY_KNOWN이지만 "이미 아는 것으로 처리했다"와 "심화 사례를 남겨라"는 다른 안내다(Core D-08).
+
+**제목과 구조는 템플릿을 유지하고 guidance 문자열만 조정한다.** 어떤 스킬이 어느 레벨에 갈지는 AI가 관여하지 않는다(C-2). `temperature`를 쓰지 않는다 — 400이다(I-4).
+
+## H-2. STAR AI 보완
+
+`AiEnhancementRequested` 수신 시 실행 (확정 W2 C-1·C-2). 개명됨 — 기존 STAR 피드백을 대체.
 
 ```
-초보(M=0)      안내: "REST가 처음이라면 HTTP 메서드부터 이해하고 시작하세요"
-               완료기준: "회원 조회·등록 API 2개를 만들고 동작을 확인한다"
-
-경험자(M=0.66)  안내: "이미 CRUD 경험이 있으니 예외 처리와 응답 표준화까지 다뤄보세요"
-               완료기준: "페이징·에러 응답 규격을 포함한 API를 구현한다"
-```
-
-**제목과 구조는 템플릿을 유지하고 안내 문구·완료 기준의 난이도만 조정한다.** 어떤 스킬이 어느 레벨에 갈지는 AI가 관여하지 않는다.
-
-## H-2. STAR 피드백
-
-`StarFeedbackRequested` 수신 시 실행.
-
-```
-입력: 사용자 STAR 원문 + 퀘스트 맥락(스킬·능력단위)
+입력: star{situation,task,action,result} 원문 (빈 항목은 "" 로 옴) + questContext
 출력(고정 형식):
 {
+  "enhancedStar": { "situation","task","action","result" } | null,   ← 보강된 STAR 전문
   "feedback": [ { "field": "action", "issue": "...", "suggestion": "..." } ],
   "resumeDraft": "..."
 }
 ```
 
-사용자 원문 기반이라 환각 여지가 낮다. 반환 형식만 고정한다. **저장하지 않고 반환하며 원문을 수정하지 않는다.** `StarFeedbackCompleted`로 발행한다.
+Core가 **원문 vs AI 제안 비교 모달**을 구현했으므로 `enhancedStar`(4필드 전문)를 만들어 보낸다.
 
-짧은 텍스트 작업이므로 경량 모델을 쓴다(설정값).
+**가드 4개 (확정 W2 D-07-a):**
+1. 사실 생성 금지 — 원문에 없는 수치·기술명·조직명·성과를 만들지 않는다. 표현만 구체화.
+2. 후처리 검증 — 보완본의 숫자·영문 고유명사를 원문과 대조. 없는 것이 발견되면 `enhancedStar`를 통째로 `null`로, `feedback`만 반환. 로그 남김.
+3. 빈 항목 유지 — 원문이 공백인 항목은 창작하지 않고 공백으로 둔다.
+4. 저장하지 않는다 — Worker는 DB에 쓰지 않고 발행만. Core가 Redis에 TTL 30분 보관.
+
+**사용자 원문을 수정하지 않는다**(원문은 Core가 보유). 경량 모델(`LLM_MODEL_LIGHT`), `max_tokens=1500`. **실패해도 반드시 `status:"FAILED"`+`errorCode`로 발행한다** — 안 그러면 프론트가 영원히 폴링한다. `AiEnhancementCompleted`로 발행(`StarFeedbackCompleted` 아님, 레거시).
 
 ---
 
@@ -806,7 +836,20 @@ class LLMProvider(Protocol):
                                    images: list[bytes], schema: dict) -> dict: ...
 ```
 
-모델명은 **설정값에만** 둔다. 코드에 하드코딩하지 않는다. 용도별로 다른 모델을 쓸 수 있게 한다(역량 추출은 상위 모델, STAR 피드백은 경량 모델).
+모델명은 **설정값에만** 둔다. 코드에 하드코딩하지 않는다. 용도별로 다른 모델을 쓴다.
+
+**실존 모델 ID (확정 W2 D-2·D-15):**
+
+| 용도 | 모델 ID | 설정 |
+|---|---|---|
+| ② 역량 추출, ③ 문구 개인화(층2), Vision | `claude-sonnet-5` | `LLM_MODEL` |
+| ① 템플릿 문구, ④ STAR AI 보완 | `claude-haiku-4-5` | `LLM_MODEL_LIGHT` |
+
+기존 `claude-sonnet-4`/`claude-haiku-4`는 **실재하지 않는 ID**다(첫 호출에서 400).
+
+**공급자 (확정 W2 D-16, Vertex 우선):** `LLM_PROVIDER = "vertex" | "anthropic"`. vertex는 `AnthropicVertex(project_id=GCP_PROJECT_ID, region=GCP_REGION)` — GCP ADC 인증, Anthropic 키 불필요. 두 구현체 모두 `LLMProvider` 뒤에 두어 파이프라인은 어느 쪽인지 모른다.
+
+**금지 파라미터 (전부 HTTP 400):** `temperature`, `top_p`, `top_k`, `thinking={"type":"enabled",...}`, 마지막 assistant 턴 prefill. `llm/provider.py`에서 **아예 만들지 않는다.** "낮은 temperature가 필요한 자리"는 `output_config={"effort":"low"}` + `max_tokens`로 표현한다. 구조화 출력은 `output_config={"format":{"type":"json_schema","schema":{...}}}`.
 
 ## I-5. OCR 공급자
 
@@ -871,6 +914,10 @@ LLM API 호출 제한(429)을 막기 위해 토큰 버킷으로 초당 요청 �
 | skill_ncs_map 구축·보강 | NCS 정의 + LLM 보조 + 사람 검수 | 초기 + `unmapped_skill` 확인 시 |
 | 직무 tagline 작성·검수 | NCS 직무 정의 근거, 사람 작성 | 직무 추가 시 |
 | skill_stat 스프레드시트 export | 내부 DB | 주기적 |
+
+> **자격 연계·능력단위 초기 적재는 시드다** (확정 A안, W2 D-3 대체). 실데이터를 API로 추출해
+> `ncs_units.json`(265건)·`ncs_certifications.json`(600행→로더 dedup 521)로 시드하고 `load_all`이
+> 적재한다. I-2/I-3 API는 이후 **갱신용**(월 1회 등). "초기=시드, 갱신=API". `ncs_load_cursor`는 갱신 배치용으로 유지.
 
 ## skill_ncs_map 구축 절차
 
@@ -1074,9 +1121,12 @@ ls -la Dockerfile .dockerignore
 
 | 변수 | 용도 | 없을 때 |
 |---|---|---|
-| `LLM_API_KEY` | LLM 호출 | C-3 폴백으로 규칙 기반 동작 |
-| `LLM_MODEL` | 모델명 (I-4) | 설정 기본값 |
-| `LLM_MODEL_LIGHT` | STAR 피드백용 경량 모델 (H-2) | 설정 기본값 |
+| `LLM_PROVIDER` | `vertex` \| `anthropic` (확정 W2 D-16) | 설정 기본값 `vertex` |
+| `GCP_PROJECT_ID` | Vertex 프로젝트 (ADC 인증) | vertex 경로 불가 → LLM 폴백 |
+| `GCP_REGION` | Vertex 리전 | 설정 기본값 `us-east5` |
+| `LLM_API_KEY` | anthropic 경로 LLM 호출 | C-3 폴백으로 규칙 기반 동작 |
+| `LLM_MODEL` | 모델명 (I-4) | 설정 기본값 `claude-sonnet-5` |
+| `LLM_MODEL_LIGHT` | AI 보완·템플릿용 경량 모델 (H-2) | 설정 기본값 `claude-haiku-4-5` |
 | `NCS_SERVICE_KEY` | data.go.kr 인증키 (I-2, I-3) | 오프라인 배치 불가. 시드로 대체 |
 | `WANTED_API_KEY` | 채용 소스 (I-1) | 수집 불가 |
 | `GITHUB_TOKEN` | repo 분석 (G-3) | 미인증 호출(시간당 60회 제한) |
