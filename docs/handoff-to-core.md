@@ -53,6 +53,9 @@ user_competency    (PK roadmap_id, skill_code)
 > `ncs_unit.is_verified`, `job.ncs_detail_code`는 이번에 새로 생긴 컬럼이다. Core 엔티티가
 > 이 컬럼을 몰라도 validate는 통과하지만(엔티티에 없는 컬럼은 무시), **엔티티가 있는데 DB에
 > 없으면 실패한다.** 즉 Core는 위 컬럼의 **부분집합**만 매핑하면 된다.
+>
+> `job`에는 `available` 컬럼이 **없다** — Core가 `job_profile` 존재 여부로 파생한다
+> (`JobQueryService.profile.isPresent()`). Worker 시드 `job.json`의 `available`은 DB에 저장하지 않는다.
 
 ### 배포 실행 순서 (반드시 지킬 것)
 
@@ -83,7 +86,32 @@ Worker 마이그레이션 잡을 한 번 돌리는 형태가 안전하다.
 **Worker 쪽 계약 (구현·푸시됨, feat/#5-ncs-real-data):**
 - 위 5개 테이블 + skill_stat·unmapped_skill·job_profile_build_lock·collection_cursor·
   worker_processed_event·ncs_load_cursor(총 12개)를 Alembic이 만든다.
-- 시드: `app/seed/load_all` (job 5개, job_profile 2개[backend·frontend], ncs_unit 27, map 51).
+- 시드: `app/seed/load_all` (job 10개, job_profile 10개×6축, ncs_unit 265, skill_ncs_map 112,
+  ncs_certification 600행→로더 dedup 521). **자격 연계도 시드로 적재한다**(확정 A안, W2 D-3 대체).
+  job_profile.json 최상위 키는 camelCase, JSONB 중첩 내용도 camelCase(Core 계약). guidance는 4종.
 
 **미결(Core가 결정):**
 - Core 배포 DB가 H2 인메모리인지 공유 RDS Postgres인지. 통합엔 후자가 필요.
+
+---
+
+## [2026-07-27] AI 보완(STAR) 결과 조회 — Core 타임아웃 안전망 필요 (무한 폴링 방지)
+
+**발단:** Core `origin/dev` 실측(시드 가이드 AI). `AiEnhancementController.getResult()`가 결과가
+없으면 **무조건 `PROCESSING`을 반환**하고 **타임아웃이 없다.** Worker가 `AiEnhancementCompleted`를
+발행하지 못하면(장애·미구현·큐 유실) 프론트가 **영원히 폴링**한다 — STAR 피드백 스피너가 안 멈춘다.
+
+**저쪽(Core) 일인 이유:** 결과 저장소(`resultStore`)·폴링 API·SSE 연결을 Core가 소유한다
+(C-7의 반대 방향 — Worker가 관여할 수 없는 영역).
+
+**Core가 해야 할 것:**
+- AiEnhancement 요청 시각을 기록하고, `getResult`가 **N초 초과 시 `FAILED` + `errorCode:"AI_TIMEOUT"`**
+  을 반환하게 한다. Worker가 죽어도 화면이 멈추지 않아야 한다. (로드맵 생성은 `ConsistencyScheduler`
+  안전망이 이미 있으나, AI 보완 경로엔 없다.)
+
+**Worker 쪽 계약 (구현 예정 — 우선순위 1):**
+- `consumers/ai_enhancement.py`가 `AiEnhancementRequested` 소비 → `AiEnhancementCompleted` 발행.
+  **성공·실패 모두 발행**(실패도 `status:"FAILED"`+`errorCode`, `enhancedStar:null`, `feedback:[]`).
+  `requestId`·`roadmapId` 필수, 봉투 `eventId`는 재발행 시 **동일 값**(Core `processed_event` 멱등).
+
+**미결:** Core의 타임아웃 N초 값.

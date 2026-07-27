@@ -1,68 +1,562 @@
 [
-  { "skill_code": "java",            "ncs_unit_code": "2001020231_23v5", "is_primary": true  },
-  { "skill_code": "python",          "ncs_unit_code": "2001020231_23v5", "is_primary": true  },
-  { "skill_code": "kotlin",          "ncs_unit_code": "2001020231_23v5", "is_primary": true  },
-  { "skill_code": "typescript",      "ncs_unit_code": "2001020231_23v5", "is_primary": true  },
-
-  { "skill_code": "oop",             "ncs_unit_code": "2001020230_23v5", "is_primary": true  },
-  { "skill_code": "functional",      "ncs_unit_code": "2001020230_23v5", "is_primary": true  },
-
-  { "skill_code": "spring",          "ncs_unit_code": "2001020211_23v6", "is_primary": true  },
-  { "skill_code": "spring-security", "ncs_unit_code": "2001020211_23v6", "is_primary": true  },
-  { "skill_code": "nodejs",          "ncs_unit_code": "2001020211_23v6", "is_primary": true  },
-  { "skill_code": "fastapi",         "ncs_unit_code": "2001020211_23v6", "is_primary": true  },
-
-  { "skill_code": "rest",            "ncs_unit_code": "2001020212_23v6", "is_primary": true  },
-  { "skill_code": "graphql",         "ncs_unit_code": "2001020212_23v6", "is_primary": true  },
-  { "skill_code": "grpc",            "ncs_unit_code": "2001020212_23v6", "is_primary": true  },
-  { "skill_code": "openapi",         "ncs_unit_code": "2001020212_23v6", "is_primary": true  },
-
-  { "skill_code": "sql",             "ncs_unit_code": "2001020205_23v6", "is_primary": true  },
-  { "skill_code": "jpa",             "ncs_unit_code": "2001020205_23v6", "is_primary": true  },
-  { "skill_code": "postgresql",      "ncs_unit_code": "2001020205_23v6", "is_primary": true  },
-  { "skill_code": "mysql",           "ncs_unit_code": "2001020205_23v6", "is_primary": true  },
-  { "skill_code": "mongodb",         "ncs_unit_code": "2001020205_23v6", "is_primary": true  },
-  { "skill_code": "redis",           "ncs_unit_code": "2001020205_23v6", "is_primary": true  },
-
-  { "skill_code": "kafka",           "ncs_unit_code": "2001020206_23v6", "is_primary": true  },
-  { "skill_code": "rabbitmq",        "ncs_unit_code": "2001020206_23v6", "is_primary": true  },
-  { "skill_code": "msa",             "ncs_unit_code": "2001020206_23v6", "is_primary": true  },
-
-  { "skill_code": "docker",          "ncs_unit_code": "2001020214_23v6", "is_primary": true  },
-  { "skill_code": "kubernetes",      "ncs_unit_code": "2001020214_23v6", "is_primary": true  },
-  { "skill_code": "ci-cd",           "ncs_unit_code": "2001020214_23v6", "is_primary": true  },
-
-  { "skill_code": "aws",             "ncs_unit_code": "2001020208_23v5", "is_primary": true  },
-  { "skill_code": "linux",           "ncs_unit_code": "2001020208_23v5", "is_primary": true  },
-  { "skill_code": "monitoring",      "ncs_unit_code": "2001020208_23v5", "is_primary": true  },
-
-  { "skill_code": "junit",           "ncs_unit_code": "2001020227_23v6", "is_primary": true  },
-  { "skill_code": "pytest",          "ncs_unit_code": "2001020227_23v6", "is_primary": true  },
-  { "skill_code": "tdd",             "ncs_unit_code": "2001020227_23v6", "is_primary": true  },
-
-  { "skill_code": "system-design",   "ncs_unit_code": "2001020221_23v6", "is_primary": true  },
-  { "skill_code": "ddd",             "ncs_unit_code": "2001020221_23v6", "is_primary": true  },
-
-  { "skill_code": "erd",             "ncs_unit_code": "2001020222_23v6", "is_primary": true  },
-  { "skill_code": "uml",             "ncs_unit_code": "2001020223_23v6", "is_primary": true  },
-
-  { "skill_code": "git",             "ncs_unit_code": "2001020233_23v5", "is_primary": true  },
-  { "skill_code": "ide",             "ncs_unit_code": "2001020233_23v5", "is_primary": true  },
-
-  { "skill_code": "refactoring",     "ncs_unit_code": "2001020217_23v6", "is_primary": true  },
-  { "skill_code": "clean-code",      "ncs_unit_code": "2001020217_23v6", "is_primary": true  },
-
-  { "skill_code": "agile",           "ncs_unit_code": "2001020229_23v6", "is_primary": true  },
-  { "skill_code": "algorithm",       "ncs_unit_code": "2001020235_23v1", "is_primary": true  },
-  { "skill_code": "os-network",      "ncs_unit_code": "2001020232_23v5", "is_primary": true  },
-
-  { "skill_code": "react",           "ncs_unit_code": "2001020225_23v6", "is_primary": true  },
-  { "skill_code": "vue",             "ncs_unit_code": "2001020225_23v6", "is_primary": true  },
-  { "skill_code": "html-css",        "ncs_unit_code": "2001020225_23v6", "is_primary": true  },
-  { "skill_code": "figma",           "ncs_unit_code": "2001020224_23v6", "is_primary": true  },
-
-  { "skill_code": "docker",          "ncs_unit_code": "2001020209_23v6", "is_primary": false },
-  { "skill_code": "spring",          "ncs_unit_code": "2001020221_23v6", "is_primary": false },
-  { "skill_code": "sql",             "ncs_unit_code": "2001020222_23v6", "is_primary": false },
-  { "skill_code": "rest",            "ncs_unit_code": "2001020218_23v6", "is_primary": false }
+  {
+    "skill_code": "git",
+    "ncs_unit_code": "2001020233_23v5",
+    "is_primary": true
+  },
+  {
+    "skill_code": "java",
+    "ncs_unit_code": "2001020231_23v5",
+    "is_primary": true
+  },
+  {
+    "skill_code": "sql",
+    "ncs_unit_code": "2001020205_23v6",
+    "is_primary": true
+  },
+  {
+    "skill_code": "jpa",
+    "ncs_unit_code": "2001020205_23v6",
+    "is_primary": true
+  },
+  {
+    "skill_code": "redis",
+    "ncs_unit_code": "2001020205_23v6",
+    "is_primary": true
+  },
+  {
+    "skill_code": "spring",
+    "ncs_unit_code": "2001020211_23v6",
+    "is_primary": true
+  },
+  {
+    "skill_code": "rest",
+    "ncs_unit_code": "2001020211_23v6",
+    "is_primary": true
+  },
+  {
+    "skill_code": "junit",
+    "ncs_unit_code": "2001020227_23v6",
+    "is_primary": true
+  },
+  {
+    "skill_code": "docker",
+    "ncs_unit_code": "2001020214_23v6",
+    "is_primary": true
+  },
+  {
+    "skill_code": "aws",
+    "ncs_unit_code": "2001020214_23v6",
+    "is_primary": true
+  },
+  {
+    "skill_code": "typescript",
+    "ncs_unit_code": "2001020231_23v5",
+    "is_primary": true
+  },
+  {
+    "skill_code": "html-css",
+    "ncs_unit_code": "2001020225_23v6",
+    "is_primary": true
+  },
+  {
+    "skill_code": "react",
+    "ncs_unit_code": "2001020225_23v6",
+    "is_primary": true
+  },
+  {
+    "skill_code": "nextjs",
+    "ncs_unit_code": "2001020225_23v6",
+    "is_primary": true
+  },
+  {
+    "skill_code": "figma",
+    "ncs_unit_code": "2001020224_23v6",
+    "is_primary": true
+  },
+  {
+    "skill_code": "ux",
+    "ncs_unit_code": "2001020224_23v6",
+    "is_primary": true
+  },
+  {
+    "skill_code": "api-integration",
+    "ncs_unit_code": "2001020212_23v6",
+    "is_primary": true
+  },
+  {
+    "skill_code": "graphql",
+    "ncs_unit_code": "2001020212_23v6",
+    "is_primary": true
+  },
+  {
+    "skill_code": "vercel",
+    "ncs_unit_code": "2001020214_23v6",
+    "is_primary": true
+  },
+  {
+    "skill_code": "firewall",
+    "ncs_unit_code": "2001060113_19v3",
+    "is_primary": true
+  },
+  {
+    "skill_code": "siem",
+    "ncs_unit_code": "2001060113_19v3",
+    "is_primary": true
+  },
+  {
+    "skill_code": "owasp",
+    "ncs_unit_code": "2001020611_25v6",
+    "is_primary": true
+  },
+  {
+    "skill_code": "secure-coding",
+    "ncs_unit_code": "2001020611_25v6",
+    "is_primary": true
+  },
+  {
+    "skill_code": "linux-hardening",
+    "ncs_unit_code": "2001020613_25v6",
+    "is_primary": true
+  },
+  {
+    "skill_code": "vuln-scan",
+    "ncs_unit_code": "2001020613_25v6",
+    "is_primary": true
+  },
+  {
+    "skill_code": "network-security",
+    "ncs_unit_code": "2001020614_25v6",
+    "is_primary": true
+  },
+  {
+    "skill_code": "packet-analysis",
+    "ncs_unit_code": "2001020614_25v6",
+    "is_primary": true
+  },
+  {
+    "skill_code": "db-encryption",
+    "ncs_unit_code": "2001020612_25v6",
+    "is_primary": true
+  },
+  {
+    "skill_code": "risk-assessment",
+    "ncs_unit_code": "2001060105_19v2",
+    "is_primary": true
+  },
+  {
+    "skill_code": "isms",
+    "ncs_unit_code": "2001060105_19v2",
+    "is_primary": true
+  },
+  {
+    "skill_code": "sql-basic",
+    "ncs_unit_code": "2001020415_19v1",
+    "is_primary": true
+  },
+  {
+    "skill_code": "ddl-dml",
+    "ncs_unit_code": "2001020415_19v1",
+    "is_primary": true
+  },
+  {
+    "skill_code": "join-subquery",
+    "ncs_unit_code": "2001020413_19v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "aggregate",
+    "ncs_unit_code": "2001020413_19v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "dbms-install",
+    "ncs_unit_code": "2001020405_19v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "backup-recovery",
+    "ncs_unit_code": "2001020405_19v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "window-function",
+    "ncs_unit_code": "2001020414_19v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "stored-procedure",
+    "ncs_unit_code": "2001020414_19v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "erd",
+    "ncs_unit_code": "2001020403_19v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "normalization",
+    "ncs_unit_code": "2001020403_19v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "index-tuning",
+    "ncs_unit_code": "2001020408_19v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "execution-plan",
+    "ncs_unit_code": "2001020408_19v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "payroll-calc",
+    "ncs_unit_code": "0202020109_23v5",
+    "is_primary": true
+  },
+  {
+    "skill_code": "labor-law",
+    "ncs_unit_code": "0202020109_23v5",
+    "is_primary": true
+  },
+  {
+    "skill_code": "training-plan",
+    "ncs_unit_code": "0202020107_23v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "onboarding",
+    "ncs_unit_code": "0202020107_23v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "benefit-admin",
+    "ncs_unit_code": "0202020110_23v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "jd-writing",
+    "ncs_unit_code": "0202020103_23v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "interview",
+    "ncs_unit_code": "0202020103_23v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "ats",
+    "ncs_unit_code": "0202020103_23v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "kpi-design",
+    "ncs_unit_code": "0202020105_23v3",
+    "is_primary": true
+  },
+  {
+    "skill_code": "hr-analytics",
+    "ncs_unit_code": "0202020105_23v3",
+    "is_primary": true
+  },
+  {
+    "skill_code": "workforce-plan",
+    "ncs_unit_code": "0202020101_23v3",
+    "is_primary": true
+  },
+  {
+    "skill_code": "hr-strategy",
+    "ncs_unit_code": "0202020101_23v3",
+    "is_primary": true
+  },
+  {
+    "skill_code": "double-entry",
+    "ncs_unit_code": "0203020101_20v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "erp-entry",
+    "ncs_unit_code": "0203020101_20v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "trial-balance",
+    "ncs_unit_code": "0203020104_23v5",
+    "is_primary": true
+  },
+  {
+    "skill_code": "adjusting-entry",
+    "ncs_unit_code": "0203020104_23v5",
+    "is_primary": true
+  },
+  {
+    "skill_code": "fs-preparation",
+    "ncs_unit_code": "0203020112_23v5",
+    "is_primary": true
+  },
+  {
+    "skill_code": "kifrs",
+    "ncs_unit_code": "0203020112_23v5",
+    "is_primary": true
+  },
+  {
+    "skill_code": "ratio-analysis",
+    "ncs_unit_code": "0203020106_20v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "excel-modeling",
+    "ncs_unit_code": "0203020106_20v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "internal-control",
+    "ncs_unit_code": "0203020107_20v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "audit-procedure",
+    "ncs_unit_code": "0203020107_20v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "consolidation",
+    "ncs_unit_code": "0203020108_20v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "market-research",
+    "ncs_unit_code": "0201030109_21v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "competitor-analysis",
+    "ncs_unit_code": "0201030109_21v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "persona",
+    "ncs_unit_code": "0201030116_21v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "segmentation",
+    "ncs_unit_code": "0201030116_21v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "content-planning",
+    "ncs_unit_code": "0201030117_21v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "channel-strategy",
+    "ncs_unit_code": "0201030117_21v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "pricing",
+    "ncs_unit_code": "0201030117_21v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "product-concept",
+    "ncs_unit_code": "0201030102_21v5",
+    "is_primary": true
+  },
+  {
+    "skill_code": "campaign-plan",
+    "ncs_unit_code": "0201030108_21v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "ga-analytics",
+    "ncs_unit_code": "0201030118_21v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "performance-ads",
+    "ncs_unit_code": "0201030118_21v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "ab-test",
+    "ncs_unit_code": "0201030118_21v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "trade-docs",
+    "ncs_unit_code": "1001010208_20v2",
+    "is_primary": true
+  },
+  {
+    "skill_code": "incoterms",
+    "ncs_unit_code": "1001010208_20v2",
+    "is_primary": true
+  },
+  {
+    "skill_code": "lead-generation",
+    "ncs_unit_code": "1001010204_20v2",
+    "is_primary": true
+  },
+  {
+    "skill_code": "crm-tool",
+    "ncs_unit_code": "1001010204_20v2",
+    "is_primary": true
+  },
+  {
+    "skill_code": "proposal-writing",
+    "ncs_unit_code": "1001010205_20v2",
+    "is_primary": true
+  },
+  {
+    "skill_code": "business-english",
+    "ncs_unit_code": "1001010205_20v2",
+    "is_primary": true
+  },
+  {
+    "skill_code": "market-entry",
+    "ncs_unit_code": "1001010201_20v2",
+    "is_primary": true
+  },
+  {
+    "skill_code": "country-risk",
+    "ncs_unit_code": "1001010201_20v2",
+    "is_primary": true
+  },
+  {
+    "skill_code": "negotiation",
+    "ncs_unit_code": "1001010206_20v2",
+    "is_primary": true
+  },
+  {
+    "skill_code": "contract-law",
+    "ncs_unit_code": "1001010206_20v2",
+    "is_primary": true
+  },
+  {
+    "skill_code": "global-strategy",
+    "ncs_unit_code": "1001010203_20v2",
+    "is_primary": true
+  },
+  {
+    "skill_code": "autocad",
+    "ncs_unit_code": "1501020111_16v3",
+    "is_primary": true
+  },
+  {
+    "skill_code": "drafting-standard",
+    "ncs_unit_code": "1501020111_16v3",
+    "is_primary": true
+  },
+  {
+    "skill_code": "solidworks",
+    "ncs_unit_code": "1501020113_16v3",
+    "is_primary": true
+  },
+  {
+    "skill_code": "catia",
+    "ncs_unit_code": "1501020113_16v3",
+    "is_primary": true
+  },
+  {
+    "skill_code": "drawing-reading",
+    "ncs_unit_code": "1501020115_16v3",
+    "is_primary": true
+  },
+  {
+    "skill_code": "gd-t",
+    "ncs_unit_code": "1501020115_16v3",
+    "is_primary": true
+  },
+  {
+    "skill_code": "bolt-design",
+    "ncs_unit_code": "1501020106_16v3",
+    "is_primary": true
+  },
+  {
+    "skill_code": "material-select",
+    "ncs_unit_code": "1501020106_16v3",
+    "is_primary": true
+  },
+  {
+    "skill_code": "tolerance-analysis",
+    "ncs_unit_code": "1501020104_19v3",
+    "is_primary": true
+  },
+  {
+    "skill_code": "fit-clearance",
+    "ncs_unit_code": "1501020104_19v3",
+    "is_primary": true
+  },
+  {
+    "skill_code": "fem-analysis",
+    "ncs_unit_code": "1501020110_19v3",
+    "is_primary": true
+  },
+  {
+    "skill_code": "design-review",
+    "ncs_unit_code": "1501020110_19v3",
+    "is_primary": true
+  },
+  {
+    "skill_code": "figma-basic",
+    "ncs_unit_code": "2001020712_25v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "prototyping",
+    "ncs_unit_code": "2001020712_25v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "design-system",
+    "ncs_unit_code": "2001020711_25v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "visual-hierarchy",
+    "ncs_unit_code": "2001020711_25v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "usability-test",
+    "ncs_unit_code": "2001020709_25v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "accessibility",
+    "ncs_unit_code": "2001020709_25v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "ui-pattern",
+    "ncs_unit_code": "2001020707_25v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "interaction-design",
+    "ncs_unit_code": "2001020707_25v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "user-flow",
+    "ncs_unit_code": "2001020704_25v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "requirement-workshop",
+    "ncs_unit_code": "2001020704_25v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "user-interview",
+    "ncs_unit_code": "2001020703_25v4",
+    "is_primary": true
+  },
+  {
+    "skill_code": "persona-journey",
+    "ncs_unit_code": "2001020703_25v4",
+    "is_primary": true
+  }
 ]

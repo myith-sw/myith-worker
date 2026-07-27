@@ -1,1 +1,3602 @@
-[]
+[
+  {
+    "ncs_unit_code": "2001020201_23v5",
+    "cert_code": "T5A6",
+    "cert_name": "SW개발_L5_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020201_23v5",
+    "cert_code": "T6A6",
+    "cert_name": "SW아키텍트_L6_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020205_23v6",
+    "cert_code": "T5A6",
+    "cert_name": "SW개발_L5_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020206_23v6",
+    "cert_code": "T5A6",
+    "cert_name": "SW개발_L5_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020208_23v5",
+    "cert_code": "T5C6",
+    "cert_name": "IT시스템운영_L5_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020209_23v6",
+    "cert_code": "T5A6",
+    "cert_name": "SW개발_L5_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020211_23v6",
+    "cert_code": "T5A6",
+    "cert_name": "SW개발_L5_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020212_23v6",
+    "cert_code": "T5A6",
+    "cert_name": "SW개발_L5_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020214_23v6",
+    "cert_code": "T3A6",
+    "cert_name": "SW개발_L3_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020214_23v6",
+    "cert_code": "C290",
+    "cert_name": "정보처리산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020221_23v6",
+    "cert_code": "T6A6",
+    "cert_name": "SW아키텍트_L6_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020221_23v6",
+    "cert_code": "T6B6",
+    "cert_name": "임베디드SW개발_L6_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020224_23v6",
+    "cert_code": "T5A6",
+    "cert_name": "SW개발_L5_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020225_23v6",
+    "cert_code": "T2E6",
+    "cert_name": "SW개발_L2_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020225_23v6",
+    "cert_code": "T3A6",
+    "cert_name": "SW개발_L3_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020225_23v6",
+    "cert_code": "H3M6",
+    "cert_name": "디지털디자인_L3_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020225_23v6",
+    "cert_code": "G545",
+    "cert_name": "멀티미디어콘텐츠제작전문가",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020225_23v6",
+    "cert_code": "C290",
+    "cert_name": "정보처리산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020225_23v6",
+    "cert_code": "E921",
+    "cert_name": "프로그래밍기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020226_23v6",
+    "cert_code": "T5A6",
+    "cert_name": "SW개발_L5_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020227_23v6",
+    "cert_code": "T3A6",
+    "cert_name": "SW개발_L3_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020227_23v6",
+    "cert_code": "C290",
+    "cert_name": "정보처리산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020227_23v6",
+    "cert_code": "E921",
+    "cert_name": "프로그래밍기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020230_23v5",
+    "cert_code": "T3A6",
+    "cert_name": "SW개발_L3_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020230_23v5",
+    "cert_code": "C290",
+    "cert_name": "정보처리산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020230_23v5",
+    "cert_code": "E921",
+    "cert_name": "프로그래밍기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020231_23v5",
+    "cert_code": "T2E6",
+    "cert_name": "SW개발_L2_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020231_23v5",
+    "cert_code": "T3A6",
+    "cert_name": "SW개발_L3_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020231_23v5",
+    "cert_code": "E801",
+    "cert_name": "임베디드기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020231_23v5",
+    "cert_code": "C290",
+    "cert_name": "정보처리산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020231_23v5",
+    "cert_code": "E921",
+    "cert_name": "프로그래밍기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020232_23v5",
+    "cert_code": "T2E6",
+    "cert_name": "SW개발_L2_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020232_23v5",
+    "cert_code": "T3A6",
+    "cert_name": "SW개발_L3_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020232_23v5",
+    "cert_code": "G545",
+    "cert_name": "멀티미디어콘텐츠제작전문가",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020232_23v5",
+    "cert_code": "C193",
+    "cert_name": "사무자동화산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020232_23v5",
+    "cert_code": "G772",
+    "cert_name": "스마트공장산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020232_23v5",
+    "cert_code": "C290",
+    "cert_name": "정보처리산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020232_23v5",
+    "cert_code": "E921",
+    "cert_name": "프로그래밍기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020233_23v5",
+    "cert_code": "T2E6",
+    "cert_name": "SW개발_L2_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020233_23v5",
+    "cert_code": "T3A6",
+    "cert_name": "SW개발_L3_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020233_23v5",
+    "cert_code": "C193",
+    "cert_name": "사무자동화산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020233_23v5",
+    "cert_code": "C290",
+    "cert_name": "정보처리산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020233_23v5",
+    "cert_code": "E921",
+    "cert_name": "프로그래밍기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020611_25v6",
+    "cert_code": "C325",
+    "cert_name": "정보보안산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020613_25v6",
+    "cert_code": "C325",
+    "cert_name": "정보보안산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020614_25v6",
+    "cert_code": "C325",
+    "cert_name": "정보보안산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001060108_19v3",
+    "cert_code": "C325",
+    "cert_name": "정보보안산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001060108_19v3",
+    "cert_code": "C325",
+    "cert_name": "정보보안산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001060109_19v3",
+    "cert_code": "C325",
+    "cert_name": "정보보안산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001060109_19v3",
+    "cert_code": "C325",
+    "cert_name": "정보보안산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001060110_19v3",
+    "cert_code": "C325",
+    "cert_name": "정보보안산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001060110_19v3",
+    "cert_code": "C325",
+    "cert_name": "정보보안산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001060111_19v3",
+    "cert_code": "C325",
+    "cert_name": "정보보안산업기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "2001060112_19v3",
+    "cert_code": "C325",
+    "cert_name": "정보보안산업기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "2001020401_19v4",
+    "cert_code": "T65A",
+    "cert_name": "SW아키텍트_L6_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020401_19v4",
+    "cert_code": "T6A6",
+    "cert_name": "SW아키텍트_L6_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020413_19v4",
+    "cert_code": "T2E4",
+    "cert_name": "SW개발_L2_24V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020413_19v4",
+    "cert_code": "T2E6",
+    "cert_name": "SW개발_L2_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020413_19v4",
+    "cert_code": "T37A",
+    "cert_name": "SW개발_L3_20V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020413_19v4",
+    "cert_code": "T3A0",
+    "cert_name": "SW개발_L3_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020413_19v4",
+    "cert_code": "T3A6",
+    "cert_name": "SW개발_L3_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020413_19v4",
+    "cert_code": "C290",
+    "cert_name": "정보처리산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020413_19v4",
+    "cert_code": "C290",
+    "cert_name": "정보처리산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020413_19v4",
+    "cert_code": "E921",
+    "cert_name": "프로그래밍기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020413_19v4",
+    "cert_code": "E921",
+    "cert_name": "프로그래밍기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020414_19v4",
+    "cert_code": "T55A",
+    "cert_name": "SW개발_L5_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020414_19v4",
+    "cert_code": "T5A6",
+    "cert_name": "SW개발_L5_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020414_19v4",
+    "cert_code": "T65A",
+    "cert_name": "SW아키텍트_L6_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020414_19v4",
+    "cert_code": "T6A6",
+    "cert_name": "SW아키텍트_L6_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020415_19v1",
+    "cert_code": "C193",
+    "cert_name": "사무자동화산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001020415_19v1",
+    "cert_code": "E921",
+    "cert_name": "프로그래밍기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001070303_23v2",
+    "cert_code": "T5J6",
+    "cert_name": "인공지능개발_L5_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001070304_23v2",
+    "cert_code": "T5J6",
+    "cert_name": "인공지능개발_L5_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001070305_23v2",
+    "cert_code": "T5J6",
+    "cert_name": "인공지능개발_L5_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001070306_23v2",
+    "cert_code": "T5J6",
+    "cert_name": "인공지능개발_L5_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "2001070307_23v2",
+    "cert_code": "T5J6",
+    "cert_name": "인공지능개발_L5_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0201030102_21v5",
+    "cert_code": "B5B6",
+    "cert_name": "마케팅전략기획_L5_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0201030106_21v4",
+    "cert_code": "B5B6",
+    "cert_name": "마케팅전략기획_L5_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0201030108_21v4",
+    "cert_code": "B5B6",
+    "cert_name": "마케팅전략기획_L5_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0201030109_21v4",
+    "cert_code": "B3A6",
+    "cert_name": "마케팅·커뮤니케이션_L3_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0201030116_21v4",
+    "cert_code": "B3A6",
+    "cert_name": "마케팅·커뮤니케이션_L3_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0201030116_21v4",
+    "cert_code": "B5B6",
+    "cert_name": "마케팅전략기획_L5_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0201030116_21v4",
+    "cert_code": "G541",
+    "cert_name": "텔레마케팅관리사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0201030116_21v4",
+    "cert_code": "G541",
+    "cert_name": "텔레마케팅관리사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0201030117_21v4",
+    "cert_code": "B3A6",
+    "cert_name": "마케팅·커뮤니케이션_L3_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0201030117_21v4",
+    "cert_code": "B5B6",
+    "cert_name": "마케팅전략기획_L5_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0201030117_21v4",
+    "cert_code": "G541",
+    "cert_name": "텔레마케팅관리사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0201030117_21v4",
+    "cert_code": "G541",
+    "cert_name": "텔레마케팅관리사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0201030118_21v4",
+    "cert_code": "B3A6",
+    "cert_name": "마케팅·커뮤니케이션_L3_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0201030118_21v4",
+    "cert_code": "B5B6",
+    "cert_name": "마케팅전략기획_L5_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0201030118_21v4",
+    "cert_code": "B5H4",
+    "cert_name": "마케팅통계분석_L5_24V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0202020102_23v3",
+    "cert_code": "B5D6",
+    "cert_name": "총무·인사_L5_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0202020103_23v4",
+    "cert_code": "B5D6",
+    "cert_name": "총무·인사_L5_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0202020104_23v4",
+    "cert_code": "B5D6",
+    "cert_name": "총무·인사_L5_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0202020107_23v4",
+    "cert_code": "B5D6",
+    "cert_name": "총무·인사_L5_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0202020108_23v4",
+    "cert_code": "B5D6",
+    "cert_name": "총무·인사_L5_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0202020109_23v5",
+    "cert_code": "B3B6",
+    "cert_name": "총무·인사_L3_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0202020110_23v4",
+    "cert_code": "B5D6",
+    "cert_name": "총무·인사_L5_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0202020114_23v5",
+    "cert_code": "B3B6",
+    "cert_name": "총무·인사_L3_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020101_20v4",
+    "cert_code": "B2A0",
+    "cert_name": "세무·회계정보관리_L2_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020101_20v4",
+    "cert_code": "B2A6",
+    "cert_name": "세무·회계정보관리_L2_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020101_20v4",
+    "cert_code": "G623",
+    "cert_name": "전산회계운용사3급",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020101_20v4",
+    "cert_code": "G623",
+    "cert_name": "전산회계운용사3급",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020102_20v4",
+    "cert_code": "B2A0",
+    "cert_name": "세무·회계정보관리_L2_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020102_20v4",
+    "cert_code": "B2A6",
+    "cert_name": "세무·회계정보관리_L2_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020102_20v4",
+    "cert_code": "G623",
+    "cert_name": "전산회계운용사3급",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020102_20v4",
+    "cert_code": "G623",
+    "cert_name": "전산회계운용사3급",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020103_20v4",
+    "cert_code": "B3C0",
+    "cert_name": "세무·회계정보관리_L3_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020103_20v4",
+    "cert_code": "B3C6",
+    "cert_name": "세무·회계정보관리_L3_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020103_20v4",
+    "cert_code": "G621",
+    "cert_name": "전산회계운용사1급",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020103_20v4",
+    "cert_code": "G621",
+    "cert_name": "전산회계운용사1급",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020103_20v4",
+    "cert_code": "G622",
+    "cert_name": "전산회계운용사2급",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020103_20v4",
+    "cert_code": "G622",
+    "cert_name": "전산회계운용사2급",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020104_23v5",
+    "cert_code": "B2A6",
+    "cert_name": "세무·회계정보관리_L2_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020104_23v5",
+    "cert_code": "G621",
+    "cert_name": "전산회계운용사1급",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020104_23v5",
+    "cert_code": "G622",
+    "cert_name": "전산회계운용사2급",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020104_23v5",
+    "cert_code": "G623",
+    "cert_name": "전산회계운용사3급",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020105_20v4",
+    "cert_code": "G621",
+    "cert_name": "전산회계운용사1급",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020105_20v4",
+    "cert_code": "G621",
+    "cert_name": "전산회계운용사1급",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020105_20v4",
+    "cert_code": "G622",
+    "cert_name": "전산회계운용사2급",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020105_20v4",
+    "cert_code": "G622",
+    "cert_name": "전산회계운용사2급",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020105_20v4",
+    "cert_code": "G623",
+    "cert_name": "전산회계운용사3급",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020105_20v4",
+    "cert_code": "G623",
+    "cert_name": "전산회계운용사3급",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020106_20v4",
+    "cert_code": "B3C0",
+    "cert_name": "세무·회계정보관리_L3_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020106_20v4",
+    "cert_code": "G621",
+    "cert_name": "전산회계운용사1급",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020110_20v2",
+    "cert_code": "G621",
+    "cert_name": "전산회계운용사1급",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020110_20v2",
+    "cert_code": "G621",
+    "cert_name": "전산회계운용사1급",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020110_20v2",
+    "cert_code": "G622",
+    "cert_name": "전산회계운용사2급",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020110_20v2",
+    "cert_code": "G622",
+    "cert_name": "전산회계운용사2급",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020111_20v2",
+    "cert_code": "G621",
+    "cert_name": "전산회계운용사1급",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020111_20v2",
+    "cert_code": "G623",
+    "cert_name": "전산회계운용사3급",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020112_23v5",
+    "cert_code": "B3C6",
+    "cert_name": "세무·회계정보관리_L3_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020112_23v5",
+    "cert_code": "G621",
+    "cert_name": "전산회계운용사1급",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0203020112_23v5",
+    "cert_code": "G623",
+    "cert_name": "전산회계운용사3급",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0201010103_22v2",
+    "cert_code": "B5E6",
+    "cert_name": "재무기획관리_L5_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0201010106_13v1",
+    "cert_code": "B55E",
+    "cert_name": "재무기획관리_L5_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0201010106_13v1",
+    "cert_code": "B5E0",
+    "cert_name": "재무기획관리_L5_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0201010106_13v1",
+    "cert_code": "B5E6",
+    "cert_name": "재무기획관리_L5_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0201010106_13v1",
+    "cert_code": "5B0D",
+    "cert_name": "재무기획관리_L5_ver1.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0201010106_13v1",
+    "cert_code": "B50E",
+    "cert_name": "재무기획관리_L5_ver2.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0201010106_13v1",
+    "cert_code": "B53E",
+    "cert_name": "재무기획관리_L5_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0201010108_22v2",
+    "cert_code": "X5O4",
+    "cert_name": "농촌체험_L5_24V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0301030101_14v1",
+    "cert_code": "C30A",
+    "cert_name": "금융업무관리_L3_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030101_14v1",
+    "cert_code": "C33A",
+    "cert_name": "금융업무관리_L3_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030101_14v1",
+    "cert_code": "5C0I",
+    "cert_name": "금융자산관리(은행)_L5_ver1.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0301030101_14v1",
+    "cert_code": "C50C",
+    "cert_name": "신용분석_L5_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030101_14v1",
+    "cert_code": "C53C",
+    "cert_name": "신용분석_L5_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030101_14v1",
+    "cert_code": "C50A",
+    "cert_name": "은행금융자산관리_L5_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030101_14v1",
+    "cert_code": "C53A",
+    "cert_name": "은행금융자산관리_L5_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030101_14v1",
+    "cert_code": "C50D",
+    "cert_name": "채권관리_L5_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030101_14v1",
+    "cert_code": "C53D",
+    "cert_name": "채권관리_L5_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030102_14v1",
+    "cert_code": "C35A",
+    "cert_name": "금융업무관리_L3_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0301030102_14v1",
+    "cert_code": "3C0E",
+    "cert_name": "금융업무관리_L3_ver1.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0301030102_14v1",
+    "cert_code": "C30A",
+    "cert_name": "금융업무관리_L3_ver2.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0301030102_14v1",
+    "cert_code": "C33A",
+    "cert_name": "금융업무관리_L3_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0301030102_14v1",
+    "cert_code": "5C0I",
+    "cert_name": "금융자산관리(은행)_L5_ver1.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0301030102_14v1",
+    "cert_code": "C50C",
+    "cert_name": "신용분석_L5_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030102_14v1",
+    "cert_code": "C53C",
+    "cert_name": "신용분석_L5_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030102_14v1",
+    "cert_code": "C50A",
+    "cert_name": "은행금융자산관리_L5_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030102_14v1",
+    "cert_code": "C53A",
+    "cert_name": "은행금융자산관리_L5_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030103_14v1",
+    "cert_code": "C30A",
+    "cert_name": "금융업무관리_L3_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030103_14v1",
+    "cert_code": "C33A",
+    "cert_name": "금융업무관리_L3_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030103_14v1",
+    "cert_code": "5C0I",
+    "cert_name": "금융자산관리(은행)_L5_ver1.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0301030103_14v1",
+    "cert_code": "C50C",
+    "cert_name": "신용분석_L5_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030103_14v1",
+    "cert_code": "C53C",
+    "cert_name": "신용분석_L5_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030103_14v1",
+    "cert_code": "C50A",
+    "cert_name": "은행금융자산관리_L5_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030103_14v1",
+    "cert_code": "C53A",
+    "cert_name": "은행금융자산관리_L5_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030104_14v1",
+    "cert_code": "5C0E",
+    "cert_name": "신용분석_L5_ver1.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0301030104_14v1",
+    "cert_code": "C50C",
+    "cert_name": "신용분석_L5_ver2.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0301030104_14v1",
+    "cert_code": "C53C",
+    "cert_name": "신용분석_L5_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0301030105_16v2",
+    "cert_code": "C50C",
+    "cert_name": "신용분석_L5_ver2.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0301030105_16v2",
+    "cert_code": "C53C",
+    "cert_name": "신용분석_L5_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0301030107_14v1",
+    "cert_code": "C50C",
+    "cert_name": "신용분석_L5_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030107_14v1",
+    "cert_code": "C53C",
+    "cert_name": "신용분석_L5_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030108_14v1",
+    "cert_code": "C50C",
+    "cert_name": "신용분석_L5_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030108_14v1",
+    "cert_code": "C53C",
+    "cert_name": "신용분석_L5_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030108_14v1",
+    "cert_code": "C50A",
+    "cert_name": "은행금융자산관리_L5_ver2.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0301030108_14v1",
+    "cert_code": "C53A",
+    "cert_name": "은행금융자산관리_L5_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0301030108_14v1",
+    "cert_code": "C50D",
+    "cert_name": "채권관리_L5_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030108_14v1",
+    "cert_code": "C53D",
+    "cert_name": "채권관리_L5_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030109_14v1",
+    "cert_code": "C50C",
+    "cert_name": "신용분석_L5_ver2.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0301030109_14v1",
+    "cert_code": "C53C",
+    "cert_name": "신용분석_L5_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0301030109_14v1",
+    "cert_code": "C50D",
+    "cert_name": "채권관리_L5_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030109_14v1",
+    "cert_code": "C53D",
+    "cert_name": "채권관리_L5_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030110_16v2",
+    "cert_code": "C50C",
+    "cert_name": "신용분석_L5_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030110_16v2",
+    "cert_code": "C53C",
+    "cert_name": "신용분석_L5_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030110_16v2",
+    "cert_code": "C50D",
+    "cert_name": "채권관리_L5_ver2.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0301030110_16v2",
+    "cert_code": "C53D",
+    "cert_name": "채권관리_L5_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0301030111_16v2",
+    "cert_code": "C50C",
+    "cert_name": "신용분석_L5_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030111_16v2",
+    "cert_code": "C53C",
+    "cert_name": "신용분석_L5_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030111_16v2",
+    "cert_code": "C50D",
+    "cert_name": "채권관리_L5_ver2.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0301030111_16v2",
+    "cert_code": "C53D",
+    "cert_name": "채권관리_L5_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0301030112_16v2",
+    "cert_code": "C50C",
+    "cert_name": "신용분석_L5_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030112_16v2",
+    "cert_code": "C53C",
+    "cert_name": "신용분석_L5_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301030112_16v2",
+    "cert_code": "C50D",
+    "cert_name": "채권관리_L5_ver2.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0301030112_16v2",
+    "cert_code": "C53D",
+    "cert_name": "채권관리_L5_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0301040107_14v1",
+    "cert_code": "C50E",
+    "cert_name": "자산운용_L5_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301040107_14v1",
+    "cert_code": "C53E",
+    "cert_name": "자산운용_L5_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301040107_14v1",
+    "cert_code": "C50B",
+    "cert_name": "증권금융자산관리_L5_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301040107_14v1",
+    "cert_code": "C53B",
+    "cert_name": "증권금융자산관리_L5_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0301040109_19v2",
+    "cert_code": "C55E",
+    "cert_name": "자산운용_L5_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1001010201_20v2",
+    "cert_code": "J5A0",
+    "cert_name": "영업_L5_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1001010202_20v2",
+    "cert_code": "J5A0",
+    "cert_name": "영업_L5_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1001010203_20v2",
+    "cert_code": "J5A0",
+    "cert_name": "영업_L5_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1001010204_20v2",
+    "cert_code": "J3A0",
+    "cert_name": "영업_L3_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1001010205_20v2",
+    "cert_code": "J3A0",
+    "cert_name": "영업_L3_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1001010206_20v2",
+    "cert_code": "J5A0",
+    "cert_name": "영업_L5_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1001010207_14v1",
+    "cert_code": "B30D",
+    "cert_name": "수출입관리_L3_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1001010207_14v1",
+    "cert_code": "B33D",
+    "cert_name": "수출입관리_L3_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1001010207_14v1",
+    "cert_code": "J55A",
+    "cert_name": "영업_L5_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1001010207_14v1",
+    "cert_code": "J5A0",
+    "cert_name": "영업_L5_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1001010207_14v1",
+    "cert_code": "J50A",
+    "cert_name": "영업_L5_ver2.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1001010207_14v1",
+    "cert_code": "J53A",
+    "cert_name": "영업_L5_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1001010209_14v1",
+    "cert_code": "B30D",
+    "cert_name": "수출입관리_L3_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1001010209_14v1",
+    "cert_code": "B33D",
+    "cert_name": "수출입관리_L3_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1001010209_14v1",
+    "cert_code": "J55A",
+    "cert_name": "영업_L5_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1001010209_14v1",
+    "cert_code": "J5A0",
+    "cert_name": "영업_L5_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1001010209_14v1",
+    "cert_code": "J50A",
+    "cert_name": "영업_L5_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1001010209_14v1",
+    "cert_code": "J53A",
+    "cert_name": "영업_L5_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1001010210_20v2",
+    "cert_code": "J5A0",
+    "cert_name": "영업_L5_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010106_20v3",
+    "cert_code": "H6A0",
+    "cert_name": "디지털디자인디렉터_L6_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010106_20v3",
+    "cert_code": "H6A6",
+    "cert_name": "디지털디자인디렉터_L6_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010106_20v3",
+    "cert_code": "H5P0",
+    "cert_name": "시각디자인_L5_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010106_20v3",
+    "cert_code": "H5P6",
+    "cert_name": "시각디자인_L5_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010106_20v3",
+    "cert_code": "H5R0",
+    "cert_name": "환경디자인_L5_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010108_20v2",
+    "cert_code": "H5P0",
+    "cert_name": "시각디자인_L5_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010108_20v2",
+    "cert_code": "H5P6",
+    "cert_name": "시각디자인_L5_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010109_20v3",
+    "cert_code": "H3J0",
+    "cert_name": "시각디자인_L3_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010109_20v3",
+    "cert_code": "H5P0",
+    "cert_name": "시각디자인_L5_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010109_20v3",
+    "cert_code": "H5P6",
+    "cert_name": "시각디자인_L5_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010109_20v3",
+    "cert_code": "C434",
+    "cert_name": "시각디자인산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010111_20v3",
+    "cert_code": "H5P0",
+    "cert_name": "시각디자인_L5_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010111_20v3",
+    "cert_code": "H5P6",
+    "cert_name": "시각디자인_L5_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010112_20v4",
+    "cert_code": "H3M0",
+    "cert_name": "디지털디자인_L3_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010112_20v4",
+    "cert_code": "H3M6",
+    "cert_name": "디지털디자인_L3_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010112_20v4",
+    "cert_code": "H3J0",
+    "cert_name": "시각디자인_L3_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010112_20v4",
+    "cert_code": "H5P6",
+    "cert_name": "시각디자인_L5_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010112_20v4",
+    "cert_code": "C434",
+    "cert_name": "시각디자인산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010113_20v4",
+    "cert_code": "H3M0",
+    "cert_name": "디지털디자인_L3_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010113_20v4",
+    "cert_code": "H3M6",
+    "cert_name": "디지털디자인_L3_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010113_20v4",
+    "cert_code": "H3J0",
+    "cert_name": "시각디자인_L3_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010113_20v4",
+    "cert_code": "H5P0",
+    "cert_name": "시각디자인_L5_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010113_20v4",
+    "cert_code": "H5P6",
+    "cert_name": "시각디자인_L5_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010113_20v4",
+    "cert_code": "C434",
+    "cert_name": "시각디자인산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010114_20v4",
+    "cert_code": "H5P0",
+    "cert_name": "시각디자인_L5_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010114_20v4",
+    "cert_code": "H5P6",
+    "cert_name": "시각디자인_L5_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010116_20v4",
+    "cert_code": "H3M0",
+    "cert_name": "디지털디자인_L3_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010116_20v4",
+    "cert_code": "H3M6",
+    "cert_name": "디지털디자인_L3_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010116_20v4",
+    "cert_code": "H3J0",
+    "cert_name": "시각디자인_L3_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010116_20v4",
+    "cert_code": "H5P6",
+    "cert_name": "시각디자인_L5_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010116_20v4",
+    "cert_code": "C434",
+    "cert_name": "시각디자인산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010116_20v4",
+    "cert_code": "F796",
+    "cert_name": "컴퓨터그래픽기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010117_20v4",
+    "cert_code": "H3M0",
+    "cert_name": "디지털디자인_L3_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010117_20v4",
+    "cert_code": "H3M6",
+    "cert_name": "디지털디자인_L3_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010117_20v4",
+    "cert_code": "H3J0",
+    "cert_name": "시각디자인_L3_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010117_20v4",
+    "cert_code": "H5P0",
+    "cert_name": "시각디자인_L5_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010117_20v4",
+    "cert_code": "H5P6",
+    "cert_name": "시각디자인_L5_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010117_20v4",
+    "cert_code": "C434",
+    "cert_name": "시각디자인산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010117_20v4",
+    "cert_code": "F796",
+    "cert_name": "컴퓨터그래픽기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010118_20v4",
+    "cert_code": "H3J0",
+    "cert_name": "시각디자인_L3_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010118_20v4",
+    "cert_code": "H5P0",
+    "cert_name": "시각디자인_L5_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010118_20v4",
+    "cert_code": "H5P6",
+    "cert_name": "시각디자인_L5_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010118_20v4",
+    "cert_code": "C434",
+    "cert_name": "시각디자인산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010118_20v4",
+    "cert_code": "F796",
+    "cert_name": "컴퓨터그래픽기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010119_20v3",
+    "cert_code": "H3J0",
+    "cert_name": "시각디자인_L3_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010119_20v3",
+    "cert_code": "C434",
+    "cert_name": "시각디자인산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010119_20v3",
+    "cert_code": "F796",
+    "cert_name": "컴퓨터그래픽기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010120_20v3",
+    "cert_code": "H3J0",
+    "cert_name": "시각디자인_L3_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010120_20v3",
+    "cert_code": "C434",
+    "cert_name": "시각디자인산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010120_20v3",
+    "cert_code": "F796",
+    "cert_name": "컴퓨터그래픽기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010121_20v3",
+    "cert_code": "H5P0",
+    "cert_name": "시각디자인_L5_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010121_20v3",
+    "cert_code": "H5P6",
+    "cert_name": "시각디자인_L5_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010123_20v4",
+    "cert_code": "H5P0",
+    "cert_name": "시각디자인_L5_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010123_20v4",
+    "cert_code": "H5P6",
+    "cert_name": "시각디자인_L5_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010607_17v3",
+    "cert_code": "H65A",
+    "cert_name": "디지털디자인디렉터_L6_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010607_17v3",
+    "cert_code": "H6A0",
+    "cert_name": "디지털디자인디렉터_L6_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010607_17v3",
+    "cert_code": "H6A6",
+    "cert_name": "디지털디자인디렉터_L6_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010607_17v3",
+    "cert_code": "H33O",
+    "cert_name": "서비스·경험디자인_L3_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010607_17v3",
+    "cert_code": "H55U",
+    "cert_name": "서비스·경험디자인_L5_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010607_17v3",
+    "cert_code": "H53U",
+    "cert_name": "서비스·경험디자인_L5_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010608_17v2",
+    "cert_code": "H35O",
+    "cert_name": "서비스·경험디자인_L3_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010608_17v2",
+    "cert_code": "H53U",
+    "cert_name": "서비스·경험디자인_L5_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010609_23v3",
+    "cert_code": "H3O6",
+    "cert_name": "서비스·경험디자인_L3_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010610_17v3",
+    "cert_code": "H5S6",
+    "cert_name": "디지털디자인_L5_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010610_17v3",
+    "cert_code": "H65A",
+    "cert_name": "디지털디자인디렉터_L6_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010610_17v3",
+    "cert_code": "H6A0",
+    "cert_name": "디지털디자인디렉터_L6_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010610_17v3",
+    "cert_code": "H6A6",
+    "cert_name": "디지털디자인디렉터_L6_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010610_17v3",
+    "cert_code": "H63A",
+    "cert_name": "디지털디자인디렉터_L6_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010610_17v3",
+    "cert_code": "H55U",
+    "cert_name": "서비스·경험디자인_L5_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010610_17v3",
+    "cert_code": "H53U",
+    "cert_name": "서비스·경험디자인_L5_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010611_17v3",
+    "cert_code": "H63A",
+    "cert_name": "디지털디자인디렉터_L6_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0802010611_17v3",
+    "cert_code": "H55U",
+    "cert_name": "서비스·경험디자인_L5_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010611_17v3",
+    "cert_code": "H53U",
+    "cert_name": "서비스·경험디자인_L5_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010612_23v4",
+    "cert_code": "H3O6",
+    "cert_name": "서비스·경험디자인_L3_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010613_17v3",
+    "cert_code": "H35O",
+    "cert_name": "서비스·경험디자인_L3_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010613_17v3",
+    "cert_code": "H3O6",
+    "cert_name": "서비스·경험디자인_L3_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010613_17v3",
+    "cert_code": "H33O",
+    "cert_name": "서비스·경험디자인_L3_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010614_17v3",
+    "cert_code": "H63A",
+    "cert_name": "디지털디자인디렉터_L6_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0802010614_17v3",
+    "cert_code": "H35O",
+    "cert_name": "서비스·경험디자인_L3_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010614_17v3",
+    "cert_code": "H3O6",
+    "cert_name": "서비스·경험디자인_L3_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010614_17v3",
+    "cert_code": "H33O",
+    "cert_name": "서비스·경험디자인_L3_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010615_17v3",
+    "cert_code": "H55U",
+    "cert_name": "서비스·경험디자인_L5_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010615_17v3",
+    "cert_code": "H53U",
+    "cert_name": "서비스·경험디자인_L5_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010616_17v3",
+    "cert_code": "H33O",
+    "cert_name": "서비스·경험디자인_L3_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0802010616_17v3",
+    "cert_code": "H55U",
+    "cert_name": "서비스·경험디자인_L5_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010616_17v3",
+    "cert_code": "H53U",
+    "cert_name": "서비스·경험디자인_L5_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010617_17v3",
+    "cert_code": "H65A",
+    "cert_name": "디지털디자인디렉터_L6_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010617_17v3",
+    "cert_code": "H6A0",
+    "cert_name": "디지털디자인디렉터_L6_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010617_17v3",
+    "cert_code": "H6A6",
+    "cert_name": "디지털디자인디렉터_L6_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010617_17v3",
+    "cert_code": "H63A",
+    "cert_name": "디지털디자인디렉터_L6_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010617_17v3",
+    "cert_code": "H55U",
+    "cert_name": "서비스·경험디자인_L5_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010617_17v3",
+    "cert_code": "H53U",
+    "cert_name": "서비스·경험디자인_L5_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010618_17v3",
+    "cert_code": "H65A",
+    "cert_name": "디지털디자인디렉터_L6_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010618_17v3",
+    "cert_code": "H6A0",
+    "cert_name": "디지털디자인디렉터_L6_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010618_17v3",
+    "cert_code": "H6A6",
+    "cert_name": "디지털디자인디렉터_L6_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010618_17v3",
+    "cert_code": "H63A",
+    "cert_name": "디지털디자인디렉터_L6_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010618_17v3",
+    "cert_code": "H55U",
+    "cert_name": "서비스·경험디자인_L5_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010618_17v3",
+    "cert_code": "H53U",
+    "cert_name": "서비스·경험디자인_L5_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010619_23v4",
+    "cert_code": "H3O6",
+    "cert_name": "서비스·경험디자인_L3_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010620_17v3",
+    "cert_code": "H33O",
+    "cert_name": "서비스·경험디자인_L3_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010620_17v3",
+    "cert_code": "H55U",
+    "cert_name": "서비스·경험디자인_L5_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010621_17v3",
+    "cert_code": "H65A",
+    "cert_name": "디지털디자인디렉터_L6_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010621_17v3",
+    "cert_code": "H6A0",
+    "cert_name": "디지털디자인디렉터_L6_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010621_17v3",
+    "cert_code": "H6A6",
+    "cert_name": "디지털디자인디렉터_L6_25V3",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010621_17v3",
+    "cert_code": "H63A",
+    "cert_name": "디지털디자인디렉터_L6_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010621_17v3",
+    "cert_code": "H33O",
+    "cert_name": "서비스·경험디자인_L3_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010621_17v3",
+    "cert_code": "H55U",
+    "cert_name": "서비스·경험디자인_L5_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010622_17v3",
+    "cert_code": "H33O",
+    "cert_name": "서비스·경험디자인_L3_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010622_17v3",
+    "cert_code": "H55U",
+    "cert_name": "서비스·경험디자인_L5_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010622_17v3",
+    "cert_code": "H53U",
+    "cert_name": "서비스·경험디자인_L5_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0802010623_17v3",
+    "cert_code": "H63A",
+    "cert_name": "디지털디자인디렉터_L6_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "0802010623_17v3",
+    "cert_code": "H55U",
+    "cert_name": "서비스·경험디자인_L5_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "0802010623_17v3",
+    "cert_code": "H53U",
+    "cert_name": "서비스·경험디자인_L5_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020104_19v3",
+    "cert_code": "O37A",
+    "cert_name": "기계요소설계_L3_20V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020104_19v3",
+    "cert_code": "B021",
+    "cert_name": "일반기계기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020104_19v3",
+    "cert_code": "B021",
+    "cert_name": "일반기계기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020105_19v3",
+    "cert_code": "O45A",
+    "cert_name": "구조해석설계_L4_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020105_19v3",
+    "cert_code": "O4O2",
+    "cert_name": "구조해석설계_L4_23V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020105_19v3",
+    "cert_code": "C031",
+    "cert_name": "기계설계산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020105_19v3",
+    "cert_code": "B021",
+    "cert_name": "일반기계기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020105_19v3",
+    "cert_code": "B021",
+    "cert_name": "일반기계기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020106_16v3",
+    "cert_code": "O40A",
+    "cert_name": "구조해석설계_L4_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020106_16v3",
+    "cert_code": "O43A",
+    "cert_name": "구조해석설계_L4_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020106_16v3",
+    "cert_code": "B080",
+    "cert_name": "기계설계기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020106_16v3",
+    "cert_code": "B080",
+    "cert_name": "기계설계기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020106_16v3",
+    "cert_code": "B080",
+    "cert_name": "기계설계기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020106_16v3",
+    "cert_code": "C031",
+    "cert_name": "기계설계산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020106_16v3",
+    "cert_code": "C031",
+    "cert_name": "기계설계산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020106_16v3",
+    "cert_code": "C031",
+    "cert_name": "기계설계산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020106_16v3",
+    "cert_code": "O63A",
+    "cert_name": "기계시스템설계_L6_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020106_16v3",
+    "cert_code": "O35A",
+    "cert_name": "기계요소설계_L3_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020106_16v3",
+    "cert_code": "O37A",
+    "cert_name": "기계요소설계_L3_20V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020106_16v3",
+    "cert_code": "O3A0",
+    "cert_name": "기계요소설계_L3_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020106_16v3",
+    "cert_code": "O30A",
+    "cert_name": "기계요소설계_L3_ver2.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020106_16v3",
+    "cert_code": "O33A",
+    "cert_name": "기계요소설계_L3_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020106_16v3",
+    "cert_code": "B021",
+    "cert_name": "일반기계기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020106_16v3",
+    "cert_code": "B021",
+    "cert_name": "일반기계기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020106_16v3",
+    "cert_code": "C034",
+    "cert_name": "자동화설비산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020106_16v3",
+    "cert_code": "C034",
+    "cert_name": "자동화설비산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020106_16v3",
+    "cert_code": "O20A",
+    "cert_name": "전산응용기계설계_L2_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020106_16v3",
+    "cert_code": "O23A",
+    "cert_name": "전산응용기계설계_L2_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020106_16v3",
+    "cert_code": "E151",
+    "cert_name": "전산응용기계제도기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020106_16v3",
+    "cert_code": "E151",
+    "cert_name": "전산응용기계제도기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020106_16v3",
+    "cert_code": "C090",
+    "cert_name": "치공구설계산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020106_16v3",
+    "cert_code": "C090",
+    "cert_name": "치공구설계산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020108_16v3",
+    "cert_code": "P43L",
+    "cert_name": "강관제조_L4_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020108_16v3",
+    "cert_code": "O40A",
+    "cert_name": "구조해석설계_L4_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020108_16v3",
+    "cert_code": "O43A",
+    "cert_name": "구조해석설계_L4_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020108_16v3",
+    "cert_code": "B080",
+    "cert_name": "기계설계기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020108_16v3",
+    "cert_code": "B080",
+    "cert_name": "기계설계기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020108_16v3",
+    "cert_code": "B080",
+    "cert_name": "기계설계기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020108_16v3",
+    "cert_code": "C031",
+    "cert_name": "기계설계산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020108_16v3",
+    "cert_code": "C031",
+    "cert_name": "기계설계산업기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020108_16v3",
+    "cert_code": "C031",
+    "cert_name": "기계설계산업기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020108_16v3",
+    "cert_code": "O30A",
+    "cert_name": "기계요소설계_L3_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020108_16v3",
+    "cert_code": "O33A",
+    "cert_name": "기계요소설계_L3_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020108_16v3",
+    "cert_code": "O20A",
+    "cert_name": "전산응용기계설계_L2_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020108_16v3",
+    "cert_code": "O23A",
+    "cert_name": "전산응용기계설계_L2_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020108_16v3",
+    "cert_code": "E151",
+    "cert_name": "전산응용기계제도기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020108_16v3",
+    "cert_code": "E151",
+    "cert_name": "전산응용기계제도기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020108_16v3",
+    "cert_code": "C090",
+    "cert_name": "치공구설계산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020108_16v3",
+    "cert_code": "C090",
+    "cert_name": "치공구설계산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "O30D",
+    "cert_name": "CNC밀링가공_L3_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "O33D",
+    "cert_name": "CNC밀링가공_L3_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "O30C",
+    "cert_name": "CNC선반가공_L3_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "O33C",
+    "cert_name": "CNC선반가공_L3_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "E251",
+    "cert_name": "공유압기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "E251",
+    "cert_name": "공유압기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "C031",
+    "cert_name": "기계설계산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "C031",
+    "cert_name": "기계설계산업기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "C031",
+    "cert_name": "기계설계산업기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "O30A",
+    "cert_name": "기계요소설계_L3_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "O33A",
+    "cert_name": "기계요소설계_L3_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "O30F",
+    "cert_name": "레이저가공_L3_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "O33F",
+    "cert_name": "레이저가공_L3_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "O20C",
+    "cert_name": "밀링가공_L2_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "O23C",
+    "cert_name": "밀링가공_L2_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "S2K2",
+    "cert_name": "반도체장비개발_L2_23V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "O20B",
+    "cert_name": "선반가공_L2_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "O23B",
+    "cert_name": "선반가공_L2_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "O30B",
+    "cert_name": "연삭가공_L3_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "O33B",
+    "cert_name": "연삭가공_L3_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "E040",
+    "cert_name": "연삭기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "O30E",
+    "cert_name": "와이어방전가공_L3_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "O33E",
+    "cert_name": "와이어방전가공_L3_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "O30G",
+    "cert_name": "워터젯가공_L3_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "O33G",
+    "cert_name": "워터젯가공_L3_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "B021",
+    "cert_name": "일반기계기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "B021",
+    "cert_name": "일반기계기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "O25A",
+    "cert_name": "전산응용기계설계_L2_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "O27A",
+    "cert_name": "전산응용기계설계_L2_20V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "O2A0",
+    "cert_name": "전산응용기계설계_L2_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "O20A",
+    "cert_name": "전산응용기계설계_L2_ver2.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "O23A",
+    "cert_name": "전산응용기계설계_L2_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "E151",
+    "cert_name": "전산응용기계제도기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "E151",
+    "cert_name": "전산응용기계제도기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "E151",
+    "cert_name": "전산응용기계제도기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "E120",
+    "cert_name": "정밀측정기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "E120",
+    "cert_name": "정밀측정기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "C098",
+    "cert_name": "정밀측정산업기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "C098",
+    "cert_name": "정밀측정산업기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "P20G",
+    "cert_name": "주조_L2_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "P23G",
+    "cert_name": "주조_L2_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "E461",
+    "cert_name": "주조기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "E461",
+    "cert_name": "주조기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "E381",
+    "cert_name": "축로기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "E381",
+    "cert_name": "축로기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "E381",
+    "cert_name": "축로기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "C090",
+    "cert_name": "치공구설계산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "C090",
+    "cert_name": "치공구설계산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "C025",
+    "cert_name": "컴퓨터응용가공산업기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "C025",
+    "cert_name": "컴퓨터응용가공산업기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "C025",
+    "cert_name": "컴퓨터응용가공산업기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "C025",
+    "cert_name": "컴퓨터응용가공산업기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "E032",
+    "cert_name": "컴퓨터응용밀링기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "E032",
+    "cert_name": "컴퓨터응용밀링기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "E032",
+    "cert_name": "컴퓨터응용밀링기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "E012",
+    "cert_name": "컴퓨터응용선반기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "E012",
+    "cert_name": "컴퓨터응용선반기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "E012",
+    "cert_name": "컴퓨터응용선반기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "O40C",
+    "cert_name": "플라즈마가공_L4_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "O43C",
+    "cert_name": "플라즈마가공_L4_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "O40B",
+    "cert_name": "형조방전가공_L4_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020111_16v3",
+    "cert_code": "O43B",
+    "cert_name": "형조방전가공_L4_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020112_19v4",
+    "cert_code": "O27A",
+    "cert_name": "전산응용기계설계_L2_20V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020112_19v4",
+    "cert_code": "O2A0",
+    "cert_name": "전산응용기계설계_L2_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020112_19v4",
+    "cert_code": "E151",
+    "cert_name": "전산응용기계제도기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O30D",
+    "cert_name": "CNC밀링가공_L3_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O33D",
+    "cert_name": "CNC밀링가공_L3_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O30C",
+    "cert_name": "CNC선반가공_L3_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O33C",
+    "cert_name": "CNC선반가공_L3_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "E251",
+    "cert_name": "공유압기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "E251",
+    "cert_name": "공유압기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O40A",
+    "cert_name": "구조해석설계_L4_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O43A",
+    "cert_name": "구조해석설계_L4_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "B080",
+    "cert_name": "기계설계기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "B080",
+    "cert_name": "기계설계기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "B080",
+    "cert_name": "기계설계기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O63A",
+    "cert_name": "기계시스템설계_L6_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O50A",
+    "cert_name": "기계제어설계_L5_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O53A",
+    "cert_name": "기계제어설계_L5_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O30F",
+    "cert_name": "레이저가공_L3_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O33F",
+    "cert_name": "레이저가공_L3_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O20C",
+    "cert_name": "밀링가공_L2_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O23C",
+    "cert_name": "밀링가공_L2_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O20B",
+    "cert_name": "선반가공_L2_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O23B",
+    "cert_name": "선반가공_L2_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O30B",
+    "cert_name": "연삭가공_L3_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O33B",
+    "cert_name": "연삭가공_L3_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "E040",
+    "cert_name": "연삭기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O30E",
+    "cert_name": "와이어방전가공_L3_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O33E",
+    "cert_name": "와이어방전가공_L3_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O30G",
+    "cert_name": "워터젯가공_L3_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O33G",
+    "cert_name": "워터젯가공_L3_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O50E",
+    "cert_name": "자동차설계_L5_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O53E",
+    "cert_name": "자동차설계_L5_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O25A",
+    "cert_name": "전산응용기계설계_L2_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O27A",
+    "cert_name": "전산응용기계설계_L2_20V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O2A0",
+    "cert_name": "전산응용기계설계_L2_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O20A",
+    "cert_name": "전산응용기계설계_L2_ver2.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O23A",
+    "cert_name": "전산응용기계설계_L2_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "E151",
+    "cert_name": "전산응용기계제도기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "E151",
+    "cert_name": "전산응용기계제도기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "E151",
+    "cert_name": "전산응용기계제도기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "C098",
+    "cert_name": "정밀측정산업기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "C098",
+    "cert_name": "정밀측정산업기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "H30K",
+    "cert_name": "제품디자인_L3_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "H33K",
+    "cert_name": "제품디자인_L3_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "P40H",
+    "cert_name": "주조_L4_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "P43H",
+    "cert_name": "주조_L4_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "C090",
+    "cert_name": "치공구설계산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "C090",
+    "cert_name": "치공구설계산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "C025",
+    "cert_name": "컴퓨터응용가공산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "C025",
+    "cert_name": "컴퓨터응용가공산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "C025",
+    "cert_name": "컴퓨터응용가공산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "C025",
+    "cert_name": "컴퓨터응용가공산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "C025",
+    "cert_name": "컴퓨터응용가공산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "C025",
+    "cert_name": "컴퓨터응용가공산업기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "E032",
+    "cert_name": "컴퓨터응용밀링기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "E032",
+    "cert_name": "컴퓨터응용밀링기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "E032",
+    "cert_name": "컴퓨터응용밀링기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "E012",
+    "cert_name": "컴퓨터응용선반기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "E012",
+    "cert_name": "컴퓨터응용선반기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "E012",
+    "cert_name": "컴퓨터응용선반기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O40C",
+    "cert_name": "플라즈마가공_L4_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O43C",
+    "cert_name": "플라즈마가공_L4_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O40B",
+    "cert_name": "형조방전가공_L4_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020113_16v3",
+    "cert_code": "O43B",
+    "cert_name": "형조방전가공_L4_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020114_19v4",
+    "cert_code": "O27A",
+    "cert_name": "전산응용기계설계_L2_20V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020114_19v4",
+    "cert_code": "O2A0",
+    "cert_name": "전산응용기계설계_L2_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020114_19v4",
+    "cert_code": "E151",
+    "cert_name": "전산응용기계제도기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "F785",
+    "cert_name": "3D프린터운용기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "F785",
+    "cert_name": "3D프린터운용기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "O45A",
+    "cert_name": "구조해석설계_L4_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "O4O2",
+    "cert_name": "구조해석설계_L4_23V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "O40A",
+    "cert_name": "구조해석설계_L4_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "O43A",
+    "cert_name": "구조해석설계_L4_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "B080",
+    "cert_name": "기계설계기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "B080",
+    "cert_name": "기계설계기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "B080",
+    "cert_name": "기계설계기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "C031",
+    "cert_name": "기계설계산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "C031",
+    "cert_name": "기계설계산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "C031",
+    "cert_name": "기계설계산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "O35A",
+    "cert_name": "기계요소설계_L3_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "O37A",
+    "cert_name": "기계요소설계_L3_20V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "O3A0",
+    "cert_name": "기계요소설계_L3_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "O30A",
+    "cert_name": "기계요소설계_L3_ver2.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "O33A",
+    "cert_name": "기계요소설계_L3_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "P20C",
+    "cert_name": "열간압연_L2_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "P23C",
+    "cert_name": "열간압연_L2_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "O27A",
+    "cert_name": "전산응용기계설계_L2_20V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "O2A0",
+    "cert_name": "전산응용기계설계_L2_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "O20A",
+    "cert_name": "전산응용기계설계_L2_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "O23A",
+    "cert_name": "전산응용기계설계_L2_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "E151",
+    "cert_name": "전산응용기계제도기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "E151",
+    "cert_name": "전산응용기계제도기능사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "P23B",
+    "cert_name": "제강_L2_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "P23A",
+    "cert_name": "제선_L2_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "C090",
+    "cert_name": "치공구설계산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "C090",
+    "cert_name": "치공구설계산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "W30H",
+    "cert_name": "태양광에너지생산기술_L3_ver2.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020115_16v3",
+    "cert_code": "W33H",
+    "cert_name": "태양광에너지생산기술_L3_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020116_19v4",
+    "cert_code": "O45A",
+    "cert_name": "구조해석설계_L4_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020116_19v4",
+    "cert_code": "O4O2",
+    "cert_name": "구조해석설계_L4_23V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020116_19v4",
+    "cert_code": "E490",
+    "cert_name": "금속재료시험기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020116_19v4",
+    "cert_code": "E490",
+    "cert_name": "금속재료시험기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020116_19v4",
+    "cert_code": "C031",
+    "cert_name": "기계설계산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020116_19v4",
+    "cert_code": "O37A",
+    "cert_name": "기계요소설계_L3_20V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020116_19v4",
+    "cert_code": "O3A0",
+    "cert_name": "기계요소설계_L3_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020116_19v4",
+    "cert_code": "B021",
+    "cert_name": "일반기계기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020116_19v4",
+    "cert_code": "B021",
+    "cert_name": "일반기계기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020116_19v4",
+    "cert_code": "E461",
+    "cert_name": "주조기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020116_19v4",
+    "cert_code": "E461",
+    "cert_name": "주조기능사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020116_19v4",
+    "cert_code": "C025",
+    "cert_name": "컴퓨터응용가공산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020116_19v4",
+    "cert_code": "C025",
+    "cert_name": "컴퓨터응용가공산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020117_18v4",
+    "cert_code": "P43L",
+    "cert_name": "강관제조_L4_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020117_18v4",
+    "cert_code": "C031",
+    "cert_name": "기계설계산업기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020117_18v4",
+    "cert_code": "O63A",
+    "cert_name": "기계시스템설계_L6_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020117_18v4",
+    "cert_code": "C090",
+    "cert_name": "치공구설계산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020118_18v4",
+    "cert_code": "P43L",
+    "cert_name": "강관제조_L4_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020118_18v4",
+    "cert_code": "C031",
+    "cert_name": "기계설계산업기사",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020118_18v4",
+    "cert_code": "O63A",
+    "cert_name": "기계시스템설계_L6_ver3.0",
+    "unit_type": "선택"
+  },
+  {
+    "ncs_unit_code": "1501020118_18v4",
+    "cert_code": "C090",
+    "cert_name": "치공구설계산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020119_19v4",
+    "cert_code": "C031",
+    "cert_name": "기계설계산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020119_19v4",
+    "cert_code": "O37A",
+    "cert_name": "기계요소설계_L3_20V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020120_19v4",
+    "cert_code": "C031",
+    "cert_name": "기계설계산업기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020120_19v4",
+    "cert_code": "O3A0",
+    "cert_name": "기계요소설계_L3_22V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020120_19v4",
+    "cert_code": "B021",
+    "cert_name": "일반기계기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1501020120_19v4",
+    "cert_code": "B021",
+    "cert_name": "일반기계기사",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050101_16v3",
+    "cert_code": "S55E",
+    "cert_name": "전기기기설계_L5_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050101_16v3",
+    "cert_code": "S5X4",
+    "cert_name": "전기기기설계_L5_24V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050101_16v3",
+    "cert_code": "S53E",
+    "cert_name": "전기기기설계_L5_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050103_16v4",
+    "cert_code": "S55E",
+    "cert_name": "전기기기설계_L5_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050103_16v4",
+    "cert_code": "S5X4",
+    "cert_name": "전기기기설계_L5_24V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050103_16v4",
+    "cert_code": "S53E",
+    "cert_name": "전기기기설계_L5_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050104_16v3",
+    "cert_code": "S55E",
+    "cert_name": "전기기기설계_L5_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050104_16v3",
+    "cert_code": "S5X4",
+    "cert_name": "전기기기설계_L5_24V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050104_16v3",
+    "cert_code": "S53E",
+    "cert_name": "전기기기설계_L5_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050106_16v3",
+    "cert_code": "S55E",
+    "cert_name": "전기기기설계_L5_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050106_16v3",
+    "cert_code": "S5X4",
+    "cert_name": "전기기기설계_L5_24V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050106_16v3",
+    "cert_code": "S53E",
+    "cert_name": "전기기기설계_L5_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050107_16v3",
+    "cert_code": "S55E",
+    "cert_name": "전기기기설계_L5_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050107_16v3",
+    "cert_code": "S5X4",
+    "cert_name": "전기기기설계_L5_24V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050107_16v3",
+    "cert_code": "S53E",
+    "cert_name": "전기기기설계_L5_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050108_16v3",
+    "cert_code": "S55E",
+    "cert_name": "전기기기설계_L5_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050108_16v3",
+    "cert_code": "S5X4",
+    "cert_name": "전기기기설계_L5_24V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050108_16v3",
+    "cert_code": "S53E",
+    "cert_name": "전기기기설계_L5_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050109_16v3",
+    "cert_code": "S55E",
+    "cert_name": "전기기기설계_L5_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050109_16v3",
+    "cert_code": "S5X4",
+    "cert_name": "전기기기설계_L5_24V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050109_16v3",
+    "cert_code": "S53E",
+    "cert_name": "전기기기설계_L5_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050110_16v3",
+    "cert_code": "S53E",
+    "cert_name": "전기기기설계_L5_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050111_16v3",
+    "cert_code": "S25A",
+    "cert_name": "전기기기제작_L2_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050111_16v3",
+    "cert_code": "S20A",
+    "cert_name": "전기기기제작_L2_ver2.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050111_16v3",
+    "cert_code": "S23A",
+    "cert_name": "전기기기제작_L2_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050112_16v3",
+    "cert_code": "S35A",
+    "cert_name": "전기기기제작_L3_20V1",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050112_16v3",
+    "cert_code": "S3A6",
+    "cert_name": "전기기기제작_L3_25V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050112_16v3",
+    "cert_code": "S30A",
+    "cert_name": "전기기기제작_L3_ver2.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050112_16v3",
+    "cert_code": "S33A",
+    "cert_name": "전기기기제작_L3_ver3.0",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050114_22v4",
+    "cert_code": "S5X4",
+    "cert_name": "전기기기설계_L5_24V2",
+    "unit_type": "필수"
+  },
+  {
+    "ncs_unit_code": "1901050116_22v4",
+    "cert_code": "S5X4",
+    "cert_name": "전기기기설계_L5_24V2",
+    "unit_type": "필수"
+  }
+]

@@ -4,36 +4,89 @@
     "job_name": "백엔드 개발자",
     "category_code": "it",
     "category_name": "IT",
-    "tagline": "서버와 데이터를 다루며 서비스의 뼈대를 만드는 개발자",
-    "ncs_detail_code": "20010202"
+    "tagline": "서버와 데이터베이스로 서비스의 심장을 만드는 직무",
+    "ncs_detail_code": "20010202",
+    "available": true
   },
   {
     "job_code": "frontend",
     "job_name": "프론트엔드 개발자",
     "category_code": "it",
     "category_name": "IT",
-    "tagline": "사용자가 직접 만나는 화면과 경험을 구현하는 개발자",
-    "ncs_detail_code": "20010202"
+    "tagline": "사용자가 직접 만나는 화면을 설계하고 구현하는 직무",
+    "ncs_detail_code": "20010202",
+    "available": true
   },
   {
-    "job_code": "data-engineer",
-    "job_name": "데이터 엔지니어",
+    "job_code": "security",
+    "job_name": "보안 엔지니어",
     "category_code": "it",
     "category_name": "IT",
-    "tagline": "데이터 파이프라인과 저장소를 설계·운영하는 개발자"
+    "tagline": "시스템과 데이터를 위협으로부터 지키는 직무",
+    "ncs_detail_code": "20010206",
+    "available": true
   },
   {
-    "job_code": "devops",
-    "job_name": "DevOps·인프라 엔지니어",
+    "job_code": "database",
+    "job_name": "데이터베이스 엔지니어",
     "category_code": "it",
     "category_name": "IT",
-    "tagline": "빌드·배포·운영을 자동화하고 인프라를 책임지는 엔지니어"
+    "tagline": "데이터를 설계하고 성능까지 책임지는 직무",
+    "ncs_detail_code": "20010204",
+    "available": true
   },
   {
-    "job_code": "qa",
-    "job_name": "QA 엔지니어",
-    "category_code": "it",
-    "category_name": "IT",
-    "tagline": "품질을 설계하고 검증하는 소프트웨어 테스트 엔지니어"
+    "job_code": "hr",
+    "job_name": "인사 담당자",
+    "category_code": "management",
+    "category_name": "경영-사무",
+    "tagline": "사람을 뽑고 키우고 평가하는, 조직의 기반을 만드는 직무",
+    "ncs_detail_code": "02020201",
+    "available": true
+  },
+  {
+    "job_code": "accounting",
+    "job_name": "회계 담당자",
+    "category_code": "finance",
+    "category_name": "금융-회계",
+    "tagline": "숫자로 회사의 상태를 기록하고 설명하는 직무",
+    "ncs_detail_code": "02030201",
+    "available": true
+  },
+  {
+    "job_code": "marketer",
+    "job_name": "디지털 마케터",
+    "category_code": "marketing",
+    "category_name": "광고-마케팅",
+    "tagline": "시장을 읽고 고객을 찾아 성과로 증명하는 직무",
+    "ncs_detail_code": "02010301",
+    "available": true
+  },
+  {
+    "job_code": "sales",
+    "job_name": "해외영업 담당자",
+    "category_code": "sales",
+    "category_name": "영업-해외영업",
+    "tagline": "국경을 넘어 고객을 만들고 계약을 성사시키는 직무",
+    "ncs_detail_code": "10010102",
+    "available": true
+  },
+  {
+    "job_code": "mechanical",
+    "job_name": "기계설계 엔지니어",
+    "category_code": "production",
+    "category_name": "생산-제조",
+    "tagline": "도면으로 부품을 설계하고 검증하는 직무",
+    "ncs_detail_code": "15010201",
+    "available": true
+  },
+  {
+    "job_code": "uiux",
+    "job_name": "UI/UX 디자이너",
+    "category_code": "design",
+    "category_name": "디자인",
+    "tagline": "사용자를 조사해 쓰기 좋은 화면으로 만드는 직무",
+    "ncs_detail_code": "20010207",
+    "available": true
   }
 ]

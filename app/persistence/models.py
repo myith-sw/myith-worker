@@ -107,7 +107,7 @@ class JobProfile(Base):
     """직무별 재료 (PART E). 파이프라인 1이 새 버전으로 저장, Core가 조립 시 읽는다.
 
     quest_templates 각 항목: {skillCode, title, completionCriteria, ncsUnitCode,
-    guidance:{novice, learner, advanced}} (확정 §1-4, D-03-a).
+    guidance:{none, aware, experienced, proficient}} (확정 W2 B-1, D-03-a).
     """
 
     __tablename__ = "job_profile"

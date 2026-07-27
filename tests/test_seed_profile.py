@@ -6,6 +6,7 @@
 """
 
 import json
+import re
 
 import pytest
 
@@ -21,12 +22,13 @@ def _load(name):
         return json.load(f)
 
 
+# job_profile.json은 최상위 키가 camelCase다(jobCode, questTemplates, ...). 중첩 내용도 camelCase.
 _PROFILES = _load("job_profile.json")
-_PROFILE_CODES = [p["job_code"] for p in _PROFILES]
+_PROFILE_CODES = [p["jobCode"] for p in _PROFILES]
 
 
 def _profile(job_code):
-    return next(p for p in _PROFILES if p["job_code"] == job_code)
+    return next(p for p in _PROFILES if p["jobCode"] == job_code)
 
 
 def _primary_map():
@@ -44,12 +46,17 @@ def test_jobs_parse_and_contain_backend():
         assert j["job_name"] and j["job_code"]
 
 
-def test_backend_frontend_have_ncs_detail_code():
-    # 확정 W2 C-6: backend·frontend → '20010202', 나머지는 없음(NULL).
+def test_jobs_have_expected_ncs_detail_codes():
+    # 확정 W2 C-6 + 실데이터 확장: backend·frontend는 20010202. 실데이터 교체 후엔
+    # 10직무 전부 NCS 세분류에 연결된다(NULL 없음). 대표 매핑을 못 박아 회귀를 막는다.
     jobs = {j["job_code"]: j for j in _load("job.json")}
-    assert jobs["backend"].get("ncs_detail_code") == "20010202"
-    assert jobs["frontend"].get("ncs_detail_code") == "20010202"
-    assert jobs["qa"].get("ncs_detail_code") is None
+    assert jobs["backend"]["ncs_detail_code"] == "20010202"
+    assert jobs["frontend"]["ncs_detail_code"] == "20010202"
+    assert jobs["security"]["ncs_detail_code"] == "20010206"
+    assert jobs["marketer"]["ncs_detail_code"] == "02010301"
+    assert jobs["hr"]["ncs_detail_code"] == "02020201"
+    for j in jobs.values():
+        assert j.get("ncs_detail_code"), f"{j['job_code']} ncs_detail_code 없음"
 
 
 def test_profiled_jobs_exist_in_job_master():
@@ -155,9 +162,9 @@ def test_quest_templates_cover_all_skills_with_guidance(code):
     p = _profile(code)
     skill_codes = {s["skillCode"] for s in p["skills"]}
     primary = _primary_map()
-    templated = {t["skillCode"] for t in p["quest_templates"]}
+    templated = {t["skillCode"] for t in p["questTemplates"]}
     assert templated == skill_codes, f"[{code}] quest_templates가 모든 스킬을 덮지 않음"
-    for t in p["quest_templates"]:
+    for t in p["questTemplates"]:
         assert t["title"].strip() and t["completionCriteria"].strip()
         assert t["ncsUnitCode"] == primary[t["skillCode"]]
         g = t["guidance"]
@@ -171,7 +178,7 @@ def test_quest_templates_cover_all_skills_with_guidance(code):
 def test_activity_quests_have_no_skill_but_valid_axis(code):
     p = _profile(code)
     axis_codes = {a["axisCode"] for a in p["axes"]}
-    for aq in p["activity_quests"]:
+    for aq in p["activityQuests"]:
         assert "skillCode" not in aq or aq.get("skillCode") is None  # F-9: skill_code 없음
         assert aq["axisCode"] in axis_codes  # axis_code는 필수
         assert settings.LEVEL_BAND_MIN <= aq["level"] <= settings.LEVEL_BAND_MAX
@@ -196,10 +203,15 @@ def test_difficulty_matches_confirmed_formula(code):
 
 
 def test_seed_units_are_real_verified_codes():
-    """확정 W2 A-3: 실데이터 반영. 27건, 20010202 세분류, is_verified=true, TBD 잔재 없음."""
+    """확정 W2 A-3 + 실데이터 확장: 265건, is_verified=true, 코드 형식 검증, TBD 잔재 없음."""
     units = SeedNcsSource().fetch_units()
-    assert len(units) == 27
+    assert len(units) == 265
     for u in units:
-        assert u.code.startswith("20010202"), f"세분류 위반: {u.code}"
+        # 코드 형식: 10자리 숫자_YYvN. 과거 가짜코드가 두 번 들어왔다 —
+        # L2001010106_18v4(L 접두어=학습모듈)와 세분류가 틀린 코드. 둘 다 그럴듯해 눈으론 못 걸렀다.
+        # 개수(len==265) 검사는 못 잡지만 이 정규식은 L 접두어를 즉시 잡고, 형식은 데이터가 늘어도 안 변한다.
+        assert re.fullmatch(r"\d{10}_\d{2}v\d+", u.code), f"코드 형식 위반: {u.code}"
         assert not u.code.startswith("TBD-"), f"TBD 잔재: {u.code}"
         assert u.is_verified is True
+    # 응용SW엔지니어링(20010202) 세분류가 부분집합으로 존재해야 한다 (backend·frontend 근거, 27건).
+    assert any(u.code.startswith("20010202") for u in units)

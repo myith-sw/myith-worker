@@ -243,6 +243,13 @@ Core가 Outbox로 발행한다. Worker 인스턴스가 여러 개면 **하나만
 | `JobProfileBuilt` | `{ jobCode, profileVersion }` | 프로필 빌드 완료 |
 | `AiEnhancementCompleted` | `{ requestId★, roadmapId★, questId, status, enhancedStar\|null, feedback[], resumeDraft, createdAt, errorCode }` | 보완 완료/실패 (확정 W2 C-2). ★필수 — 없으면 화면 미도달. 실패도 반드시 발행 |
 
+**`CompetencyExtracted.competencies[]` 원소 구조 (확정 W3, Core 합의됨):** 원소는 정확히 **4필드** — `{ skillCode, mastery, confidence, evidence }`. `user_competency` 테이블 row와 1:1 대응한다. axisCode·previousMastery·source는 **넣지 않는다**(각각 job_profile로 파생 가능 / Core 소유 user_diagnosis에 있음 / 저장 컬럼·소비처 없음). 규칙:
+- **근거 있는 스킬만 포함.** evidence 없는 스킬은 배열에서 빠진다(테이블에 row가 없으므로 — G-1).
+- **부분 upsert 시맨틱.** 배열에 없는 `skill_code`는 "변경 없음"이지 삭제가 아니다. Worker는 DELETE하지 않는다.
+- **`mastery`·`confidence` 범위 0.00~1.00** (1.00 포함, proficient). `> 1.0`은 데이터 오류.
+- **`competencies: []`(빈 배열)도 발행한다** — "추출 완료, 근거 0건, 자가진단만으로 즉시 조립하라" 신호. Core는 빈 배열을 에러가 아니라 폴백 조립 트리거로 처리한다(D-5 정합성 스케줄러와 동일 경로).
+- 이벤트는 **트리거 + 편의 미러**일 뿐, 병합의 실제 데이터는 Core가 `user_competency` 테이블에서 읽는다(D-4). 봉투 `version`은 1 고정, 미지 필드 무시로 전방 호환.
+
 **봉투 `eventId` 재사용 (확정 W2 C-3):** Core는 `AiEnhancementCompleted`·`CompetencyExtracted`·`JobProfileBuilt` 수신 시 봉투 `eventId`를 자기 `processed_event`에 저장해 멱등 처리한다. **Worker는 재발행 시 같은 `eventId`를 써야 한다** — (이벤트종류+대상ID)로 결정론적으로 만들거나 최초 생성 시 저장해 재사용. `requestId`(Core가 준 값)와 `eventId`(Worker가 만드는 봉투 ID)는 **다른 값이다.**
 
 **레거시:** `StarFeedbackRequested`/`StarFeedbackCompleted`는 폐기됐다. Core에 핸들러가 남아 있어도 **발행하지 않는다.**
@@ -321,7 +328,7 @@ job_profile
   levels           jsonb    -- [{level, skillCodes[]}]
   prerequisites    jsonb    -- [{from, to}]
   questions        jsonb    -- [{skillCode, text, axisCode}]
-  quest_templates  jsonb    -- [{skillCode, title, completionCriteria, ncsUnitCode, guidance:{novice,learner,advanced}}] (확정 §1-4)
+  quest_templates  jsonb    -- [{skillCode, title, completionCriteria, ncsUnitCode, guidance:{none,aware,experienced,proficient}}] (확정 §1-4, W2 B-1: 4종)
   activity_quests  jsonb    -- [{title, axisCode, level, completionCriteria}]
   built_at         timestamptz
   primary key (job_code, version)
@@ -907,6 +914,10 @@ LLM API 호출 제한(429)을 막기 위해 토큰 버킷으로 초당 요청 �
 | skill_ncs_map 구축·보강 | NCS 정의 + LLM 보조 + 사람 검수 | 초기 + `unmapped_skill` 확인 시 |
 | 직무 tagline 작성·검수 | NCS 직무 정의 근거, 사람 작성 | 직무 추가 시 |
 | skill_stat 스프레드시트 export | 내부 DB | 주기적 |
+
+> **자격 연계·능력단위 초기 적재는 시드다** (확정 A안, W2 D-3 대체). 실데이터를 API로 추출해
+> `ncs_units.json`(265건)·`ncs_certifications.json`(600행→로더 dedup 521)로 시드하고 `load_all`이
+> 적재한다. I-2/I-3 API는 이후 **갱신용**(월 1회 등). "초기=시드, 갱신=API". `ncs_load_cursor`는 갱신 배치용으로 유지.
 
 ## skill_ncs_map 구축 절차
 

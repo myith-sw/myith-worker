@@ -78,6 +78,13 @@ class Settings(BaseSettings):
     # ── 정책값: 수집·밴딩·재빌드 임계 (F-1, F-7, F-8, F-10) ──
     COLLECT_SAMPLE_SIZE: int = 50
     SKILL_CAP: int = 25
+    # 레이더 축 고정 수 (F-4/F-7). 프론트 레이더가 육각형 고정이라 6으로 묶는다.
+    # TODO(F-4): 그룹핑 파이프라인 구현 시 이 값으로 축을 자른다.
+    #   초과 → 축별 P합 상위 PROFILE_AXIS_COUNT개만, 잘린 축·스킬을 log로 남긴다(조용히 버리지 않는다).
+    #   미만 → 억지로 채우지 않는다. 스킬 없는 축은 완료율이 영구 0%라 다각형이 더 찌그러진다.
+    #   자르는 기준이 P합인 이유: 수준(N)으로 자르면 어려운 축만 남아 실무와 멀어진다.
+    #   (현재 시드 프로필은 이미 전부 6축이라 런타임 강제 대상 없음. 원티드 실데이터가 흐르면 필요.)
+    PROFILE_AXIS_COUNT: int = 6
     LEVEL_BAND_MIN: int = 4
     LEVEL_BAND_MAX: int = 7
     PREREQ_THETA: float = 0.3  # F-6 비대칭성 임계
