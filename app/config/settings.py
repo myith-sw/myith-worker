@@ -123,6 +123,8 @@ class Settings(BaseSettings):
     DOC_MIN_CHARS_PER_PAGE: int = 50  # G-4 텍스트 충분 판정
     OCR_CONFIDENCE_MIN: float = 0.6
     STAR_MAX_TOKENS: int = 1500  # H-2 STAR 보완 (경량 모델, 짧은 텍스트). effort는 haiku엔 미지원이라 안 씀
+    # H-2 가드2 사실검증 모드: numeric=숫자만(기본, 한↔영 표기 오탐 제거) | strict=숫자+영문 | off
+    STAR_FABRICATION_CHECK: str = "numeric"
     COMPETENCY_MAX_TOKENS: int = 2000  # G-5 역량 추출 (스킬 다수 + evidence 인용)
     GUIDANCE_MAX_TOKENS: int = 300  # H-1 층2 문구 다듬기 (확정 사양)
     LLM_PERSONALIZE_ENABLED: bool = True  # H-1 층2(문구 개인화) on/off. 실패·타임아웃 시 층1로 폴백

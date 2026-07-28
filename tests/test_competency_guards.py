@@ -75,10 +75,11 @@ def test_output_exactly_four_fields():
 # ── build_prompt: 데이터 영역 분리(C-4) ──────────────────────────────────
 
 
-def test_build_prompt_wraps_data_area():
-    p = build_prompt(SOURCE, [{"skillCode": "react", "skillName": "React"}])
-    assert "데이터 영역 시작" in p and "데이터 영역 끝" in p
-    assert "react: React" in p and SOURCE in p
+def test_build_prompt_system_data_separation():
+    system, user = build_prompt(SOURCE, [{"skillCode": "react", "skillName": "React"}])
+    assert "데이터 영역 시작" in user and "데이터 영역 끝" in user
+    assert "react: React" in user and SOURCE in user  # 스킬목록·산출물은 user
+    assert "분석자" in system  # 지시부는 system (competency.txt)
 
 
 # ── extract_competencies: 가드 5(폴백) + 스키마 재시도 ────────────────────
@@ -89,7 +90,7 @@ class FakeProvider:
         self._response, self._raises = response, raises
         self.calls = 0
 
-    async def complete_json(self, *, prompt, schema, model, max_tokens):
+    async def complete_json(self, *, prompt, schema, model, max_tokens, system=None):
         self.calls += 1
         if self._raises:
             raise self._raises

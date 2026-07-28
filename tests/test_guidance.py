@@ -59,7 +59,7 @@ class FakeProvider:
         self.calls = 0
         self.last = {}
 
-    async def complete_json(self, *, prompt, schema, model, max_tokens, effort=None, thinking_disabled=False):
+    async def complete_json(self, *, prompt, schema, model, max_tokens, system=None, effort=None, thinking_disabled=False):
         self.calls += 1
         self.last = {"model": model, "max_tokens": max_tokens, "effort": effort, "thinking": thinking_disabled}
         if self._raises:
