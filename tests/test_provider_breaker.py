@@ -9,7 +9,7 @@ import asyncio
 import pytest
 
 from app.competency.analyzer import extract_competencies
-from app.llm.provider import AnthropicLLMProvider
+from app.llm.provider import AnthropicLLMProvider, _image_media_type
 from app.resilience.breaker import AsyncCircuitBreaker, CircuitOpenError
 
 
@@ -65,3 +65,14 @@ def test_extract_competencies_falls_back_to_empty_when_breaker_open():
         )
     )
     assert out == []  # 폴백: 파이프라인은 완주, 자가진단만으로 조립(C-3)
+
+
+# ── Vision media_type: 업로드 이미지가 png가 아닐 수 있다(리뷰 high 수정) ──
+
+
+def test_image_media_type_detection():
+    assert _image_media_type(b"\x89PNG\r\n\x1a\n....") == "image/png"
+    assert _image_media_type(b"\xff\xd8\xff\xe0....") == "image/jpeg"
+    assert _image_media_type(b"RIFF\x00\x00\x00\x00WEBP....") == "image/webp"
+    assert _image_media_type(b"GIF89a....") == "image/gif"
+    assert _image_media_type(b"unknown") == "image/png"  # 기본

@@ -21,6 +21,7 @@ import logging
 from typing import Protocol
 
 from app.competency.analyzer import extract_competencies
+from app.config.settings import settings
 from app.llm.provider import LLMProvider
 from app.messaging.envelope import build_envelope
 
@@ -51,6 +52,10 @@ class GitHubClient(Protocol):
     async def fetch_repo_evidence(self, repo_url: str) -> str | None: ...
 
 
+class DocSource(Protocol):
+    async def fetch_and_parse(self, file_key: str) -> str: ...
+
+
 def _gather_content(payload: dict) -> str:
     """서술형 텍스트만 모은다(G-2). narrative 객체 + experiences[].content."""
     parts: list[str] = []
@@ -68,23 +73,34 @@ def _gather_content(payload: dict) -> str:
     return "\n".join(parts)
 
 
-async def _gather_all_content(payload: dict, github_client: "GitHubClient | None") -> str:
-    """서술형(G-2) + GitHub 저장소 요약(G-3)을 한 덩어리로. 같은 analyzer에 넣는다.
+async def _gather_all_content(
+    payload: dict,
+    github_client: "GitHubClient | None",
+    doc_source: "DocSource | None" = None,
+) -> str:
+    """서술형(G-2) + GitHub 요약(G-3) + 업로드 문서(G-4)를 한 덩어리로. 같은 analyzer에 넣는다.
 
-    experiences[].repoUrl을 순회(중복 제거)해 각 저장소 요약을 붙인다. 실패·비공개는
-    github_client가 None을 돌려주므로 그냥 빠진다(파이프라인 안 죽음). 이 수집은 진행률
+    experiences[]의 repoUrl·fileKey를 순회(중복 제거)해 각 근거를 붙인다. 실패·비공개·없음은
+    클라이언트가 None/""을 돌려주므로 그냥 빠진다(파이프라인 안 죽음). 이 수집은 진행률
     25(수집/파싱) 안에 들어간다 — 단계를 늘리지 않는다.
     """
     parts = [_gather_content(payload)]
-    if github_client is not None:
-        seen: set[str] = set()
-        for exp in payload.get("experiences") or []:
-            url = exp.get("repoUrl") if isinstance(exp, dict) else None
-            # 문자열만 처리 — 비문자열(리스트 등 계약 위반)은 스킵(unhashable로 죽지 않게, C-3)
-            if not isinstance(url, str) or not url or url in seen:
-                continue
-            seen.add(url)
+    seen_repo: set[str] = set()
+    seen_file: set[str] = set()
+    # 최대 N개만 처리(Core policy와 일치). 파일 다수 × Vision 페이지로 비용이 폭발하지 않게 상한.
+    for exp in (payload.get("experiences") or [])[: settings.MAX_EXPERIENCES]:
+        if not isinstance(exp, dict):
+            continue
+        url = exp.get("repoUrl")
+        if github_client is not None and isinstance(url, str) and url and url not in seen_repo:
+            seen_repo.add(url)
             text = await github_client.fetch_repo_evidence(url)
+            if text:
+                parts.append(text)
+        file_key = exp.get("fileKey")
+        if doc_source is not None and isinstance(file_key, str) and file_key and file_key not in seen_file:
+            seen_file.add(file_key)
+            text = await doc_source.fetch_and_parse(file_key)
             if text:
                 parts.append(text)
     return "\n".join(p for p in parts if p)
@@ -108,6 +124,7 @@ async def handle_roadmap_generation(
     repo: CompetencyRepo,
     *,
     github_client: GitHubClient | None = None,
+    doc_source: DocSource | None = None,
     trace_id: str | None = None,
 ) -> dict:
     """RoadmapGenerationRequested 처리 → CompetencyExtracted 발행. 발행 봉투를 반환."""
@@ -118,7 +135,7 @@ async def handle_roadmap_generation(
 
     await _publish_progress(publisher, roadmap_id, "parse", trace_id)
 
-    content = await _gather_all_content(payload, github_client)  # 서술형 + GitHub(G-3)
+    content = await _gather_all_content(payload, github_client, doc_source)  # 서술형+GitHub+문서
     skills = await repo.load_skills(job_code, profile_version)  # 닫힌 후보 집합(가드 1)
     competencies = await extract_competencies(content, skills, provider)  # 실패 시 [] (가드 5)
 

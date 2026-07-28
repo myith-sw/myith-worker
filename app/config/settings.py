@@ -76,6 +76,8 @@ class Settings(BaseSettings):
     RABBITMQ_PREFETCH: int = 3
     PDF_MAX_PAGES: int = 30
     PDF_MAX_FILE_MB: int = 10
+    PDF_RENDER_DPI: int = 150  # Vision/OCR용 페이지 렌더 해상도 (G-4, C-6)
+    MAX_EXPERIENCES: int = 3  # Core policy.roadmap.max-experiences. 파일 다수 시 Vision 비용 상한
     HTTP_MAX_CONCURRENCY: int = 10
 
     # ── 정책값: 난이도 공식 가중치 (F-5, 임의로 바꾸지 않음) ──

@@ -29,9 +29,13 @@ import aio_pika
 from sqlalchemy import delete
 from sqlalchemy.exc import IntegrityError
 
+from app.competency.document import DocumentSource
 from app.competency.github import HttpxGitHubClient
+from app.competency.ocr import get_ocr_provider
 from app.competency.repository import CompetencyRepository
+from app.competency.vision import get_vision_extractor
 from app.config.settings import settings
+from app.storage.s3 import S3Fetcher
 from app.consumers.ai_enhancement import handle_ai_enhancement
 from app.consumers.profile_build import handle_profile_build
 from app.consumers.roadmap_generation import handle_roadmap_generation
@@ -107,12 +111,15 @@ async def _safe_reject(message: aio_pika.abc.AbstractIncomingMessage) -> None:
         logger.warning("reject 실패(채널 상태 확인)")
 
 
-async def _dispatch(event_type, payload, provider, publisher, repo, github_client, trace_id) -> None:
+async def _dispatch(
+    event_type, payload, provider, publisher, repo, github_client, doc_source, trace_id
+) -> None:
     if event_type == _AI:
         await handle_ai_enhancement(payload, provider, publisher, trace_id=trace_id)
     elif event_type == _ROADMAP:
         await handle_roadmap_generation(
-            payload, provider, publisher, repo, github_client=github_client, trace_id=trace_id
+            payload, provider, publisher, repo,
+            github_client=github_client, doc_source=doc_source, trace_id=trace_id,
         )
     elif event_type == _PROFILE:
         await handle_profile_build(payload)
@@ -120,7 +127,9 @@ async def _dispatch(event_type, payload, provider, publisher, repo, github_clien
         logger.warning("미지원 eventType, ACK+무시: %s", event_type)
 
 
-def _make_handler(session_factory, provider: LLMProvider | None, publisher, repo, github_client):
+def _make_handler(
+    session_factory, provider: LLMProvider | None, publisher, repo, github_client, doc_source
+):
     async def on_message(message: aio_pika.abc.AbstractIncomingMessage) -> None:
         # 수동 ack/reject: 성공/중복=ACK, 헤더누락·처리실패=DLQ(reject requeue=False).
         event_id = _hdr(message, "eventId")
@@ -136,7 +145,9 @@ def _make_handler(session_factory, provider: LLMProvider | None, publisher, repo
             return
         try:
             payload = json.loads(message.body)  # body = payload 자체(껍데기 없음)
-            await _dispatch(event_type, payload, provider, publisher, repo, github_client, trace_id)
+            await _dispatch(
+                event_type, payload, provider, publisher, repo, github_client, doc_source, trace_id
+            )
             await message.ack()
         except Exception:  # noqa: BLE001 — 어떤 처리 실패든 원본 보존 위해 DLQ로
             # 보상: 선점 해제 → DLQ 재처리 시 재시도 가능(H-2 FAILED-always 보존).
@@ -191,7 +202,13 @@ async def setup_messaging(provider: LLMProvider | None) -> MessagingRuntime:
         publisher = AioPikaFanoutPublisher(worker_fanout)
         repo = CompetencyRepository(session_factory)
         github_client = HttpxGitHubClient(token=settings.GITHUB_TOKEN)  # 토큰 없어도 동작(60/h)
-        handler = _make_handler(session_factory, provider, publisher, repo, github_client)
+        # G-4 문서: OCR 자격증명 없으면 ocr=None(2단계 스킵), Vision은 LLM 공급자 유무 따라감.
+        doc_source = DocumentSource(
+            S3Fetcher(), ocr=get_ocr_provider(), vision=get_vision_extractor(provider)
+        )
+        handler = _make_handler(
+            session_factory, provider, publisher, repo, github_client, doc_source
+        )
 
         # AI 보완 (실 핸들러) — 우선순위 1
         ai_queue = await channel.declare_queue(
