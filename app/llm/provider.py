@@ -59,24 +59,43 @@ def unsupported_params(model: str) -> set[str]:
 
 
 def build_request_kwargs(
-    *, model: str, prompt: str, schema: dict, max_tokens: int
+    *,
+    model: str,
+    prompt: str,
+    schema: dict,
+    max_tokens: int,
+    effort: str | None = None,
+    thinking_disabled: bool = False,
 ) -> dict:
-    """messages.create에 넘길 kwargs를 만드는 유일한 지점. 구조화 출력만 지정한다.
+    """messages.create에 넘길 kwargs를 만드는 유일한 지점. 구조화 출력만 기본 지정한다.
 
-    샘플링·effort 파라미터는 넣지 않는다 → 어떤 모델에서도 UNSUPPORTED_PARAMS에 걸리지 않는다.
-    새 파라미터를 추가하려면 unsupported_params(model)로 반드시 검증한다.
+    effort는 sonnet-5+ 계열에서만 허용된다(haiku는 400, UNSUPPORTED_PARAMS 참조) — 호출부가
+    모델에 맞게만 넘긴다. thinking_disabled는 H-1 층2 확정 사양. 샘플링 파라미터는 넣지 않는다.
     """
-    return {
+    output_config: dict = {"format": {"type": "json_schema", "schema": schema}}
+    if effort:
+        output_config["effort"] = effort
+    kwargs: dict = {
         "model": model,
         "max_tokens": max_tokens,
         "messages": [{"role": "user", "content": prompt}],
-        "output_config": {"format": {"type": "json_schema", "schema": schema}},
+        "output_config": output_config,
     }
+    if thinking_disabled:
+        kwargs["thinking"] = {"type": "disabled"}
+    return kwargs
 
 
 class LLMProvider(Protocol):
     async def complete_json(
-        self, *, prompt: str, schema: dict, model: str, max_tokens: int
+        self,
+        *,
+        prompt: str,
+        schema: dict,
+        model: str,
+        max_tokens: int,
+        effort: str | None = None,
+        thinking_disabled: bool = False,
     ) -> dict:
         """prompt를 보내고 schema를 만족하는 JSON(dict)을 돌려준다. 실패는 예외로 올린다."""
         ...
@@ -101,12 +120,24 @@ class AnthropicLLMProvider:
         self._breaker = breaker or get_breaker("llm")
 
     async def complete_json(
-        self, *, prompt: str, schema: dict, model: str, max_tokens: int
+        self,
+        *,
+        prompt: str,
+        schema: dict,
+        model: str,
+        max_tokens: int,
+        effort: str | None = None,
+        thinking_disabled: bool = False,
     ) -> dict:
         resp = await self._breaker.call_async(
             self._client.messages.create,
             **build_request_kwargs(
-                model=model, prompt=prompt, schema=schema, max_tokens=max_tokens
+                model=model,
+                prompt=prompt,
+                schema=schema,
+                max_tokens=max_tokens,
+                effort=effort,
+                thinking_disabled=thinking_disabled,
             ),
         )
         text = next(

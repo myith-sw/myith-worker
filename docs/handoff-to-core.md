@@ -4,32 +4,41 @@ Worker가 Core에 의존하거나, Core 쪽 변경이 필요한 항목을 기록
 
 ---
 
-## [2026-07-28] H-1 층2 퀘스트 문구 개인화 — 전달 계약 미정 (스톱)
+## [2026-07-28] H-1 층2 퀘스트 문구 개인화 — ✅ (C) 확정. Worker 쓰기 구현됨 / Core 읽기·층1 필요
 
-**발단:** 우선순위 2 후속 ④ H-1. 층1(`app/pipeline/guidance.py guidance_tier`)은 구현됨 —
-M값 → guidance 4종 키. quest_templates[].guidance(4변형)는 job_profile에 있고 Core가 읽는다.
-**층2(narrative 기반 LLM 다듬기)를 착수하려니 결과를 Core에 전달할 채널이 없다.**
+**결정(2026-07-28, 시드가이드 AI가 Core 코드 확인):** **(C) — Worker 소유 `user_quest_guidance` 테이블.**
+`user_competency`와 정확히 같은 패턴(조립 시점 DB 읽기)이라 이미 동작하는 계약이고, 새 이벤트가
+필요 없으며, 폴백(테이블 비면 층1)이 공짜다. (A)는 왕복·상태관리 추가, (B)는 `competencies`가
+근거 있는 스킬만 담아 모든 퀘스트에 필요한 guidance와 구조가 안 맞고 W3 4필드 고정도 깨진다.
 
-**저쪽(Core) 일인 이유:** 층2 결과는 **사용자별**(narrative 반영)이고 LLM은 Worker 전용이다.
-그런데 로드맵 조립은 Core 소유(PART L)이고, 개인화된 guidance를 담을 곳이 없다:
-- `CompetencyExtracted`는 4필드 competencies 고정(W3) — guidance 못 넣음.
-- `user_competency` 테이블에 guidance 컬럼 없음.
-- job_profile.quest_templates.guidance는 per-job(사용자 무관) — per-user 값 못 담음.
+**🔴 Core가 확인해준 사실: 층1도 지금 화면에 도달하지 못한다.** `RoadmapAssembler.QuestTemplate`
+레코드에 guidance 필드가 없고, quest 테이블에 guidance 컬럼이 없어 시드의 4변형이 **Core 파싱에서
+버려진다.** `git grep guidance`가 Core 자바 0건. 즉 층2 이전에 층1부터 끊겨 있다.
 
-**필요한 결정(Core):** 아래 중 하나로 전달 계약을 정해야 층2를 완결할 수 있다.
-- (A) 신규 이벤트 쌍: Core가 `GuidancePersonalizeRequested`(선택된 guidance 문자열 + narrative)
-  발행 → Worker가 다듬어 `GuidancePersonalized`로 반환. 조립 직전 Core가 반영.
-- (B) `CompetencyExtracted`에 개인화 guidance 배열 추가(W3 계약 확장 — Core 합의 필요).
-- (C) Worker가 per-user guidance를 쓸 새 테이블(예: `user_quest_guidance`)을 소유하고 Core가 읽음.
+### Core가 해야 할 것 (①~⑤)
+1. `QuestTemplate` 레코드에 guidance 4종 필드 추가 + `ProfileDataParser` 파싱.
+2. quest 테이블에 guidance 컬럼 추가(Flyway).
+3. 조립 시 **자가진단 M값으로 4종 중 하나 선택**해 채움 ← 층1(LLM 없이). **③까지만 해도 개인화 문구가 화면에 나온다.**
+4. `user_quest_guidance`에 값이 있으면 그것으로 덮어씀 ← 층2.
+5. 퀘스트 조회 응답에 guidance 포함.
 
-**Worker 쪽 준비된 것 / 확정 사양(구현 예정):** 층2 LLM 호출은 확정 사양대로 한다 —
-narrative 있을 때만 **사용자당 1회**(퀘스트마다 금지), `claude-sonnet-5`(LLM_MODEL),
-`output_config={"effort":"low"}` + `thinking={"type":"disabled"}` + `max_tokens=300`, 샘플링
-파라미터 금지. 층1이 고른 문자열들을 한 번에 다듬어 한 번에 받는다. 실패·타임아웃·스키마 이탈은
-층1 결과 그대로 폴백(C-3). `LLM_PERSONALIZE_ENABLED=false`로 통째로 off. **직무별 캐싱 금지**
-(narrative 반영 자리가 사라짐). title/완료기준/level/axis는 불변(C-2).
+### Worker가 한 것 (구현·검증 완료, 이 브랜치)
+- **`user_quest_guidance` 테이블 소유**(Alembic `0006`, C-1). Core Flyway엔 넣지 않는다.
+  ```
+  user_quest_guidance (PK roadmap_id, skill_code)
+    roadmap_id bigint, skill_code varchar, guidance text,
+    tier varchar (none|aware|experienced|proficient), created_at timestamptz
+  ```
+- 층2 구현: 근거 스킬(user_competency)의 M값 → `guidance_tier` → 해당 tier의 층1 문구를 narrative로
+  다듬어 저장. **확정 사양 그대로** — narrative 있을 때만·사용자당 1회·`claude-sonnet-5`·
+  `effort:"low"`+`thinking:"disabled"`+`max_tokens=300`·샘플링 금지·직무별 캐싱 금지. 실패·타임아웃·
+  스키마 이탈은 **층1 문구 그대로 저장**(tier 유지, C-3). `LLM_PERSONALIZE_ENABLED=false`로 off.
+- **발행 순서(D-5):** `user_competency` 쓰기 → `user_quest_guidance` 쓰기 → `CompetencyExtracted`
+  발행. **새 이벤트 없음** — 기존 발행 전에 쓰기만 하므로 Core가 조립 시점에 둘 다 읽는다.
+- `tier`를 함께 저장 — 폴백 시 Core가 어느 층1 문구를 골랐는지 재현·검증 가능.
 
-**미결:** 위 (A)/(B)/(C) 중 Core의 선택. 정해지면 Worker가 소비/발행 측을 즉시 구현한다.
+**미결(Core):** 위 ①~⑤. **Core의 ①~⑤를 기다리지 않고 Worker가 먼저 테이블에 쓴다** — Core가
+나중에 읽기만 붙이면 된다(반대 순서면 Core가 읽을 게 없어 테스트 불가).
 
 ---
 

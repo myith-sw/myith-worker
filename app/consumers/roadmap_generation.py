@@ -24,6 +24,7 @@ from app.competency.analyzer import extract_competencies
 from app.config.settings import settings
 from app.llm.provider import LLMProvider
 from app.messaging.envelope import build_envelope
+from app.pipeline.guidance import personalize_guidance, select_guidance
 
 logger = logging.getLogger("myith.consumer.roadmap")
 
@@ -46,6 +47,17 @@ class FanoutPublisher(Protocol):
 class CompetencyRepo(Protocol):
     async def load_skills(self, job_code: str, version: int | None) -> list[dict]: ...
     async def write_competencies(self, roadmap_id: int, competencies: list[dict]) -> None: ...
+    async def load_guidance_templates(self, job_code: str, version: int | None) -> dict: ...
+    async def write_guidance(self, roadmap_id: int, rows: list[dict]) -> None: ...
+
+
+def _narrative_text(payload: dict) -> str:
+    """narrative{strength,difficulty}를 한 문자열로. 층2 개인화 입력(없으면 "")."""
+    narrative = payload.get("narrative")
+    if not isinstance(narrative, dict):
+        return ""
+    parts = [str(narrative.get(k) or "").strip() for k in ("strength", "difficulty")]
+    return " ".join(p for p in parts if p)
 
 
 class GitHubClient(Protocol):
@@ -143,6 +155,14 @@ async def handle_roadmap_generation(
 
     # D-5/G-6: DB 쓰기 먼저 (부분 upsert, 빈 배열은 no-op — 삭제 안 함)
     await repo.write_competencies(roadmap_id, competencies)
+
+    # H-1 층2: 근거 스킬의 guidance를 narrative로 다듬어 user_quest_guidance에 저장.
+    # user_competency 쓰기 직후 · CompetencyExtracted 발행 전(D-5). narrative 없으면 빈 리스트
+    # → Core가 층1 수행. LLM 실패는 층1 문구로 폴백(C-3).
+    templates = await repo.load_guidance_templates(job_code, profile_version)
+    items = select_guidance(competencies, templates)
+    guidance_rows = await personalize_guidance(items, _narrative_text(payload), provider)
+    await repo.write_guidance(roadmap_id, guidance_rows)
 
     await _publish_progress(publisher, roadmap_id, "merge", trace_id)
     await _publish_progress(publisher, roadmap_id, "saved", trace_id)

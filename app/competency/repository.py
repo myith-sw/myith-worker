@@ -14,7 +14,7 @@ import logging
 from sqlalchemy import select
 from sqlalchemy.dialects.postgresql import insert
 
-from app.persistence.models import JobProfile, UserCompetency
+from app.persistence.models import JobProfile, UserCompetency, UserQuestGuidance
 
 logger = logging.getLogger("myith.competency.repo")
 
@@ -35,6 +35,54 @@ class CompetencyRepository:
                 stmt = stmt.order_by(JobProfile.version.desc())
             row = (await session.execute(stmt.limit(1))).scalar_one_or_none()
         return list(row) if row else []
+
+    async def load_guidance_templates(
+        self, job_code: str, version: int | None
+    ) -> dict[str, dict]:
+        """job_profile.quest_templates → {skill_code: guidance 4종 dict}. 없으면 {}."""
+        if self._sf is None or not job_code:
+            return {}
+        async with self._sf() as session:
+            stmt = select(JobProfile.quest_templates).where(JobProfile.job_code == job_code)
+            if version is not None:
+                stmt = stmt.where(JobProfile.version == version)
+            else:
+                stmt = stmt.order_by(JobProfile.version.desc())
+            row = (await session.execute(stmt.limit(1))).scalar_one_or_none()
+        out: dict[str, dict] = {}
+        for qt in row or []:
+            code = qt.get("skillCode") if isinstance(qt, dict) else None
+            guidance = qt.get("guidance") if isinstance(qt, dict) else None
+            if code and isinstance(guidance, dict):
+                out[code] = guidance
+        return out
+
+    async def write_guidance(self, roadmap_id: int, rows: list[dict]) -> None:
+        """user_quest_guidance에 부분 upsert(D-6 멱등). 빈 리스트는 no-op(Core 층1 폴백).
+
+        rows: [{skillCode, guidance, tier}]. user_competency 쓰기 직후·발행 전에 호출한다(D-5)."""
+        if self._sf is None:
+            logger.warning("DB 없음 → user_quest_guidance 미기록(폴백)")
+            return
+        if not rows:
+            return
+        async with self._sf() as session:
+            for r in rows:
+                stmt = (
+                    insert(UserQuestGuidance)
+                    .values(
+                        roadmap_id=roadmap_id,
+                        skill_code=r["skillCode"],
+                        guidance=r["guidance"],
+                        tier=r["tier"],
+                    )
+                    .on_conflict_do_update(
+                        index_elements=["roadmap_id", "skill_code"],
+                        set_={"guidance": r["guidance"], "tier": r["tier"]},
+                    )
+                )
+                await session.execute(stmt)
+            await session.commit()
 
     async def write_competencies(self, roadmap_id: int, competencies: list[dict]) -> None:
         """user_competency에 부분 upsert(D-4). 빈 배열은 no-op(삭제 안 함)."""
