@@ -151,11 +151,11 @@ app/
 
 읽기만 (그것도 최소한으로): `users`, `character`, `roadmap`, `quest`, `star_record`, `dashboard_snapshot`, `user_diagnosis`
 
-Worker 소유·쓰기: `job_profile`, `skill_stat`, `unmapped_skill`, `user_competency`, `job_profile_build_lock`, `collection_cursor`, `worker_processed_event`
+Worker 소유·쓰기: `job_profile`, `skill_stat`, `unmapped_skill`, `user_competency`, `user_quest_guidance`, `job_profile_build_lock`, `collection_cursor`, `worker_processed_event`
 
 오프라인 배치 소유(이 저장소, 별도 스크립트): `job`, `ncs_unit`, `ncs_certification`, `skill_ncs_map`, `ncs_load_cursor`
 
-**DDL 소유권(확정 D-13, W2):** 위 Worker/배치 소유 테이블 12개의 DDL은 **이 저장소 Alembic이 소유한다** — job, job_profile, ncs_unit, ncs_certification, skill_ncs_map, user_competency, skill_stat, unmapped_skill, job_profile_build_lock, collection_cursor, worker_processed_event, ncs_load_cursor. Core Flyway는 더 이상 이 테이블들을 만들지 않는다. Core 소유 테이블(`users`, `roadmap`, `quest`, ...)의 DDL은 절대 여기 Alembic에 넣지 않는다 — 필요하면 raw SQL/읽기 전용으로 조회만 한다.
+**DDL 소유권(확정 D-13, W2, W-H1-C):** 위 Worker/배치 소유 테이블 13개의 DDL은 **이 저장소 Alembic이 소유한다** — job, job_profile, ncs_unit, ncs_certification, skill_ncs_map, user_competency, user_quest_guidance, skill_stat, unmapped_skill, job_profile_build_lock, collection_cursor, worker_processed_event, ncs_load_cursor. Core Flyway는 더 이상 이 테이블들을 만들지 않는다. Core 소유 테이블(`users`, `roadmap`, `quest`, ...)의 DDL은 절대 여기 Alembic에 넣지 않는다 — 필요하면 raw SQL/읽기 전용으로 조회만 한다.
 
 **멱등 이벤트 테이블 — 확정 W2 A-1:** `processed_event`는 **Core Flyway 소유**다(Core가 fanout 소비 멱등에 쓴다). Worker는 수신 멱등(D-6)을 **`worker_processed_event`**(이 저장소 Alembic 소유, 위 목록에 포함)에 둔다. 이름이 다르므로 같은 DB를 공유해도 eventId 공간이 충돌하지 않는다. Core 소유 `processed_event`에는 절대 쓰지 않는다(C-1). 멱등 체크는 **DB 고유 제약으로만** 한다 — SELECT 후 INSERT는 동시 수신 시 뚫린다.
 
@@ -399,6 +399,14 @@ user_competency                -- AI 보정 결과
   mastery     numeric(3,2)
   evidence    text             -- 원문 인용. 길이 상한 적용
   confidence  numeric(3,2)
+  created_at  timestamptz
+  primary key (roadmap_id, skill_code)
+
+user_quest_guidance            -- 층2 개인화 문구 (확정 W-H1-C, H-1). Core 조립 시 읽어 층1 위에 덮음
+  roadmap_id  bigint
+  skill_code  varchar
+  guidance    text             -- 층2가 다듬은 최종 문구 1개
+  tier        varchar          -- none|aware|experienced|proficient (층1이 고른 값. 폴백 재현용)
   created_at  timestamptz
   primary key (roadmap_id, skill_code)
 
@@ -790,6 +798,8 @@ clone은 디스크·시간을 쓰고 신뢰할 수 없는 저장소에 대한 �
 **guidance는 4종이다.** 0.66(experienced)과 1.0(proficient)을 합치지 않는다 — 둘 다 ALREADY_KNOWN이지만 "이미 아는 것으로 처리했다"와 "심화 사례를 남겨라"는 다른 안내다(Core D-08).
 
 **제목과 구조는 템플릿을 유지하고 guidance 문자열만 조정한다.** 어떤 스킬이 어느 레벨에 갈지는 AI가 관여하지 않는다(C-2). 층2는 claude-sonnet-5라 `temperature`가 400이다(I-4) — `effort:"low"`로 대체한다. **직무별 `(skillCode, tier)` 캐싱은 하지 않는다** — 층2의 존재 이유가 사용자 `narrative` 반영인데 직무별 캐싱은 사용자 맥락이 들어갈 자리를 없앤다. 캐싱은 LLM을 안 쓰는 층1이 이미 한다.
+
+**전달 계약 (확정 W-H1-C):** 층2는 **Worker 소유 `user_quest_guidance`**에 쓴다(Core가 조립 시 읽어 층1 위에 덮음, 비면 층1 폴백). 새 이벤트 없음 — `RoadmapGenerationRequested` 처리 중 근거 스킬(user_competency)의 M값 → `guidance_tier` → 해당 층1 문구를 narrative로 다듬어 `{roadmap_id, skill_code, guidance, tier}` 저장. **순서(D-5):** user_competency 쓰기 → user_quest_guidance 쓰기 → `CompetencyExtracted` 발행. 실패는 층1 문구 그대로 저장(tier 유지). 구현: `app.pipeline.guidance.{select_guidance, personalize_guidance}`, `CompetencyRepository.{load_guidance_templates, write_guidance}`. **⚠️ Core 선행 작업 필요**(handoff-to-core.md): Core가 quest에 guidance 컬럼·파싱·조립 반영을 붙여야 화면에 뜬다(층1조차 현재 Core 파싱에서 버려짐).
 
 ## H-2. STAR AI 보완
 

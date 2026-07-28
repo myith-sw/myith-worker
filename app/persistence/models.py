@@ -185,6 +185,25 @@ class UserCompetency(Base):
     )
 
 
+class UserQuestGuidance(Base):
+    """층2 개인화 문구 (확정 W-H1-C, H-1). Worker 쓰기 / Core 조립 시 읽어 층1 위에 덮는다.
+
+    비어 있으면 Core가 층1 템플릿(quest_templates[].guidance 4종)을 쓴다 — 폴백이 공짜다.
+    user_competency와 정확히 같은 패턴(조립 시점 DB 읽기). tier는 층1이 고른 값을 함께 저장해
+    폴백 시 Core가 어느 문구를 골랐는지 재현·검증할 수 있게 한다.
+    """
+
+    __tablename__ = "user_quest_guidance"
+
+    roadmap_id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    skill_code: Mapped[str] = mapped_column(String, primary_key=True)
+    guidance: Mapped[str] = mapped_column(Text, nullable=False)  # 층2가 다듬은 최종 문구 1개
+    tier: Mapped[str] = mapped_column(String, nullable=False)  # none|aware|experienced|proficient
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+
+
 class JobProfileBuildLock(Base):
     """중복 빌드 방지 (F-0)."""
 

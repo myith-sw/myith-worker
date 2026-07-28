@@ -20,6 +20,7 @@ OWNED_TABLES = {
     "collection_cursor",
     "worker_processed_event",  # W2 A-1: Core `processed_event`와 별개
     "ncs_load_cursor",  # W2 D-3: 자격 적재 재개 커서
+    "user_quest_guidance",  # W-H1-C: H-1 층2 개인화 문구 (Worker 쓰기 / Core 읽기)
 }
 
 # Core Flyway 소유. 여기 메타데이터에 절대 나타나면 안 된다.

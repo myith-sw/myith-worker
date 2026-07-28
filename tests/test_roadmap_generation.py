@@ -30,14 +30,16 @@ class FakeProvider:
     def __init__(self, response):
         self._response = response
 
-    async def complete_json(self, *, prompt, schema, model, max_tokens):
+    async def complete_json(self, *, prompt, schema, model, max_tokens, effort=None, thinking_disabled=False):
         return self._response
 
 
 class FakeRepo:
-    def __init__(self, skills, log):
+    def __init__(self, skills, log, templates=None):
         self._skills, self._log = skills, log
+        self._templates = templates or {}
         self.written = None
+        self.guidance_written = None
 
     async def load_skills(self, job_code, version):
         return self._skills
@@ -45,6 +47,13 @@ class FakeRepo:
     async def write_competencies(self, roadmap_id, competencies):
         self._log.append(("write", roadmap_id))
         self.written = competencies
+
+    async def load_guidance_templates(self, job_code, version):
+        return self._templates
+
+    async def write_guidance(self, roadmap_id, rows):
+        self._log.append(("write_guid", roadmap_id))
+        self.guidance_written = rows
 
 
 class FakePublisher:
@@ -197,6 +206,20 @@ def test_gather_all_content_appends_document_and_dedups():
     ds = FakeDoc({"f1": "[업로드 문서] PDF 근거", "f2": ""})
     content = _run(_gather_all_content(payload, None, ds))
     assert "PDF 근거" in content and ds.calls == ["f1", "f2"]  # f1 dedup, f2 빈 결과→빠짐
+
+
+# ── H-1: 층2 guidance 쓰기가 competency 쓰기 뒤·발행 전(D-5) ──────────────
+
+
+def test_guidance_write_between_competency_and_publish():
+    log = []
+    templates = {"react": {"none": "n", "aware": "a", "experienced": "e", "proficient": "p"}}
+    repo = FakeRepo(SKILLS, log, templates=templates)
+    _run(handle_roadmap_generation(PAYLOAD, FakeProvider(GOOD_RESP), FakePublisher(log), repo))
+    comp_i = next(i for i, e in enumerate(log) if e[0] == "write")
+    guid_i = next(i for i, e in enumerate(log) if e[0] == "write_guid")
+    pub_i = next(i for i, e in enumerate(log) if e == ("publish", COMPETENCY_EXTRACTED))
+    assert comp_i < guid_i < pub_i  # user_competency → user_quest_guidance → 발행
 
 
 def test_gather_all_content_caps_experiences(monkeypatch):
