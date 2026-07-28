@@ -9,6 +9,7 @@ load_all은 항상 시드 소스를 쓴다. API 소스는 오프라인 배치(st
 직접 실행)의 몫이다 — NCS_SERVICE_KEY가 있어도 여기서는 시드를 적재한다.
 """
 
+import argparse
 import logging
 
 from app.ncs.certification_loader import load_certifications
@@ -23,14 +24,16 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(mess
 logger = logging.getLogger("myith.seed")
 
 
-def main() -> None:
+def main(prune: bool = False) -> None:
     source = SeedNcsSource()  # load_all은 항상 시드. API는 오프라인 배치 전용.
-    logger.info("시드 적재 시작 (source=SeedNcsSource)")
+    logger.info("시드 적재 시작 (source=SeedNcsSource, prune=%s)", prune)
     with session_scope() as session:
         units = load_units(session, source)  # FK 때문에 가장 먼저
         certs = load_certifications(session, source)
-        maps = load_skill_map(session, load_skill_seed())
-        jobs = load_jobs(session)
+        # prune은 job·skill_ncs_map만. ncs_unit·ncs_certification은 공공데이터 누적이라
+        # 삭제 안 함. job_profile은 런타임 소유라 삭제 안 함(loaders.load_job_profiles 주석).
+        maps = load_skill_map(session, load_skill_seed(), prune=prune)
+        jobs = load_jobs(session, prune=prune)
         profiles = load_job_profiles(session)
     logger.info(
         "시드 적재 완료: ncs_unit=%d, ncs_certification=%d, skill_ncs_map=%d, "
@@ -44,4 +47,12 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="시드 전체 적재")
+    parser.add_argument(
+        "--prune",
+        action="store_true",
+        help="시드에 없는 job·skill_ncs_map 행을 삭제한다 "
+        "(ncs_unit·ncs_certification·job_profile은 대상 아님. 기본: upsert만)",
+    )
+    args = parser.parse_args()
+    main(prune=args.prune)
