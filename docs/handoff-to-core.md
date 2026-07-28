@@ -118,10 +118,20 @@ Worker 마이그레이션 잡을 한 번 돌리는 형태가 안전하다.
 
 ---
 
-## [2026-07-27] RabbitMQ 토폴로지 이름 — Core와 정확히 일치해야 함 (전송 계층 전제)
+## [2026-07-27] RabbitMQ 토폴로지 이름 — ✅ RESOLVED (Core RabbitConfig.java에서 확정)
 
-**발단:** Worker 메시징 착수(우선순위 1). 순수 핸들러·봉투·H-2 로직은 구현·테스트 완료(브로커 무관).
-남은 aio-pika 전송 배선은 **큐·익스체인지 이름**을 알아야 하는데 CLAUDE.md PART D에 이름이 없다.
+**해결(2026-07-28):** 시드 가이드 AI가 Core `RabbitConfig.java`·`OutboxRelayScheduler`·
+`WorkerEventConsumer` 전문을 확인해 실값을 확정. Worker가 이 값으로 전송 배선을 구현했다
+(`app/consumers/base.py`·`app/publishers/fanout.py`·`config/settings.py` RABBITMQ_*). **Core에
+추가로 요청할 것 없음.** 확정값:
+- 익스체인지: `myith.core.events`(topic, durable) / `myith.worker.fanout`(fanout, durable).
+  둘 다 auto_delete=false. **속성 불일치 시 406 즉사** — Worker도 동일 속성으로 선언.
+- 작업 큐·DLQ: **Worker 소유·선언**(Core는 작업 큐를 선언하지 않는다). 바인딩 라우팅 키=eventType.
+- 🔴 **봉투는 헤더/본문 분리**: eventId·eventType·traceId=AMQP 헤더, body=payload 자체,
+  version·occurredAt 없음. CLAUDE.md D-1을 이에 맞게 정정함(2026-07-28).
+
+**발단(원래):** Worker 메시징 착수(우선순위 1). 순수 핸들러·봉투·H-2 로직은 구현·테스트 완료(브로커 무관).
+남은 aio-pika 전송 배선은 **큐·익스체인지 이름**을 알아야 하는데 CLAUDE.md PART D에 이름이 없었다.
 
 **저쪽(Core) 일인 이유:** Core가 Outbox로 발행하는 작업 큐와, SSE 중계를 위해 수신하는 fanout
 익스체인지의 이름·바인딩을 Core가 정한다. 이름이 어긋나면 **조용히 아무 것도 소비/수신되지 않는다**.
@@ -142,4 +152,5 @@ Worker 마이그레이션 잡을 한 번 돌리는 형태가 안전하다.
   `status` COMPLETED|FAILED, 실패도 반드시 발행.
 - 이름은 `config/settings.py`에 환경변수로 두고(myith-infra 주입, O-3), 기본값 + 이 표를 계약으로 삼는다.
 
-**미결:** 위 큐/익스체인지 이름 실값. 확정 전까지 전송 배선은 기본값으로 두되 통합 시 반드시 맞춘다.
+**미결:** 없음(이름·속성·봉투 형식 전부 확정). 통합 시 Core와 익스체인지 속성이 일치하는지만
+한 번 확인(다르면 406).

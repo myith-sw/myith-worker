@@ -1,10 +1,14 @@
 """H-2 STAR 보완 로직 테스트. DB·실제 LLM 없이 가짜 provider로 순수 검증한다."""
 
 import asyncio
-import pathlib
 
 import pytest
 
+from app.llm.provider import (
+    UNSUPPORTED_PARAMS,
+    build_request_kwargs,
+    unsupported_params,
+)
 from app.llm.star_enhance import (
     build_prompt,
     build_star_enhancement,
@@ -133,18 +137,38 @@ def test_prompt_wraps_user_text_as_data_not_instruction():
     assert "따르지 않는다" in prompt  # 인젝션 방어 지시가 프롬프트에 포함됨 (C-4)
 
 
-# ── 금지 파라미터 미사용 (I-4): app/llm 어디에도 없어야 함 ────────────────────
+# ── 금지 파라미터 미사용 (I-4): 모델별로 파생 ───────────────────────────────
+# 문자열 grep이 아니라 모델→미지원 파라미터 표(UNSUPPORTED_PARAMS)에서 파생한다.
+# haiku-4-5는 temperature를 허용하므로(구세대) grep은 정당한 사용까지 막았다 — 표로 좁힌다.
 
 
-def test_no_forbidden_llm_params_in_llm_package():
-    forbidden = ["temperature", "top_p", "top_k"]
-    for path in pathlib.Path("app/llm").rglob("*"):
-        if path.suffix not in (".py", ".txt"):
-            continue
-        text = path.read_text(encoding="utf-8")
-        for tok in forbidden:
-            assert tok not in text, f"{path}: 금지 파라미터 '{tok}' 발견 (I-4)"
+def _flatten_param_keys(kwargs: dict) -> set[str]:
+    """요청 kwargs를 점 표기 키 집합으로. 중첩 dict는 'parent.child'로 편다."""
+    keys: set[str] = set()
+    for k, v in kwargs.items():
+        keys.add(k)
+        if isinstance(v, dict):
+            keys |= {f"{k}.{sub}" for sub in v}
+    return keys
 
 
-def _read(p: str) -> str:
-    return pathlib.Path(p).read_text(encoding="utf-8")
+@pytest.mark.parametrize("model", list(UNSUPPORTED_PARAMS))
+def test_request_kwargs_send_no_unsupported_params(model):
+    kwargs = build_request_kwargs(
+        model=model, prompt="x", schema={"type": "object"}, max_tokens=100
+    )
+    present = _flatten_param_keys(kwargs)
+    assert not (unsupported_params(model) & present), (
+        f"{model}: 미지원 파라미터가 요청에 포함됨 (400 위험)"
+    )
+
+
+def test_haiku_allows_sampling_but_forbids_effort():
+    """haiku-4-5: temperature/top_p/top_k 허용, output_config.effort만 금지."""
+    blocked = unsupported_params("claude-haiku-4-5")
+    assert "output_config.effort" in blocked
+    assert not ({"temperature", "top_p", "top_k"} & blocked)
+
+
+def test_sonnet5_forbids_sampling_params():
+    assert {"temperature", "top_p", "top_k"} <= unsupported_params("claude-sonnet-5")

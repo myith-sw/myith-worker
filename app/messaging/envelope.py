@@ -1,4 +1,8 @@
-"""메시지 봉투 (D-1). 발신 봉투 조립 + 결정론적 eventId.
+"""메시지 봉투 — 내부 표현 + 결정론적 eventId.
+
+이 dict는 **내부 표현**이다. 와이어로 나갈 때 publishers/fanout이 매핑한다:
+eventId·eventType·traceId → AMQP 헤더, payload → body(껍데기 없음). version·occurredAt은
+와이어에 없다(Core는 읽지 않는다) — 로깅·추적 편의로만 둔다. 상세는 fanout.py 참조.
 
 Core는 AiEnhancementCompleted·CompetencyExtracted·JobProfileBuilt 수신 시 봉투 eventId를
 자기 processed_event에 저장해 멱등 처리한다(확정 W2 C-3). 따라서 **재발행 시 같은 eventId**를

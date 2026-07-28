@@ -43,6 +43,17 @@ class Settings(BaseSettings):
     S3_BUCKET: str | None = None  # 랜덤 접미어. 하드코딩 금지 (O-3)
     AWS_REGION: str = "ap-northeast-2"
 
+    # ── RabbitMQ 토폴로지 (확정, Core RabbitConfig.java에서 추출) ─────────────
+    # 익스체인지 속성이 Core와 한 글자라도 다르면 PRECONDITION_FAILED(406)로 채널 즉사한다.
+    # 아래 속성은 Core와 반드시 일치: core.events=topic, worker.fanout=fanout, 둘 다 durable.
+    # 작업 큐·DLQ는 Worker가 선언·소유한다(Core는 작업 큐를 선언하지 않는다). 라우팅 키=eventType.
+    RABBITMQ_CORE_EXCHANGE: str = "myith.core.events"  # Core→Worker, topic
+    RABBITMQ_WORKER_FANOUT: str = "myith.worker.fanout"  # Worker→Core, fanout
+    RABBITMQ_QUEUE_AI_ENHANCEMENT: str = "myith.worker.ai-enhancement"
+    RABBITMQ_QUEUE_PROFILE_BUILD: str = "myith.worker.profile-build"
+    RABBITMQ_QUEUE_ROADMAP: str = "myith.worker.roadmap-generation"  # 우선순위 2에서 소비
+    RABBITMQ_DLQ: str = "myith.worker.dlq"
+
     # ── LLM 공급자 (확정 W2 D-2·D-16, Vertex 우선) ──────────
     LLM_PROVIDER: str = "vertex"  # "vertex" | "anthropic"
     GCP_PROJECT_ID: str | None = None  # vertex 인증(ADC)용

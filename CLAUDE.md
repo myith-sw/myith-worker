@@ -205,20 +205,49 @@ EC2 인스턴스 프로파일(IAM 역할)이 붙어 있다. `boto3`는 기본 �
 
 Worker가 Core와 주고받는 전부다. 이 계약 밖의 방법으로 통신하지 않는다(직접 HTTP 호출 금지, Core 테이블 쓰기 금지).
 
-## D-1. 메시지 봉투 (모든 메시지 공통)
+## D-1. 메시지 봉투 (확정 — Core 실구현 기준)
 
-```json
-{
-  "eventId": "uuid",          // 멱등 키. processed_event와 대조
-  "eventType": "...",
-  "version": 1,               // 스키마 버전. 모르는 필드는 무시
-  "traceId": "uuid",          // 로깅 컨텍스트에 주입
-  "occurredAt": "2026-01-01T00:00:00Z",
-  "payload": { }
-}
+**⚠ 이전 문서는 봉투를 JSON body에 담는다고 적었으나 실구현은 다르다.** Core
+`OutboxRelayScheduler`(발신)·`WorkerEventConsumer`(수신) 실측 기준으로 정정한다.
+
+| 필드 | 실제 위치 |
+|---|---|
+| `eventId` | **AMQP 헤더** (`setHeader("eventId", ...)`) |
+| `eventType` | **AMQP 헤더** — 라우팅 키도 이 값과 같다 |
+| `traceId` | **AMQP 헤더** (null 가능 — MDC가 비어 있을 수 있다) |
+| `version` | **없다** — 스키마 버전 협상 수단이 현재 없다(시연 범위에선 무방, 다음 세션 주의) |
+| `occurredAt` | **없다** |
+| payload | **메시지 body 그대로** — `{"payload": {...}}`로 감싸지 않는다 |
+
+```python
+# 수신: 헤더에서 꺼낸다. json.loads(body)["eventId"]는 KeyError다.
+event_id   = message.headers.get("eventId")
+event_type = message.headers.get("eventType")
+trace_id   = message.headers.get("traceId")   # None 가능
+payload    = json.loads(message.body)          # 껍데기 없음. roadmapId 등은 payload 루트에 있다
+
+# 발신: eventId·eventType·traceId를 헤더로, payload만 body로. 봉투로 감싸지 마라.
+#   Core WorkerEventConsumer는 eventId·eventType 헤더 중 하나라도 없으면 조용히 버린다.
 ```
 
-필수 필드가 없으면 DLQ로 보낸다. `version`이 미래 값이면 알려진 필드만 읽는다.
+**필수 헤더(`eventId`·`eventType`)가 없으면 DLQ로 보낸다.** "필수 필드"의 대상은 body가 아니라
+**헤더**다. 구현: 내부적으로는 `app/messaging/envelope.py`가 6필드 dict(내부 표현)를 만들고,
+`app/publishers/fanout.py`가 와이어로 매핑한다(헤더 3개 + payload body). `version`·`occurredAt`은
+내부 표현에만 있고 발신하지 않는다.
+
+**토폴로지 (Core `RabbitConfig.java`에서 확정 — 속성 불일치 시 `PRECONDITION_FAILED` 406 즉사):**
+
+| 용도 | 이름 | 타입 | durable | 선언 소유 |
+|---|---|---|---|---|
+| Core→Worker (작업) | `myith.core.events` | topic | true | Core+Worker(속성 일치 필수) |
+| Worker→Core (완료) | `myith.worker.fanout` | fanout | true | Core+Worker(속성 일치 필수) |
+| 작업 큐 | `myith.worker.{ai-enhancement,profile-build,roadmap-generation}` | — | true | **Worker 소유** (Core는 선언 안 함) |
+| DLQ | `myith.worker.dlq` | — | true | **Worker 소유** |
+
+바인딩 라우팅 키 = eventType 문자열 그대로. 발신은 fanout에 `routing_key=""`. 이름은
+`config/settings.py`(RABBITMQ_* )에 두고 필요 시 환경변수로 덮는다. roadmap-generation 큐는
+우선순위 2(G 교차검증)에서 선언·소비한다 — 그전엔 미바인딩이라 Core 발행이 unroutable로
+버려지고 `ConsistencyScheduler` 안전망이 폴백 조립한다(D-5).
 
 ## D-2. 수신 — 작업 큐 (경쟁 소비)
 
