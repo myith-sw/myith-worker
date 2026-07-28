@@ -43,9 +43,22 @@ class Settings(BaseSettings):
     S3_BUCKET: str | None = None  # 랜덤 접미어. 하드코딩 금지 (O-3)
     AWS_REGION: str = "ap-northeast-2"
 
-    # ── LLM 공급자 (확정 W2 D-2·D-16, Vertex 우선) ──────────
-    LLM_PROVIDER: str = "vertex"  # "vertex" | "anthropic"
-    GCP_PROJECT_ID: str | None = None  # vertex 인증(ADC)용
+    # ── RabbitMQ 토폴로지 (확정, Core RabbitConfig.java에서 추출) ─────────────
+    # 익스체인지 속성이 Core와 한 글자라도 다르면 PRECONDITION_FAILED(406)로 채널 즉사한다.
+    # 아래 속성은 Core와 반드시 일치: core.events=topic, worker.fanout=fanout, 둘 다 durable.
+    # 작업 큐·DLQ는 Worker가 선언·소유한다(Core는 작업 큐를 선언하지 않는다). 라우팅 키=eventType.
+    RABBITMQ_CORE_EXCHANGE: str = "myith.core.events"  # Core→Worker, topic
+    RABBITMQ_WORKER_FANOUT: str = "myith.worker.fanout"  # Worker→Core, fanout
+    RABBITMQ_QUEUE_AI_ENHANCEMENT: str = "myith.worker.ai-enhancement"
+    RABBITMQ_QUEUE_PROFILE_BUILD: str = "myith.worker.profile-build"
+    RABBITMQ_QUEUE_ROADMAP: str = "myith.worker.roadmap-generation"  # 우선순위 2에서 소비
+    RABBITMQ_DLQ: str = "myith.worker.dlq"
+
+    # ── LLM 공급자 (확정 정정 2026-07-28: Anthropic 직접. D-16 Vertex-우선 대체) ──
+    # GCP 결제 프로필이 타인 명의라 통합 이점 소멸 + Vertex 승인 대기가 개발을 막아 직접 API로 전환.
+    # 구현체 2개는 LLMProvider 뒤에 유지 → 승인 시 이 값만 "vertex"로 바꾸면 전환된다(I-4).
+    LLM_PROVIDER: str = "anthropic"  # "anthropic" | "vertex"
+    GCP_PROJECT_ID: str | None = None  # vertex 인증(ADC)용. 승인 시 사용
     GCP_REGION: str = "us-east5"
 
     # ── 시크릿 (운영자 .env, 기본값 없음 → 없으면 폴백) ──────
@@ -97,6 +110,8 @@ class Settings(BaseSettings):
     LLM_SCHEMA_RETRIES: int = 2
     DOC_MIN_CHARS_PER_PAGE: int = 50  # G-4 텍스트 충분 판정
     OCR_CONFIDENCE_MIN: float = 0.6
+    STAR_MAX_TOKENS: int = 1500  # H-2 STAR 보완 (경량 모델, 짧은 텍스트). effort는 haiku엔 미지원이라 안 씀
+    LLM_PERSONALIZE_ENABLED: bool = True  # H-1 층2(문구 개인화) on/off. 실패·타임아웃 시 층1로 폴백
 
     # compose의 `${VAR:-}`는 미설정 시 빈 문자열을 주입한다. 빈 문자열은
     # "제공되지 않음"으로 취급해 None으로 바꾼다 → 폴백이 정상 동작한다 (O-3).

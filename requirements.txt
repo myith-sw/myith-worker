@@ -30,3 +30,6 @@ kiwipiepy>=0.17
 pdfplumber>=0.11
 PyMuPDF>=1.24
 google-cloud-vision>=3.7
+
+# LLM (Anthropic SDK — Vertex 우선, I-4). vertex extra는 GCP ADC 인증에 필요.
+anthropic[vertex]>=0.69

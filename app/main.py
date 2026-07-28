@@ -22,9 +22,19 @@ logger = logging.getLogger("myith.worker")
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logger.info("worker starting: app=%s env=%s", settings.APP_NAME, settings.APP_ENV)
-    # 여기서 DB·큐에 붙지 않는다. 연결 실패로 기동이 죽으면 안 된다 (O-3).
-    # 컨슈머 기동은 메시징 PART(8번)에서 추가한다.
+    # 브로커·DB 연결 실패로 기동이 죽으면 안 된다 (O-3): 잡아서 로그만 남기고 /health는 200.
+    runtime = None
+    try:
+        from app.consumers.base import setup_messaging
+        from app.llm.provider import get_llm_provider
+
+        provider = get_llm_provider()  # None이면 핸들러가 FAILED 발행/규칙 폴백 (C-3)
+        runtime = await setup_messaging(provider)
+    except Exception as e:  # noqa: BLE001 — 브로커 부재·연결 실패 등. 컨슈머 없이 계속.
+        logger.warning("메시징 기동 실패 → 컨슈머 없이 계속 (/health는 200): %s", e)
     yield
+    if runtime is not None:
+        await runtime.close()
     logger.info("worker shutting down")
 
 

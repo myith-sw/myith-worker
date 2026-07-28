@@ -205,20 +205,49 @@ EC2 인스턴스 프로파일(IAM 역할)이 붙어 있다. `boto3`는 기본 �
 
 Worker가 Core와 주고받는 전부다. 이 계약 밖의 방법으로 통신하지 않는다(직접 HTTP 호출 금지, Core 테이블 쓰기 금지).
 
-## D-1. 메시지 봉투 (모든 메시지 공통)
+## D-1. 메시지 봉투 (확정 — Core 실구현 기준)
 
-```json
-{
-  "eventId": "uuid",          // 멱등 키. processed_event와 대조
-  "eventType": "...",
-  "version": 1,               // 스키마 버전. 모르는 필드는 무시
-  "traceId": "uuid",          // 로깅 컨텍스트에 주입
-  "occurredAt": "2026-01-01T00:00:00Z",
-  "payload": { }
-}
+**⚠ 이전 문서는 봉투를 JSON body에 담는다고 적었으나 실구현은 다르다.** Core
+`OutboxRelayScheduler`(발신)·`WorkerEventConsumer`(수신) 실측 기준으로 정정한다.
+
+| 필드 | 실제 위치 |
+|---|---|
+| `eventId` | **AMQP 헤더** (`setHeader("eventId", ...)`) |
+| `eventType` | **AMQP 헤더** — 라우팅 키도 이 값과 같다 |
+| `traceId` | **AMQP 헤더** (null 가능 — MDC가 비어 있을 수 있다) |
+| `version` | **없다** — 스키마 버전 협상 수단이 현재 없다(시연 범위에선 무방, 다음 세션 주의) |
+| `occurredAt` | **없다** |
+| payload | **메시지 body 그대로** — `{"payload": {...}}`로 감싸지 않는다 |
+
+```python
+# 수신: 헤더에서 꺼낸다. json.loads(body)["eventId"]는 KeyError다.
+event_id   = message.headers.get("eventId")
+event_type = message.headers.get("eventType")
+trace_id   = message.headers.get("traceId")   # None 가능
+payload    = json.loads(message.body)          # 껍데기 없음. roadmapId 등은 payload 루트에 있다
+
+# 발신: eventId·eventType·traceId를 헤더로, payload만 body로. 봉투로 감싸지 마라.
+#   Core WorkerEventConsumer는 eventId·eventType 헤더 중 하나라도 없으면 조용히 버린다.
 ```
 
-필수 필드가 없으면 DLQ로 보낸다. `version`이 미래 값이면 알려진 필드만 읽는다.
+**필수 헤더(`eventId`·`eventType`)가 없으면 DLQ로 보낸다.** "필수 필드"의 대상은 body가 아니라
+**헤더**다. 구현: 내부적으로는 `app/messaging/envelope.py`가 6필드 dict(내부 표현)를 만들고,
+`app/publishers/fanout.py`가 와이어로 매핑한다(헤더 3개 + payload body). `version`·`occurredAt`은
+내부 표현에만 있고 발신하지 않는다.
+
+**토폴로지 (Core `RabbitConfig.java`에서 확정 — 속성 불일치 시 `PRECONDITION_FAILED` 406 즉사):**
+
+| 용도 | 이름 | 타입 | durable | 선언 소유 |
+|---|---|---|---|---|
+| Core→Worker (작업) | `myith.core.events` | topic | true | Core+Worker(속성 일치 필수) |
+| Worker→Core (완료) | `myith.worker.fanout` | fanout | true | Core+Worker(속성 일치 필수) |
+| 작업 큐 | `myith.worker.{ai-enhancement,profile-build,roadmap-generation}` | — | true | **Worker 소유** (Core는 선언 안 함) |
+| DLQ | `myith.worker.dlq` | — | true | **Worker 소유** |
+
+바인딩 라우팅 키 = eventType 문자열 그대로. 발신은 fanout에 `routing_key=""`. 이름은
+`config/settings.py`(RABBITMQ_* )에 두고 필요 시 환경변수로 덮는다. roadmap-generation 큐는
+우선순위 2(G 교차검증)에서 선언·소비한다 — 그전엔 미바인딩이라 Core 발행이 unroutable로
+버려지고 `ConsistencyScheduler` 안전망이 폴백 조립한다(D-5).
 
 ## D-2. 수신 — 작업 큐 (경쟁 소비)
 
@@ -227,10 +256,16 @@ Core가 Outbox로 발행한다. Worker 인스턴스가 여러 개면 **하나만
 | eventType | payload | 트리거 |
 |---|---|---|
 | `JobProfileBuildRequested` | `{ jobCode, reason }` | 주1회 스케줄러 또는 온디맨드 |
-| `RoadmapGenerationRequested` | `{ userId, roadmapId, jobCode, profileVersion, answers[], narrative?, repoUrl?, fileKey? }` | 사용자가 로드맵 생성 |
+| `RoadmapGenerationRequested` | `{ roadmapId, userId, jobCode, profileVersion, answers, narrative?:{strength,difficulty}, experiences?:[{content?,repoUrl?,fileKey?}] }` (확정 — Core `RoadmapCreateService` 실측) | 사용자가 로드맵 생성 |
 | `AiEnhancementRequested` | `{ requestId, questId, roadmapId, userId, star{situation,task,action,result}, locale?, style? }` | 사용자가 '피드백 받기' 클릭 (확정 W2 C-1) |
 
 `reason`은 `scheduled` 또는 `on_demand`.
+
+**🔴 `RoadmapGenerationRequested` 주의 (G 파이프라인 전제):** `repoUrl`·`fileKey`는 최상위가 아니라
+**`experiences[]` 원소 안**에 있다. 사용자가 경험 카드를 **최대 3개**(Core `policy.roadmap.max-experiences: 3`)
+등록하므로 배열을 순회한다 — 첫 원소만 읽으면 나머지가 통째로 무시된다. `narrative`는 문자열이 아니라
+`{strength, difficulty}` **객체**다. `AiEnhancementRequested`에는 `questContext`가 **없다**(Core가 안 보냄) —
+맥락 없이 STAR 원문만으로 보완한다(D-07-a). `questId`로 `quest`를 조회하지 않는다.
 
 ## D-3. 발신 — fanout exchange (브로드캐스트)
 
@@ -413,8 +448,19 @@ Core도 Flyway로 같은 데이터베이스(`myith`)에 마이그레이션을 �
 
 - Worker의 Alembic은 **Worker 소유 테이블만** 다룬다(C-1)
 - Core가 쓰는 Flyway 이력 테이블(`flyway_schema_history`)을 건드리지 않는다
-- 배포 순서상 Core가 먼저 뜨며 자기 스키마를 만든다. Worker가 Core 테이블을 읽으려면 Core 마이그레이션이 끝난 뒤여야 한다
-- Worker 컨테이너 기동 시 Core 테이블이 없을 수 있다. **읽기 실패를 치명적 오류로 처리하지 않는다**(재시도 후 다음 주기로 넘긴다)
+- **🔴 배포 순서가 역전됐다 (`b08624c` 공유 DDL 이관 이후).** Core는 `ddl-auto: validate`이고
+  Worker 소유 테이블 6개(`job`·`job_profile`·`ncs_unit`·`ncs_certification`·`skill_ncs_map`·
+  `user_competency`)를 `@Entity`로 매핑한다. `validate`는 **ApplicationContext 초기화 때** 전부
+  검증하므로, **Worker `alembic upgrade head`가 먼저 돌지 않으면 Core가 아예 기동에 실패한다**
+  (런타임 500이 아니라 `SchemaManagementException`). 실제 순서:
+  ```
+  1. Worker  alembic upgrade head          ← 공유 테이블 6개 생성
+  2. Worker  python -m app.seed.load_all    ← NCS 265·자격 521·직무 10 적재
+  3. Core    부팅                            ← Flyway(Core 소유 테이블) → validate 통과
+  4. Worker  컨테이너 기동
+  ```
+- 단, **`roadmap`·`user_diagnosis`는 여전히 Core 소유**다. Worker가 그것들을 읽을 때는 Core 기동
+  뒤여야 하고, 기동 시 없을 수 있으니 **읽기 실패를 치명적 오류로 처리하지 않는다**(재시도 후 다음 주기).
 
 ---
 
@@ -726,21 +772,23 @@ clone은 디스크·시간을 쓰고 신뢰할 수 없는 저장소에 대한 �
                        0.33 ≤ M < 0.66 → aware         들어봤다
                        0.66 ≤ M < 1.0  → experienced   해본 적 있다   (ALREADY_KNOWN)
                        M ≥ 1.0         → proficient    능숙하다       (ALREADY_KNOWN)
-층2 (LLM, 선택)     : narrative가 있을 때만 선택된 문구를 다듬는다.
-                     output_config={"effort":"low"}, max_tokens=300. title/완료기준/level/axis 불변.
+층2 (LLM, 선택)     : narrative가 있을 때만, **사용자당 최대 1회**(퀘스트마다 호출 금지).
+                     선택된 guidance 문자열들을 한 번에 넘겨 다듬고 한 번에 받는다.
+                     모델 claude-sonnet-5(LLM_MODEL). output_config={"effort":"low"},
+                     thinking={"type":"disabled"}, max_tokens=300. title/완료기준/level/axis 불변.
 폴백               : 실패·타임아웃·스키마 이탈 → 층1 결과 그대로. LLM_PERSONALIZE_ENABLED로 통째로 off.
 ```
 
 **guidance는 4종이다.** 0.66(experienced)과 1.0(proficient)을 합치지 않는다 — 둘 다 ALREADY_KNOWN이지만 "이미 아는 것으로 처리했다"와 "심화 사례를 남겨라"는 다른 안내다(Core D-08).
 
-**제목과 구조는 템플릿을 유지하고 guidance 문자열만 조정한다.** 어떤 스킬이 어느 레벨에 갈지는 AI가 관여하지 않는다(C-2). `temperature`를 쓰지 않는다 — 400이다(I-4).
+**제목과 구조는 템플릿을 유지하고 guidance 문자열만 조정한다.** 어떤 스킬이 어느 레벨에 갈지는 AI가 관여하지 않는다(C-2). 층2는 claude-sonnet-5라 `temperature`가 400이다(I-4) — `effort:"low"`로 대체한다. **직무별 `(skillCode, tier)` 캐싱은 하지 않는다** — 층2의 존재 이유가 사용자 `narrative` 반영인데 직무별 캐싱은 사용자 맥락이 들어갈 자리를 없앤다. 캐싱은 LLM을 안 쓰는 층1이 이미 한다.
 
 ## H-2. STAR AI 보완
 
 `AiEnhancementRequested` 수신 시 실행 (확정 W2 C-1·C-2). 개명됨 — 기존 STAR 피드백을 대체.
 
 ```
-입력: star{situation,task,action,result} 원문 (빈 항목은 "" 로 옴) + questContext
+입력: star{situation,task,action,result} 원문 (빈 항목은 "" 로 옴) + locale?/style? (questContext 없음)
 출력(고정 형식):
 {
   "enhancedStar": { "situation","task","action","result" } | null,   ← 보강된 STAR 전문
@@ -847,9 +895,28 @@ class LLMProvider(Protocol):
 
 기존 `claude-sonnet-4`/`claude-haiku-4`는 **실재하지 않는 ID**다(첫 호출에서 400).
 
-**공급자 (확정 W2 D-16, Vertex 우선):** `LLM_PROVIDER = "vertex" | "anthropic"`. vertex는 `AnthropicVertex(project_id=GCP_PROJECT_ID, region=GCP_REGION)` — GCP ADC 인증, Anthropic 키 불필요. 두 구현체 모두 `LLMProvider` 뒤에 두어 파이프라인은 어느 쪽인지 모른다.
+**공급자 (확정 정정 2026-07-28 — Anthropic 직접 API로 전환. D-16 Vertex-우선 대체):**
+`LLM_PROVIDER = "anthropic" | "vertex"`, **기본값 `anthropic`**. GCP 결제 프로필이 타인 명의라
+통합 이점이 사라졌고 Vertex 승인 대기가 개발을 막아 직접 API로 간다. 두 구현체는 `LLMProvider`
+뒤에 그대로 두어 승인 시 환경변수 한 줄로 전환한다(발표: "두 경로 모두 지원").
 
-**금지 파라미터 (전부 HTTP 400):** `temperature`, `top_p`, `top_k`, `thinking={"type":"enabled",...}`, 마지막 assistant 턴 prefill. `llm/provider.py`에서 **아예 만들지 않는다.** "낮은 temperature가 필요한 자리"는 `output_config={"effort":"low"}` + `max_tokens`로 표현한다. 구조화 출력은 `output_config={"format":{"type":"json_schema","schema":{...}}}`.
+- anthropic: `AsyncAnthropic(api_key=LLM_API_KEY)`. 엔드포인트 `POST https://api.anthropic.com/v1/messages`,
+  헤더 `x-api-key: {키}` + `anthropic-version: 2023-06-01`. **`Authorization: Bearer`가 아니다.**
+- **직접 API에는 `@날짜` 접미어가 없다** — `claude-haiku-4-5` 그대로. `@20251001`은 Vertex/Bedrock 표기.
+- vertex: `AsyncAnthropicVertex(project_id=GCP_PROJECT_ID, region=GCP_REGION)`, GCP ADC. `requirements`는
+  `anthropic[vertex]` 유지(vertex 전환 대비, superset).
+
+**금지 파라미터는 전역이 아니라 모델별이다 (`llm/provider.py` `UNSUPPORTED_PARAMS`가 진실의 원천):**
+- `claude-sonnet-5`/`claude-opus-*`/`claude-fable-5`: `temperature`·`top_p`·`top_k`·`thinking.budget_tokens` → 400.
+  "낮은 temperature 자리"는 `output_config={"effort":"low"}`로 표현(effort는 sonnet-5+에서 지원).
+- `claude-haiku-4-5`: 구세대라 `temperature`·`top_p`·`top_k`는 **허용**, `output_config.effort`는 **400**.
+- 요청은 `build_request_kwargs` 한 곳에서만 만들고 금지 파라미터를 넣지 않는다. 구조화 출력은
+  `output_config={"format":{"type":"json_schema","schema":{...}}}`. 마지막 assistant prefill 금지.
+
+**예산이 선불 $5다 — C-3를 실제로 시험한다.** `LLM_API_KEY` 미설정·401·429·**402/credit_balance_too_low**는
+전부 폴백으로 degrade해야 한다(402는 선불 모델의 정상 경로). 크레딧이 떨어져도 로드맵·퀘스트는
+전부 동작한다. 서킷브레이커·레이트리미터·백오프는 PART J(회복탄력성, 마무리 단계)에서 붙인다 —
+그 전까지도 **어떤 LLM 에러든 예외→FAILED/폴백**이라 파이프라인은 완주한다.
 
 ## I-5. OCR 공급자
 
@@ -1121,10 +1188,10 @@ ls -la Dockerfile .dockerignore
 
 | 변수 | 용도 | 없을 때 |
 |---|---|---|
-| `LLM_PROVIDER` | `vertex` \| `anthropic` (확정 W2 D-16) | 설정 기본값 `vertex` |
-| `GCP_PROJECT_ID` | Vertex 프로젝트 (ADC 인증) | vertex 경로 불가 → LLM 폴백 |
+| `LLM_PROVIDER` | `anthropic` \| `vertex` (확정 정정 2026-07-28: anthropic 직접) | **설정 기본값 `anthropic`** |
+| `LLM_API_KEY` | anthropic 직접 API 호출 (`x-api-key`) | C-3 폴백으로 규칙 기반 동작 |
+| `GCP_PROJECT_ID` | Vertex 프로젝트 (승인 시 전환) | vertex 경로 불가 → LLM 폴백 |
 | `GCP_REGION` | Vertex 리전 | 설정 기본값 `us-east5` |
-| `LLM_API_KEY` | anthropic 경로 LLM 호출 | C-3 폴백으로 규칙 기반 동작 |
 | `LLM_MODEL` | 모델명 (I-4) | 설정 기본값 `claude-sonnet-5` |
 | `LLM_MODEL_LIGHT` | AI 보완·템플릿용 경량 모델 (H-2) | 설정 기본값 `claude-haiku-4-5` |
 | `NCS_SERVICE_KEY` | data.go.kr 인증키 (I-2, I-3) | 오프라인 배치 불가. 시드로 대체 |
@@ -1227,6 +1294,14 @@ docker compose -f docker-compose.worker.yml logs -f worker
 ```
 
 **RabbitMQ를 먼저 띄운다.** Core가 Worker의 RabbitMQ에 붙으므로, Worker EC2를 Core보다 먼저 기동하는 편이 재시도 루프를 줄인다.
+
+**🔴 Core 기동 전에 Worker 마이그레이션+시드를 한 번 돌린다 (PART E 순서).** Core `ddl-auto: validate`가
+공유 테이블 6개를 검증하므로, 아래를 Core보다 먼저 실행하지 않으면 Core가 기동에 실패한다:
+
+```bash
+docker compose -f docker-compose.worker.yml run --rm worker sh -lc \
+  "alembic upgrade head && python -m app.seed.load_all"
+```
 
 ## O-8. 배포 후 점검 순서
 
