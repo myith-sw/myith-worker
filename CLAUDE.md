@@ -252,9 +252,9 @@ payload    = json.loads(message.body)          # 껍데기 없음. roadmapId 등
 바인딩 라우팅 키 = eventType 문자열 그대로. 발신은 fanout에 `routing_key=""`. 이름은
 `config/settings.py`(RABBITMQ_* )에 두고 필요 시 환경변수로 덮는다. roadmap-generation 큐는
 **우선순위 2에서 선언·바인딩·소비 완료** — `RoadmapGenerationRequested` → 역량 추출
-→ `user_competency` 쓰기 → `CompetencyExtracted`. **G-2 서술형 + G-3 GitHub 구현됨**
-(`narrative`·`experiences[].content`·`repoUrl` 분석 → 같은 analyzer). **PDF(G-4)는 미구현**이라
-`experiences[].fileKey`는 아직 무시한다.
+→ `user_competency` 쓰기 → `CompetencyExtracted`. **G-2 서술형 + G-3 GitHub + G-4 문서 구현됨**
+(`narrative`·`content`·`repoUrl`·`fileKey` 전부 분석 → 같은 analyzer). G-4는 S3 문서를 3단
+하이브리드(텍스트→OCR→Vision)로 처리하되 OCR 자격증명 없으면 2단계 스킵(텍스트→Vision).
 
 ## D-2. 수신 — 작업 큐 (경쟁 소비)
 
@@ -271,8 +271,8 @@ Core가 Outbox로 발행한다. Worker 인스턴스가 여러 개면 **하나만
 **🔴 `RoadmapGenerationRequested` 주의 (G 파이프라인 전제):** `repoUrl`·`fileKey`는 최상위가 아니라
 **`experiences[]` 원소 안**에 있다. 사용자가 경험 카드를 **최대 3개**(Core `policy.roadmap.max-experiences: 3`)
 등록하므로 배열을 순회한다 — 첫 원소만 읽으면 나머지가 통째로 무시된다. `narrative`는 문자열이 아니라
-`{strength, difficulty}` **객체**다. **처리 현황: `content`(G-2)·`repoUrl`(G-3)은 처리한다(같은
-analyzer로). `fileKey`는 G-4 구현 전까지 무시한다.** `AiEnhancementRequested`에는 `questContext`가
+`{strength, difficulty}` **객체**다. **처리 현황: `content`(G-2)·`repoUrl`(G-3)·`fileKey`(G-4) 전부
+처리한다(같은 analyzer로).** `AiEnhancementRequested`에는 `questContext`가
 **없다**(Core가 안 보냄) — 맥락 없이 STAR 원문만으로 보완한다(D-07-a). `questId`로 `quest`를 조회하지 않는다.
 
 ## D-3. 발신 — fanout exchange (브로드캐스트)

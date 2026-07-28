@@ -174,3 +174,37 @@ def test_gather_all_content_non_string_repourl_skips_without_crash():
     gh = FakeGitHub({})
     content = _run(_gather_all_content(payload, gh))
     assert "강점" in content and gh.calls == []  # 비문자열은 fetch도 안 부름
+
+
+# ── G-4: 업로드 문서(fileKey)가 같은 analyzer로 흘러가는지 ──────────────────
+
+
+class FakeDoc:
+    def __init__(self, mapping):
+        self._mapping = mapping
+        self.calls = []
+
+    async def fetch_and_parse(self, file_key):
+        self.calls.append(file_key)
+        return self._mapping.get(file_key, "")
+
+
+def test_gather_all_content_appends_document_and_dedups():
+    payload = {
+        "narrative": {"strength": "강점"},
+        "experiences": [{"fileKey": "f1"}, {"fileKey": "f1"}, {"fileKey": "f2"}],
+    }
+    ds = FakeDoc({"f1": "[업로드 문서] PDF 근거", "f2": ""})
+    content = _run(_gather_all_content(payload, None, ds))
+    assert "PDF 근거" in content and ds.calls == ["f1", "f2"]  # f1 dedup, f2 빈 결과→빠짐
+
+
+def test_gather_all_content_caps_experiences(monkeypatch):
+    # 🔴 파일 다수 → Vision 비용 폭발 방지. MAX_EXPERIENCES개만 처리(리뷰 medium 수정)
+    from app.config.settings import settings
+
+    monkeypatch.setattr(settings, "MAX_EXPERIENCES", 2)
+    payload = {"experiences": [{"fileKey": f"f{i}"} for i in range(10)]}
+    ds = FakeDoc({f"f{i}": f"doc{i}" for i in range(10)})
+    _run(_gather_all_content(payload, None, ds))
+    assert ds.calls == ["f0", "f1"]  # 처음 2개만

@@ -19,6 +19,7 @@ anthropic 임포트는 지연시킨다 — 미설치·미인증이면 팩토리�
 
 from __future__ import annotations
 
+import base64
 import json
 import logging
 from typing import Any, Protocol
@@ -36,6 +37,19 @@ UNSUPPORTED_PARAMS: dict[str, set[str]] = {
     "claude-fable-5": {"temperature", "top_p", "top_k", "thinking.budget_tokens"},
     "claude-haiku-4-5": {"output_config.effort"},  # 샘플링 계열은 허용, effort만 금지
 }
+
+
+def _image_media_type(data: bytes) -> str:
+    """매직바이트로 이미지 MIME 판별(Anthropic 지원: png/jpeg/gif/webp). 기본 png."""
+    if data[:8] == b"\x89PNG\r\n\x1a\n":
+        return "image/png"
+    if data[:3] == b"\xff\xd8\xff":
+        return "image/jpeg"
+    if data[:4] == b"RIFF" and data[8:12] == b"WEBP":
+        return "image/webp"
+    if data[:6] in (b"GIF87a", b"GIF89a"):
+        return "image/gif"
+    return "image/png"
 
 
 def unsupported_params(model: str) -> set[str]:
@@ -67,6 +81,12 @@ class LLMProvider(Protocol):
         """prompt를 보내고 schema를 만족하는 JSON(dict)을 돌려준다. 실패는 예외로 올린다."""
         ...
 
+    async def complete_with_images(
+        self, *, prompt: str, images: list[bytes], schema: dict, model: str, max_tokens: int
+    ) -> dict:
+        """이미지 + prompt를 보내고 schema JSON을 돌려준다(G-4 Vision). 실패는 예외로 올린다."""
+        ...
+
 
 class AnthropicLLMProvider:
     """AnthropicVertex/Anthropic 비동기 클라이언트 래퍼. 구조화 출력만 사용.
@@ -95,6 +115,37 @@ class AnthropicLLMProvider:
         if not text:
             raise ValueError("LLM 응답에 text 블록이 없다")
         return json.loads(text)  # output_config.format이 유효 JSON을 보장
+
+    async def complete_with_images(
+        self, *, prompt: str, images: list[bytes], schema: dict, model: str, max_tokens: int
+    ) -> dict:
+        # 이미지 블록 + 텍스트. 금지 파라미터 없이 구조화 출력만(같은 브레이커로 감쌈).
+        # media_type은 매직바이트로 판별 — PDF 렌더는 PNG지만 업로드 이미지는 jpg/webp일 수 있다.
+        content = [
+            {
+                "type": "image",
+                "source": {
+                    "type": "base64",
+                    "media_type": _image_media_type(img),
+                    "data": base64.b64encode(img).decode(),
+                },
+            }
+            for img in images
+        ]
+        content.append({"type": "text", "text": prompt})
+        resp = await self._breaker.call_async(
+            self._client.messages.create,
+            model=model,
+            max_tokens=max_tokens,
+            messages=[{"role": "user", "content": content}],
+            output_config={"format": {"type": "json_schema", "schema": schema}},
+        )
+        text = next(
+            (b.text for b in resp.content if getattr(b, "type", None) == "text"), None
+        )
+        if not text:
+            raise ValueError("Vision 응답에 text 블록이 없다")
+        return json.loads(text)
 
 
 def _build_client() -> Any | None:
