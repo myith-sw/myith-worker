@@ -54,9 +54,11 @@ class Settings(BaseSettings):
     RABBITMQ_QUEUE_ROADMAP: str = "myith.worker.roadmap-generation"  # 우선순위 2에서 소비
     RABBITMQ_DLQ: str = "myith.worker.dlq"
 
-    # ── LLM 공급자 (확정 W2 D-2·D-16, Vertex 우선) ──────────
-    LLM_PROVIDER: str = "vertex"  # "vertex" | "anthropic"
-    GCP_PROJECT_ID: str | None = None  # vertex 인증(ADC)용
+    # ── LLM 공급자 (확정 정정 2026-07-28: Anthropic 직접. D-16 Vertex-우선 대체) ──
+    # GCP 결제 프로필이 타인 명의라 통합 이점 소멸 + Vertex 승인 대기가 개발을 막아 직접 API로 전환.
+    # 구현체 2개는 LLMProvider 뒤에 유지 → 승인 시 이 값만 "vertex"로 바꾸면 전환된다(I-4).
+    LLM_PROVIDER: str = "anthropic"  # "anthropic" | "vertex"
+    GCP_PROJECT_ID: str | None = None  # vertex 인증(ADC)용. 승인 시 사용
     GCP_REGION: str = "us-east5"
 
     # ── 시크릿 (운영자 .env, 기본값 없음 → 없으면 폴백) ──────

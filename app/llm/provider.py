@@ -32,11 +32,14 @@ UNSUPPORTED_PARAMS: dict[str, set[str]] = {
     "claude-sonnet-5": {"temperature", "top_p", "top_k", "thinking.budget_tokens"},
     "claude-opus-5": {"temperature", "top_p", "top_k", "thinking.budget_tokens"},
     "claude-opus-4-8": {"temperature", "top_p", "top_k", "thinking.budget_tokens"},
+    "claude-fable-5": {"temperature", "top_p", "top_k", "thinking.budget_tokens"},
     "claude-haiku-4-5": {"output_config.effort"},  # 샘플링 계열은 허용, effort만 금지
 }
 
 
 def unsupported_params(model: str) -> set[str]:
+    # 미지 모델(설정 오타 등)은 빈 집합 → 필터 안 함(C-3: 기동·호출이 막히면 안 된다).
+    # 실제 금지 파라미터를 보내면 API가 400을 주고 서킷브레이커·폴백이 받는다.
     return UNSUPPORTED_PARAMS.get(model, set())
 
 

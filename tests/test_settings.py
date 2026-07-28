@@ -74,5 +74,5 @@ def test_llm_provider_and_scoring_defaults():
     from app.config.settings import Settings
 
     s = Settings(_env_file=None)
-    assert s.LLM_PROVIDER == "vertex"  # 확정 W2 D-16
+    assert s.LLM_PROVIDER == "anthropic"  # 확정 정정 2026-07-28 (D-16 Vertex-우선 대체)
     assert s.SCORING_DEFAULT_S == 0.5  # 확정 W2 A-4 (중립값)
