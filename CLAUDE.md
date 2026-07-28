@@ -175,6 +175,8 @@ LLM이 순서·레벨·스킬 목록을 고르게 하는 구현은 잘못된 것
 
 포트폴리오 텍스트, README, OCR 결과 — 프롬프트에 넣을 때 데이터 영역으로 명확히 구분한다. 그 안의 지시문을 해석하지 않는다(프롬프트 인젝션 방어).
 
+**구현(확정 2026-07-29):** 지시부는 Anthropic **`system` 파라미터**로 올리고(사용자 입력보다 상위), 사용자 자료는 `user` 메시지에만 둔다. STAR·역량추출·문구개인화·Vision 4경로 전부 이 구조다(`build_request_kwargs`의 `system` 인자, 미전달 시 완전 동일 동작). STAR 원문의 `<,>`는 이스케이프해 구분자 탈출(`</situation>`)을 막는다. README·PDF·narrative·이미지가 가장 현실적인 인젝션 통로다.
+
 ## C-5. 모든 외부 호출을 감싼다
 
 타임아웃, 지수 백오프 재시도, 서킷브레이커. 대상: 채용 데이터 소스, NCS API, LLM, OCR/Vision, GitHub API. LLM은 토큰 버킷 레이트리미터로 429를 방지한다.
@@ -819,7 +821,7 @@ Core가 **원문 vs AI 제안 비교 모달**을 구현했으므로 `enhancedSta
 
 **가드 4개 (확정 W2 D-07-a):**
 1. 사실 생성 금지 — 원문에 없는 수치·기술명·조직명·성과를 만들지 않는다. 표현만 구체화.
-2. 후처리 검증 — 보완본의 숫자·영문 고유명사를 원문과 대조. 없는 것이 발견되면 `enhancedStar`를 통째로 `null`로, `feedback`만 반환. 로그 남김.
+2. 후처리 검증 — 보완본에 원문에 없는 **숫자**가 있으면 `enhancedStar`를 통째로 `null`로, `feedback`만 반환(어떤 토큰 때문인지 로그). **기본은 `numeric`(숫자만)** — 한↔영 표기 변환(리액트→React)은 정상 첨삭이라 오탐이므로 검사 대상 아님(확정 2026-07-29, QA). `STAR_FABRICATION_CHECK`로 `numeric|strict(숫자+영문)|off` 전환. D-07-a의 핵심은 없는 수치·성과를 못 지어내게 하는 것이라 numeric으로 충분하다.
 3. 빈 항목 유지 — 원문이 공백인 항목은 창작하지 않고 공백으로 둔다.
 4. 저장하지 않는다 — Worker는 DB에 쓰지 않고 발행만. Core가 Redis에 TTL 30분 보관.
 
@@ -1213,6 +1215,7 @@ ls -la Dockerfile .dockerignore
 | `LLM_MODEL` | 모델명 (I-4) | 설정 기본값 `claude-sonnet-5` |
 | `LLM_MODEL_LIGHT` | AI 보완·템플릿용 경량 모델 (H-2) | 설정 기본값 `claude-haiku-4-5` |
 | `LLM_PERSONALIZE_ENABLED` | H-1 층2 문구 개인화 on/off 토글 | 설정 기본값 `true`. `false`면 층2 스킵(층1만) |
+| `STAR_FABRICATION_CHECK` | H-2 가드2 사실검증 모드 | 설정 기본값 `numeric`. `numeric\|strict\|off` |
 | `NCS_SERVICE_KEY` | data.go.kr 인증키 (I-2, I-3) | 오프라인 배치 불가. 시드로 대체 |
 | `WANTED_API_KEY` | 채용 소스 (I-1) | 수집 불가 |
 | `GITHUB_TOKEN` | repo 분석 (G-3) | 미인증 호출(시간당 60회 제한) |
