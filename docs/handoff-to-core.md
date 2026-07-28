@@ -15,12 +15,15 @@ Worker가 Core에 의존하거나, Core 쪽 변경이 필요한 항목을 기록
 레코드에 guidance 필드가 없고, quest 테이블에 guidance 컬럼이 없어 시드의 4변형이 **Core 파싱에서
 버려진다.** `git grep guidance`가 Core 자바 0건. 즉 층2 이전에 층1부터 끊겨 있다.
 
-### Core가 해야 할 것 (①~⑤)
+### Core가 해야 할 것 — **우선순위: ①②③⑤(층1) 먼저 → ④(층2) 나중**
+**먼저 (층1, LLM 0회로 화면에 뜸):**
 1. `QuestTemplate` 레코드에 guidance 4종 필드 추가 + `ProfileDataParser` 파싱.
 2. quest 테이블에 guidance 컬럼 추가(Flyway).
-3. 조립 시 **자가진단 M값으로 4종 중 하나 선택**해 채움 ← 층1(LLM 없이). **③까지만 해도 개인화 문구가 화면에 나온다.**
-4. `user_quest_guidance`에 값이 있으면 그것으로 덮어씀 ← 층2.
+3. 조립 시 **자가진단 M값으로 4종 중 하나 선택**해 채움 ← 층1. **①②③⑤까지만 들어가도 LLM 0회로 개인화 문구가 화면에 나온다(데모 최소선).**
 5. 퀘스트 조회 응답에 guidance 포함.
+
+**그다음 (층2 오버레이):**
+4. `user_quest_guidance`에 값이 있으면 그것으로 덮어씀 ← 층2. Worker가 이미 테이블에 쓰고 있으므로 읽기만 붙이면 된다.
 
 ### Worker가 한 것 (구현·검증 완료, 이 브랜치)
 - **`user_quest_guidance` 테이블 소유**(Alembic `0006`, C-1). Core Flyway엔 넣지 않는다.
