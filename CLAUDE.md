@@ -825,6 +825,8 @@ Core가 **원문 vs AI 제안 비교 모달**을 구현했으므로 `enhancedSta
 3. 빈 항목 유지 — 원문이 공백인 항목은 창작하지 않고 공백으로 둔다.
 4. 저장하지 않는다 — Worker는 DB에 쓰지 않고 발행만. Core가 Redis에 TTL 30분 보관.
 
+**⚠️ 가드 2의 한계 (다음 세션이 과신하지 말 것):** 가드 2는 **숫자만** 검증한다(`STAR_FABRICATION_CHECK=numeric`). **한글 고유명사 날조는 정규식으로 잡히지 않는다 — `strict` 모드에서도 못 잡았다**(예: "회사에서 일함"→"삼성전자에서 일함"은 strict·numeric 모두 통과). 그래서 numeric으로 바꿔도 잃는 방어력이 없고 오탐만 사라진다. **사실 생성 방어의 본체는 가드 1(프롬프트 "사실을 만들지 마라")**이고, 가드 2는 수치에 대한 보조 장치다. `strict`는 한↔영 표기 변환(리액트→React)을 전부 날조로 판정해 오탐이 크다.
+
 **사용자 원문을 수정하지 않는다**(원문은 Core가 보유). 경량 모델(`LLM_MODEL_LIGHT`), `max_tokens=1500`. **실패해도 반드시 `status:"FAILED"`+`errorCode`로 발행한다** — 안 그러면 프론트가 영원히 폴링한다. `AiEnhancementCompleted`로 발행(`StarFeedbackCompleted` 아님, 레거시).
 
 ---
