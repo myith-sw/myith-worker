@@ -105,6 +105,27 @@ def test_empty_field_stays_empty_even_if_llm_fills_it():
     assert out["enhancedStar"]["action"]  # 채워진 항목은 보강됨
 
 
+def test_filled_field_kept_when_ai_returns_blank():
+    # 🔴 사용자가 쓴 항목을 AI가 빈 값/공백으로 돌려줘도 원문 유지 — '적용' 시 글이 안 사라진다.
+    star = {"situation": "ㅋㅋㅋㅋ", "task": "발표함", "action": "자료 정리함", "result": ""}
+    resp = {
+        "enhancedStar": {
+            "situation": "",  # AI가 무의미한 글을 못 다듬어 빈 값
+            "task": "   ",  # 공백만 반환
+            "action": "자료를 체계적으로 정리했다",  # 정상 다듬기
+            "result": "",  # 원문도 공백
+        },
+        "feedback": [],
+        "resumeDraft": "요약",
+    }
+    es = _run(build_star_enhancement(star, "", FakeProvider(resp), retries=0))["enhancedStar"]
+    assert es is not None
+    assert es["situation"] == "ㅋㅋㅋㅋ"  # AI가 비웠지만 원문 유지
+    assert es["task"] == "발표함"  # 공백만 반환 → 원문 유지
+    assert es["action"] == "자료를 체계적으로 정리했다"  # 다듬은 것은 반영
+    assert es["result"] == ""  # 원문이 공백이면 공백(창작 금지)
+
+
 # ── 성공 경로 ──────────────────────────────────────────────────────────────
 
 
