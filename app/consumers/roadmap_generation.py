@@ -47,6 +47,10 @@ class CompetencyRepo(Protocol):
     async def write_competencies(self, roadmap_id: int, competencies: list[dict]) -> None: ...
 
 
+class GitHubClient(Protocol):
+    async def fetch_repo_evidence(self, repo_url: str) -> str | None: ...
+
+
 def _gather_content(payload: dict) -> str:
     """서술형 텍스트만 모은다(G-2). narrative 객체 + experiences[].content."""
     parts: list[str] = []
@@ -62,6 +66,28 @@ def _gather_content(payload: dict) -> str:
             if content:
                 parts.append(content)
     return "\n".join(parts)
+
+
+async def _gather_all_content(payload: dict, github_client: "GitHubClient | None") -> str:
+    """서술형(G-2) + GitHub 저장소 요약(G-3)을 한 덩어리로. 같은 analyzer에 넣는다.
+
+    experiences[].repoUrl을 순회(중복 제거)해 각 저장소 요약을 붙인다. 실패·비공개는
+    github_client가 None을 돌려주므로 그냥 빠진다(파이프라인 안 죽음). 이 수집은 진행률
+    25(수집/파싱) 안에 들어간다 — 단계를 늘리지 않는다.
+    """
+    parts = [_gather_content(payload)]
+    if github_client is not None:
+        seen: set[str] = set()
+        for exp in payload.get("experiences") or []:
+            url = exp.get("repoUrl") if isinstance(exp, dict) else None
+            # 문자열만 처리 — 비문자열(리스트 등 계약 위반)은 스킵(unhashable로 죽지 않게, C-3)
+            if not isinstance(url, str) or not url or url in seen:
+                continue
+            seen.add(url)
+            text = await github_client.fetch_repo_evidence(url)
+            if text:
+                parts.append(text)
+    return "\n".join(p for p in parts if p)
 
 
 async def _publish_progress(publisher, roadmap_id, step: str, trace_id) -> None:
@@ -81,6 +107,7 @@ async def handle_roadmap_generation(
     publisher: FanoutPublisher,
     repo: CompetencyRepo,
     *,
+    github_client: GitHubClient | None = None,
     trace_id: str | None = None,
 ) -> dict:
     """RoadmapGenerationRequested 처리 → CompetencyExtracted 발행. 발행 봉투를 반환."""
@@ -91,7 +118,7 @@ async def handle_roadmap_generation(
 
     await _publish_progress(publisher, roadmap_id, "parse", trace_id)
 
-    content = _gather_content(payload)
+    content = await _gather_all_content(payload, github_client)  # 서술형 + GitHub(G-3)
     skills = await repo.load_skills(job_code, profile_version)  # 닫힌 후보 집합(가드 1)
     competencies = await extract_competencies(content, skills, provider)  # 실패 시 [] (가드 5)
 

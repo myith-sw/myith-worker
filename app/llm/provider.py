@@ -24,6 +24,7 @@ import logging
 from typing import Any, Protocol
 
 from app.config.settings import settings
+from app.resilience.breaker import get_breaker
 
 logger = logging.getLogger("myith.llm")
 
@@ -68,18 +69,25 @@ class LLMProvider(Protocol):
 
 
 class AnthropicLLMProvider:
-    """AnthropicVertex/Anthropic 비동기 클라이언트 래퍼. 구조화 출력만 사용."""
+    """AnthropicVertex/Anthropic 비동기 클라이언트 래퍼. 구조화 출력만 사용.
 
-    def __init__(self, client: Any) -> None:
+    서킷브레이커(C-5): 연속 실패(429·402 credit_balance_too_low·5xx·타임아웃)가 임계를 넘으면
+    회로를 열어 즉시 CircuitOpenError를 낸다 → 호출부(extract_competencies/star_enhance)가
+    규칙 폴백/FAILED로 degrade한다(C-3). 선불 $5 소진 시 이 경로가 실제로 돈다.
+    """
+
+    def __init__(self, client: Any, *, breaker=None) -> None:
         self._client = client
+        self._breaker = breaker or get_breaker("llm")
 
     async def complete_json(
         self, *, prompt: str, schema: dict, model: str, max_tokens: int
     ) -> dict:
-        resp = await self._client.messages.create(
+        resp = await self._breaker.call_async(
+            self._client.messages.create,
             **build_request_kwargs(
                 model=model, prompt=prompt, schema=schema, max_tokens=max_tokens
-            )
+            ),
         )
         text = next(
             (b.text for b in resp.content if getattr(b, "type", None) == "text"), None

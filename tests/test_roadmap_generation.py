@@ -5,6 +5,7 @@ import asyncio
 from app.consumers.roadmap_generation import (
     COMPETENCY_EXTRACTED,
     ROADMAP_PROGRESS,
+    _gather_all_content,
     _gather_content,
     handle_roadmap_generation,
 )
@@ -130,3 +131,46 @@ def test_no_profile_skills_falls_back_to_empty():
     repo = FakeRepo([], [])
     _run(handle_roadmap_generation(PAYLOAD, FakeProvider(GOOD_RESP), pub, repo))
     assert _extracted(pub)[0]["payload"]["competencies"] == []
+
+
+# ── G-3: GitHub 저장소 요약이 같은 analyzer로 흘러가는지 ────────────────────
+
+
+class FakeGitHub:
+    def __init__(self, mapping):
+        self._mapping = mapping
+        self.calls = []
+
+    async def fetch_repo_evidence(self, repo_url):
+        self.calls.append(repo_url)
+        return self._mapping.get(repo_url)
+
+
+def test_gather_all_content_appends_repo_and_dedups():
+    payload = {
+        "narrative": {"strength": "서술 강점", "difficulty": ""},
+        "experiences": [
+            {"content": "직접 만든 것", "repoUrl": "https://github.com/o/r1"},
+            {"repoUrl": "https://github.com/o/r1"},  # 중복 → 1회만
+            {"repoUrl": "https://github.com/o/r2"},  # None 반환 → 빠짐
+        ],
+    }
+    gh = FakeGitHub({"https://github.com/o/r1": "[GitHub o/r1] React 구현", "https://github.com/o/r2": None})
+    content = _run(_gather_all_content(payload, gh))
+    assert "서술 강점" in content and "직접 만든 것" in content
+    assert "[GitHub o/r1] React 구현" in content
+    assert gh.calls == ["https://github.com/o/r1", "https://github.com/o/r2"]  # r1 dedup
+
+
+def test_gather_all_content_none_client_is_narrative_only():
+    content = _run(_gather_all_content(PAYLOAD, None))
+    assert "http://x" not in content  # repoUrl 무시(클라이언트 없음)
+    assert "React로 대시보드를 구현" in content
+
+
+def test_gather_all_content_non_string_repourl_skips_without_crash():
+    # 계약 위반(repoUrl이 리스트) → unhashable로 죽지 않고 스킵(C-3)
+    payload = {"narrative": {"strength": "강점"}, "experiences": [{"repoUrl": ["x"]}, {"repoUrl": None}]}
+    gh = FakeGitHub({})
+    content = _run(_gather_all_content(payload, gh))
+    assert "강점" in content and gh.calls == []  # 비문자열은 fetch도 안 부름

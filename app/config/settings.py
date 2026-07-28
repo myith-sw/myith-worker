@@ -108,6 +108,16 @@ class Settings(BaseSettings):
     COMPETENCY_CONFIDENCE_MIN: float = 0.6
     EVIDENCE_MAX_LEN: int = 200
     LLM_SCHEMA_RETRIES: int = 2
+
+    # ── 정책값: G-3 GitHub 분석 + 외부호출 서킷브레이커 (C-5) ──
+    GITHUB_API_TIMEOUT: float = 5.0
+    GITHUB_README_MAX_CHARS: int = 8000  # README 상한 (수십만자 저장소 방어)
+    GITHUB_MANIFEST_MAX: int = 2  # 최상위 의존성 매니페스트 최대 조회 수
+    GITHUB_RETRY_ATTEMPTS: int = 3  # 네트워크 블립 재시도 횟수 (C-6, 하드코딩 금지)
+    GITHUB_RETRY_BACKOFF: float = 0.2  # 지수 백오프 배수
+    GITHUB_RETRY_MAX_WAIT: float = 2.0  # 백오프 상한
+    BREAKER_FAIL_MAX: int = 5  # 연속 실패 임계 → 회로 개방 (GitHub·LLM·Vision 공용)
+    BREAKER_RESET_SEC: int = 30  # 개방 후 반개방까지 대기
     DOC_MIN_CHARS_PER_PAGE: int = 50  # G-4 텍스트 충분 판정
     OCR_CONFIDENCE_MIN: float = 0.6
     STAR_MAX_TOKENS: int = 1500  # H-2 STAR 보완 (경량 모델, 짧은 텍스트). effort는 haiku엔 미지원이라 안 씀
