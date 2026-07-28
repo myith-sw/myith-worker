@@ -246,8 +246,9 @@ payload    = json.loads(message.body)          # 껍데기 없음. roadmapId 등
 
 바인딩 라우팅 키 = eventType 문자열 그대로. 발신은 fanout에 `routing_key=""`. 이름은
 `config/settings.py`(RABBITMQ_* )에 두고 필요 시 환경변수로 덮는다. roadmap-generation 큐는
-우선순위 2(G 교차검증)에서 선언·소비한다 — 그전엔 미바인딩이라 Core 발행이 unroutable로
-버려지고 `ConsistencyScheduler` 안전망이 폴백 조립한다(D-5).
+**우선순위 2(G-2 서술형)에서 선언·바인딩·소비 완료** — `RoadmapGenerationRequested` → 역량 추출
+→ `user_competency` 쓰기 → `CompetencyExtracted`. 단 **GitHub(G-3)·PDF(G-4)는 미구현**이라
+`experiences[].content`·`narrative`만 분석하고 `repoUrl`·`fileKey`는 아직 무시한다.
 
 ## D-2. 수신 — 작업 큐 (경쟁 소비)
 
