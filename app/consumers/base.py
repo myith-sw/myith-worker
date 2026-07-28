@@ -29,6 +29,7 @@ import aio_pika
 from sqlalchemy import delete
 from sqlalchemy.exc import IntegrityError
 
+from app.competency.github import HttpxGitHubClient
 from app.competency.repository import CompetencyRepository
 from app.config.settings import settings
 from app.consumers.ai_enhancement import handle_ai_enhancement
@@ -106,18 +107,20 @@ async def _safe_reject(message: aio_pika.abc.AbstractIncomingMessage) -> None:
         logger.warning("reject 실패(채널 상태 확인)")
 
 
-async def _dispatch(event_type, payload, provider, publisher, repo, trace_id) -> None:
+async def _dispatch(event_type, payload, provider, publisher, repo, github_client, trace_id) -> None:
     if event_type == _AI:
         await handle_ai_enhancement(payload, provider, publisher, trace_id=trace_id)
     elif event_type == _ROADMAP:
-        await handle_roadmap_generation(payload, provider, publisher, repo, trace_id=trace_id)
+        await handle_roadmap_generation(
+            payload, provider, publisher, repo, github_client=github_client, trace_id=trace_id
+        )
     elif event_type == _PROFILE:
         await handle_profile_build(payload)
     else:  # 바인딩상 도달 불가. 방어적으로 로그만 남기고 ACK(정상 반환).
         logger.warning("미지원 eventType, ACK+무시: %s", event_type)
 
 
-def _make_handler(session_factory, provider: LLMProvider | None, publisher, repo):
+def _make_handler(session_factory, provider: LLMProvider | None, publisher, repo, github_client):
     async def on_message(message: aio_pika.abc.AbstractIncomingMessage) -> None:
         # 수동 ack/reject: 성공/중복=ACK, 헤더누락·처리실패=DLQ(reject requeue=False).
         event_id = _hdr(message, "eventId")
@@ -133,7 +136,7 @@ def _make_handler(session_factory, provider: LLMProvider | None, publisher, repo
             return
         try:
             payload = json.loads(message.body)  # body = payload 자체(껍데기 없음)
-            await _dispatch(event_type, payload, provider, publisher, repo, trace_id)
+            await _dispatch(event_type, payload, provider, publisher, repo, github_client, trace_id)
             await message.ack()
         except Exception:  # noqa: BLE001 — 어떤 처리 실패든 원본 보존 위해 DLQ로
             # 보상: 선점 해제 → DLQ 재처리 시 재시도 가능(H-2 FAILED-always 보존).
@@ -187,7 +190,8 @@ async def setup_messaging(provider: LLMProvider | None) -> MessagingRuntime:
         session_factory = get_async_sessionmaker()
         publisher = AioPikaFanoutPublisher(worker_fanout)
         repo = CompetencyRepository(session_factory)
-        handler = _make_handler(session_factory, provider, publisher, repo)
+        github_client = HttpxGitHubClient(token=settings.GITHUB_TOKEN)  # 토큰 없어도 동작(60/h)
+        handler = _make_handler(session_factory, provider, publisher, repo, github_client)
 
         # AI 보완 (실 핸들러) — 우선순위 1
         ai_queue = await channel.declare_queue(
