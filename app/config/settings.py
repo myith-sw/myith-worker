@@ -97,6 +97,8 @@ class Settings(BaseSettings):
     LLM_SCHEMA_RETRIES: int = 2
     DOC_MIN_CHARS_PER_PAGE: int = 50  # G-4 텍스트 충분 판정
     OCR_CONFIDENCE_MIN: float = 0.6
+    STAR_MAX_TOKENS: int = 1500  # H-2 STAR 보완 (경량 모델, 짧은 텍스트). effort는 haiku엔 미지원이라 안 씀
+    LLM_PERSONALIZE_ENABLED: bool = True  # H-1 층2(문구 개인화) on/off. 실패·타임아웃 시 층1로 폴백
 
     # compose의 `${VAR:-}`는 미설정 시 빈 문자열을 주입한다. 빈 문자열은
     # "제공되지 않음"으로 취급해 None으로 바꾼다 → 폴백이 정상 동작한다 (O-3).
