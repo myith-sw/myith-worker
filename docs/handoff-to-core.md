@@ -4,6 +4,35 @@ Worker가 Core에 의존하거나, Core 쪽 변경이 필요한 항목을 기록
 
 ---
 
+## [2026-07-28] H-1 층2 퀘스트 문구 개인화 — 전달 계약 미정 (스톱)
+
+**발단:** 우선순위 2 후속 ④ H-1. 층1(`app/pipeline/guidance.py guidance_tier`)은 구현됨 —
+M값 → guidance 4종 키. quest_templates[].guidance(4변형)는 job_profile에 있고 Core가 읽는다.
+**층2(narrative 기반 LLM 다듬기)를 착수하려니 결과를 Core에 전달할 채널이 없다.**
+
+**저쪽(Core) 일인 이유:** 층2 결과는 **사용자별**(narrative 반영)이고 LLM은 Worker 전용이다.
+그런데 로드맵 조립은 Core 소유(PART L)이고, 개인화된 guidance를 담을 곳이 없다:
+- `CompetencyExtracted`는 4필드 competencies 고정(W3) — guidance 못 넣음.
+- `user_competency` 테이블에 guidance 컬럼 없음.
+- job_profile.quest_templates.guidance는 per-job(사용자 무관) — per-user 값 못 담음.
+
+**필요한 결정(Core):** 아래 중 하나로 전달 계약을 정해야 층2를 완결할 수 있다.
+- (A) 신규 이벤트 쌍: Core가 `GuidancePersonalizeRequested`(선택된 guidance 문자열 + narrative)
+  발행 → Worker가 다듬어 `GuidancePersonalized`로 반환. 조립 직전 Core가 반영.
+- (B) `CompetencyExtracted`에 개인화 guidance 배열 추가(W3 계약 확장 — Core 합의 필요).
+- (C) Worker가 per-user guidance를 쓸 새 테이블(예: `user_quest_guidance`)을 소유하고 Core가 읽음.
+
+**Worker 쪽 준비된 것 / 확정 사양(구현 예정):** 층2 LLM 호출은 확정 사양대로 한다 —
+narrative 있을 때만 **사용자당 1회**(퀘스트마다 금지), `claude-sonnet-5`(LLM_MODEL),
+`output_config={"effort":"low"}` + `thinking={"type":"disabled"}` + `max_tokens=300`, 샘플링
+파라미터 금지. 층1이 고른 문자열들을 한 번에 다듬어 한 번에 받는다. 실패·타임아웃·스키마 이탈은
+층1 결과 그대로 폴백(C-3). `LLM_PERSONALIZE_ENABLED=false`로 통째로 off. **직무별 캐싱 금지**
+(narrative 반영 자리가 사라짐). title/완료기준/level/axis는 불변(C-2).
+
+**미결:** 위 (A)/(B)/(C) 중 Core의 선택. 정해지면 Worker가 소비/발행 측을 즉시 구현한다.
+
+---
+
 ## [2026-07-26] 공유 테이블 DDL을 Worker Alembic으로 이관 — Core Flyway 정리 필요
 
 **발단:** 확정 D-13/W2. Core Flyway가 만들던 공유 테이블 5개를 Worker Alembic이 소유하게 됨.
