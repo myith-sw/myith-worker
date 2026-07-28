@@ -1212,6 +1212,7 @@ ls -la Dockerfile .dockerignore
 | `GCP_REGION` | Vertex 리전 | 설정 기본값 `us-east5` |
 | `LLM_MODEL` | 모델명 (I-4) | 설정 기본값 `claude-sonnet-5` |
 | `LLM_MODEL_LIGHT` | AI 보완·템플릿용 경량 모델 (H-2) | 설정 기본값 `claude-haiku-4-5` |
+| `LLM_PERSONALIZE_ENABLED` | H-1 층2 문구 개인화 on/off 토글 | 설정 기본값 `true`. `false`면 층2 스킵(층1만) |
 | `NCS_SERVICE_KEY` | data.go.kr 인증키 (I-2, I-3) | 오프라인 배치 불가. 시드로 대체 |
 | `WANTED_API_KEY` | 채용 소스 (I-1) | 수집 불가 |
 | `GITHUB_TOKEN` | repo 분석 (G-3) | 미인증 호출(시간당 60회 제한) |
