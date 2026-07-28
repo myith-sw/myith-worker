@@ -29,9 +29,11 @@ import aio_pika
 from sqlalchemy import delete
 from sqlalchemy.exc import IntegrityError
 
+from app.competency.repository import CompetencyRepository
 from app.config.settings import settings
 from app.consumers.ai_enhancement import handle_ai_enhancement
 from app.consumers.profile_build import handle_profile_build
+from app.consumers.roadmap_generation import handle_roadmap_generation
 from app.llm.provider import LLMProvider
 from app.persistence.database import get_async_sessionmaker
 from app.persistence.models import WorkerProcessedEvent
@@ -39,12 +41,10 @@ from app.publishers.fanout import AioPikaFanoutPublisher
 
 logger = logging.getLogger("myith.consumer.base")
 
-# Core→Worker 바인딩. 라우팅 키(=eventType) → (큐 설정 이름, 핸들러 종류).
-# roadmap-generation은 우선순위 2에서 추가한다 — 지금 선언하면 소비자 없이 durable 큐가
-# 쌓인다. 미바인딩이면 Core 발행은 topic 익스체인지에서 unroutable로 버려지고, Core의
-# ConsistencyScheduler(60초) 안전망이 자가진단 폴백으로 로드맵을 완성한다(D-5).
+# Core→Worker 바인딩. 라우팅 키 = eventType 문자열 그대로.
 _AI = "AiEnhancementRequested"
 _PROFILE = "JobProfileBuildRequested"
+_ROADMAP = "RoadmapGenerationRequested"  # 우선순위 2(G 교차검증)에서 선언·소비
 
 
 def _hdr(message: aio_pika.abc.AbstractIncomingMessage, key: str) -> str | None:
@@ -106,16 +106,18 @@ async def _safe_reject(message: aio_pika.abc.AbstractIncomingMessage) -> None:
         logger.warning("reject 실패(채널 상태 확인)")
 
 
-async def _dispatch(event_type, payload, provider, publisher, trace_id) -> None:
+async def _dispatch(event_type, payload, provider, publisher, repo, trace_id) -> None:
     if event_type == _AI:
         await handle_ai_enhancement(payload, provider, publisher, trace_id=trace_id)
+    elif event_type == _ROADMAP:
+        await handle_roadmap_generation(payload, provider, publisher, repo, trace_id=trace_id)
     elif event_type == _PROFILE:
         await handle_profile_build(payload)
     else:  # 바인딩상 도달 불가. 방어적으로 로그만 남기고 ACK(정상 반환).
         logger.warning("미지원 eventType, ACK+무시: %s", event_type)
 
 
-def _make_handler(session_factory, provider: LLMProvider | None, publisher):
+def _make_handler(session_factory, provider: LLMProvider | None, publisher, repo):
     async def on_message(message: aio_pika.abc.AbstractIncomingMessage) -> None:
         # 수동 ack/reject: 성공/중복=ACK, 헤더누락·처리실패=DLQ(reject requeue=False).
         event_id = _hdr(message, "eventId")
@@ -131,7 +133,7 @@ def _make_handler(session_factory, provider: LLMProvider | None, publisher):
             return
         try:
             payload = json.loads(message.body)  # body = payload 자체(껍데기 없음)
-            await _dispatch(event_type, payload, provider, publisher, trace_id)
+            await _dispatch(event_type, payload, provider, publisher, repo, trace_id)
             await message.ack()
         except Exception:  # noqa: BLE001 — 어떤 처리 실패든 원본 보존 위해 DLQ로
             # 보상: 선점 해제 → DLQ 재처리 시 재시도 가능(H-2 FAILED-always 보존).
@@ -184,7 +186,8 @@ async def setup_messaging(provider: LLMProvider | None) -> MessagingRuntime:
 
         session_factory = get_async_sessionmaker()
         publisher = AioPikaFanoutPublisher(worker_fanout)
-        handler = _make_handler(session_factory, provider, publisher)
+        repo = CompetencyRepository(session_factory)
+        handler = _make_handler(session_factory, provider, publisher, repo)
 
         # AI 보완 (실 핸들러) — 우선순위 1
         ai_queue = await channel.declare_queue(
@@ -192,6 +195,13 @@ async def setup_messaging(provider: LLMProvider | None) -> MessagingRuntime:
         )
         await ai_queue.bind(core_events, routing_key=_AI)
         await ai_queue.consume(handler)
+
+        # 로드맵 생성 = G 교차검증 (실 핸들러) — 우선순위 2. 이 큐 바인딩이 있어야 경로가 열린다.
+        roadmap_queue = await channel.declare_queue(
+            settings.RABBITMQ_QUEUE_ROADMAP, durable=True, arguments=dlq_args
+        )
+        await roadmap_queue.bind(core_events, routing_key=_ROADMAP)
+        await roadmap_queue.consume(handler)
 
         # 프로필 빌드 (ACK+로그) — 큐 적체 방지 + 관측
         pb_queue = await channel.declare_queue(
@@ -206,8 +216,9 @@ async def setup_messaging(provider: LLMProvider | None) -> MessagingRuntime:
         raise
 
     logger.info(
-        "메시징 소비 시작: %s, %s → fanout=%s (provider=%s)",
+        "메시징 소비 시작: %s, %s, %s → fanout=%s (provider=%s)",
         settings.RABBITMQ_QUEUE_AI_ENHANCEMENT,
+        settings.RABBITMQ_QUEUE_ROADMAP,
         settings.RABBITMQ_QUEUE_PROFILE_BUILD,
         settings.RABBITMQ_WORKER_FANOUT,
         "on" if provider is not None else "off(폴백)",
