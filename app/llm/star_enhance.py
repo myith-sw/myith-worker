@@ -132,9 +132,11 @@ async def build_star_enhancement(
             feedback = raw.get("feedback") or []
             resume = str(raw.get("resumeDraft") or "")
 
-            # 가드 3: 빈 항목 유지
+            # 가드 3: 빈 항목 유지 + 사용자가 쓴 항목은 AI가 비워도 원문 유지(데이터 유실 방지).
+            # 원문이 공백이면 공백(창작 금지). 원문이 있는데 AI가 빈 값을 주면(무의미한 글을
+            # 못 다듬는 경우 등) 원문을 그대로 둔다 — '적용'해도 사용자가 쓴 글이 사라지지 않는다.
             enhanced = {
-                f: ("" if not original[f] else str(enhanced_in.get(f, "")).strip())
+                f: ("" if not original[f] else (str(enhanced_in.get(f, "")).strip() or original[f]))
                 for f in _FIELDS
             }
             # 가드 2: 사실 생성 후처리 검증 (전 항목 합쳐 대조)
