@@ -64,13 +64,16 @@ def build_request_kwargs(
     prompt: str,
     schema: dict,
     max_tokens: int,
+    system: str | None = None,
     effort: str | None = None,
     thinking_disabled: bool = False,
 ) -> dict:
     """messages.create에 넘길 kwargs를 만드는 유일한 지점. 구조화 출력만 기본 지정한다.
 
-    effort는 sonnet-5+ 계열에서만 허용된다(haiku는 400, UNSUPPORTED_PARAMS 참조) — 호출부가
-    모델에 맞게만 넘긴다. thinking_disabled는 H-1 층2 확정 사양. 샘플링 파라미터는 넣지 않는다.
+    system(선택): 지시부를 `system`으로 올리면 사용자 입력(user)보다 상위에 있어 프롬프트
+    인젝션 방어가 강해진다(C-4). **미전달 시 system 키를 아예 넣지 않아 기존과 동일하게 동작한다.**
+    effort는 sonnet-5+ 계열에서만 허용된다(haiku는 400). thinking_disabled는 H-1 층2 확정 사양.
+    샘플링 파라미터는 넣지 않는다.
     """
     output_config: dict = {"format": {"type": "json_schema", "schema": schema}}
     if effort:
@@ -81,6 +84,8 @@ def build_request_kwargs(
         "messages": [{"role": "user", "content": prompt}],
         "output_config": output_config,
     }
+    if system:
+        kwargs["system"] = system
     if thinking_disabled:
         kwargs["thinking"] = {"type": "disabled"}
     return kwargs
@@ -94,6 +99,7 @@ class LLMProvider(Protocol):
         schema: dict,
         model: str,
         max_tokens: int,
+        system: str | None = None,
         effort: str | None = None,
         thinking_disabled: bool = False,
     ) -> dict:
@@ -101,7 +107,14 @@ class LLMProvider(Protocol):
         ...
 
     async def complete_with_images(
-        self, *, prompt: str, images: list[bytes], schema: dict, model: str, max_tokens: int
+        self,
+        *,
+        prompt: str,
+        images: list[bytes],
+        schema: dict,
+        model: str,
+        max_tokens: int,
+        system: str | None = None,
     ) -> dict:
         """이미지 + prompt를 보내고 schema JSON을 돌려준다(G-4 Vision). 실패는 예외로 올린다."""
         ...
@@ -126,6 +139,7 @@ class AnthropicLLMProvider:
         schema: dict,
         model: str,
         max_tokens: int,
+        system: str | None = None,
         effort: str | None = None,
         thinking_disabled: bool = False,
     ) -> dict:
@@ -136,6 +150,7 @@ class AnthropicLLMProvider:
                 prompt=prompt,
                 schema=schema,
                 max_tokens=max_tokens,
+                system=system,
                 effort=effort,
                 thinking_disabled=thinking_disabled,
             ),
@@ -148,7 +163,14 @@ class AnthropicLLMProvider:
         return json.loads(text)  # output_config.format이 유효 JSON을 보장
 
     async def complete_with_images(
-        self, *, prompt: str, images: list[bytes], schema: dict, model: str, max_tokens: int
+        self,
+        *,
+        prompt: str,
+        images: list[bytes],
+        schema: dict,
+        model: str,
+        max_tokens: int,
+        system: str | None = None,
     ) -> dict:
         # 이미지 블록 + 텍스트. 금지 파라미터 없이 구조화 출력만(같은 브레이커로 감쌈).
         # media_type은 매직바이트로 판별 — PDF 렌더는 PNG지만 업로드 이미지는 jpg/webp일 수 있다.
@@ -164,13 +186,15 @@ class AnthropicLLMProvider:
             for img in images
         ]
         content.append({"type": "text", "text": prompt})
-        resp = await self._breaker.call_async(
-            self._client.messages.create,
-            model=model,
-            max_tokens=max_tokens,
-            messages=[{"role": "user", "content": content}],
-            output_config={"format": {"type": "json_schema", "schema": schema}},
-        )
+        create_kwargs: dict = {
+            "model": model,
+            "max_tokens": max_tokens,
+            "messages": [{"role": "user", "content": content}],
+            "output_config": {"format": {"type": "json_schema", "schema": schema}},
+        }
+        if system:  # 지시부를 system으로 → 이미지 안 인젝션 방어 강화(C-4)
+            create_kwargs["system"] = system
+        resp = await self._breaker.call_async(self._client.messages.create, **create_kwargs)
         text = next(
             (b.text for b in resp.content if getattr(b, "type", None) == "text"), None
         )

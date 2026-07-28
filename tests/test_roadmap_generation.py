@@ -30,7 +30,7 @@ class FakeProvider:
     def __init__(self, response):
         self._response = response
 
-    async def complete_json(self, *, prompt, schema, model, max_tokens, effort=None, thinking_disabled=False):
+    async def complete_json(self, *, prompt, schema, model, max_tokens, system=None, effort=None, thinking_disabled=False):
         return self._response
 
 
