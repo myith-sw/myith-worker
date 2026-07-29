@@ -68,8 +68,8 @@ flowchart TD
 
 ## 그림 2 — 가드 게이트 단면도 (LLM을 믿지 않는다)
 
-LLM 판정이 게이트를 통과하며 줄어든다. 숫자는 [guard-trace-sample.md](guard-trace-sample.md)의
-가드 코드 실행값(예시 입력, 실측은 시연 직전 교체). **폐기된 항목은 옆으로 빠진다.**
+LLM 판정이 게이트를 통과하며 줄어든다. 아래 숫자는 [guard-trace-sample.md](guard-trace-sample.md) **§1 모의
+실행값**(입력만 모의, 가드 로직은 실측)이다 — 발표엔 §2 실측으로 교체한다. **폐기된 항목은 옆으로 빠진다.**
 
 ```mermaid
 flowchart LR

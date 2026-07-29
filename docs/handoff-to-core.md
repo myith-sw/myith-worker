@@ -4,6 +4,35 @@ Worker가 Core에 의존하거나, Core 쪽 변경이 필요한 항목을 기록
 
 ---
 
+## [2026-07-29] 퀘스트 추천 자격 — 표시 상한 + 정렬 (Core 확정, 기록 일치)
+
+**발단:** 검수 CSV(review_job_certs.csv) 덤프 중 스킬당 추천 자격이 최대 27개까지 붙는 것을 발견.
+화면에 전부 노출하면 지저분하다. 상한·정렬을 어디서 결정할지 논의 → **렌더 시점 결정이라 Core 몫.**
+
+**저쪽(Core) 일인 이유:** C-1 소유권 — 퀘스트↔자격 표시는 Core가 `roadmap`·`quest`를 조립·렌더할 때
+`ncs_certification`을 `skill → ncsUnitCode`로 조인해 만든다. `job_profile`에는 자격이 들어있지 않고
+(quest_templates엔 `ncsUnitCode`만) 몇 개를 보여줄지는 조립 로직의 판단이다. Worker는 저장까지만 한다.
+
+**Core가 확정한 값 (이미 지시됨, 이 기록도 이 값으로 맞춤):**
+- **정렬:** `unit_type` **'필수' 우선 → `cert_name` 가나다순**
+- **상한:** **5개** (`application.yml` 설정값)
+- **응답:** `moreCertificationCount`(int) 추가 — 상한 초과분 개수. **5개 이하면 0**
+- **근거 데이터(Worker 실측, 2026-07-29):** 스킬당 자격 수 **min 1 / max 27 / 중앙값 2 / 평균 3.8**,
+  **5개 이상이 79 진입점 중 15개.** (`scripts/gen_review_csvs.py` → review_job_certs.csv 집계)
+
+**Worker 쪽 계약 (구현됨):**
+- `ncs_certification`에 **연계 자격을 전부 저장한다** (I-3: "한 능력단위에 연계된 자격은 전부"). 상한을
+  적용해 버리지 않는다 — 저장은 무손실, 상한은 렌더에서.
+- 표시명은 **정규화된 값**을 저장한다 (Part 2, `cert_transform`): 코드형 `SW개발_L5_25V2`를
+  `SW개발 (과정평가형 L5)`로 relabel + 버전 중복 collapse. **Core는 `cert_name`을 그대로 노출하면 된다**
+  — 추가 파싱 불필요. `unit_type`(필수/선택)·`cert_code`는 그대로 있다(정렬·키에 사용).
+- 검수 HIDE(노출 제외)는 Worker 오버라이드(`cert_hidden.json`)에서 적재 제외로 처리하므로, Core가
+  보는 `ncs_certification` 자체에 이미 반영돼 있다(별도 필터 불필요).
+
+**미결:** 없음. Core는 위 3개(정렬·상한5·moreCertificationCount)만 구현하면 된다.
+
+---
+
 ## [2026-07-28] H-1 층2 퀘스트 문구 개인화 — ✅ (C) 확정. Worker 쓰기 구현됨 / Core 읽기·층1 필요
 
 **결정(2026-07-28, 시드가이드 AI가 Core 코드 확인):** **(C) — Worker 소유 `user_quest_guidance` 테이블.**
