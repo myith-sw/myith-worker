@@ -13,7 +13,32 @@ def _item(code, ev, conf=0.9, mastery=0.7):
 
 
 def _guard(items, conf_min=0.6, ev_max=200):
-    return apply_guards(items, ALLOWED, SOURCE, conf_min=conf_min, ev_max=ev_max)
+    accepted, _trace = apply_guards(items, ALLOWED, SOURCE, conf_min=conf_min, ev_max=ev_max)
+    return accepted
+
+
+def _trace(items, conf_min=0.6, ev_max=200):
+    _accepted, trace = apply_guards(items, ALLOWED, SOURCE, conf_min=conf_min, ev_max=ev_max)
+    return trace
+
+
+# ── 가드 트레이스 (Part 4 ①): 폐기 사유별 구조화 카운트 ────────────────────
+
+
+def test_guard_trace_counts_by_reason():
+    items = [
+        _item("react", "React로 대시보드를 구현하고"),  # accepted
+        _item("react", "컴포넌트를 설계했다"),  # 같은 스킬 → duplicate
+        _item("python", "React로 대시보드를 구현하고"),  # 목록 밖 → out_of_set
+        _item("docker", "존재하지 않는 근거"),  # 원문에 없음 → no_evidence
+        _item("spring", "Docker로 배포까지 진행했다", conf=0.3),  # 임계 미달 → low_confidence
+        {"skillCode": "docker", "evidence": "Docker로 배포까지 진행했다", "confidence": "bad", "mastery": 0.5},  # schema
+    ]
+    t = _trace(items)
+    assert t["llm_returned"] == 6 and t["input_candidates"] == len(ALLOWED)
+    assert t["accepted"] == 1 and t["dropped_duplicate"] == 1
+    assert t["dropped_out_of_set"] == 1 and t["dropped_no_evidence"] == 1
+    assert t["dropped_low_confidence"] == 1 and t["dropped_schema"] == 1
 
 
 # ── 가드 1: 닫힌 후보 집합 ────────────────────────────────────────────────

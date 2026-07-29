@@ -115,7 +115,9 @@ async def _dispatch(
     event_type, payload, provider, publisher, repo, github_client, doc_source, trace_id
 ) -> None:
     if event_type == _AI:
-        await handle_ai_enhancement(payload, provider, publisher, trace_id=trace_id)
+        await handle_ai_enhancement(
+            payload, provider, publisher, evidence_reader=repo.read_evidence, trace_id=trace_id
+        )
     elif event_type == _ROADMAP:
         await handle_roadmap_generation(
             payload, provider, publisher, repo,

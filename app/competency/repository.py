@@ -84,6 +84,25 @@ class CompetencyRepository:
                 await session.execute(stmt)
             await session.commit()
 
+    async def read_evidence(self, roadmap_id: int, skill_code: str) -> str | None:
+        """user_competency에서 (roadmap_id, skill_code)의 evidence를 읽는다(H-2 근거 주입).
+
+        없거나 DB 없음이면 None. 호출부는 None이면 근거 없이 기존 경로로 진행한다."""
+        if self._sf is None or not skill_code or roadmap_id is None:
+            return None
+        async with self._sf() as session:
+            row = (
+                await session.execute(
+                    select(UserCompetency.evidence)
+                    .where(
+                        UserCompetency.roadmap_id == roadmap_id,
+                        UserCompetency.skill_code == skill_code,
+                    )
+                    .limit(1)
+                )
+            ).scalar_one_or_none()
+        return row or None
+
     async def write_competencies(self, roadmap_id: int, competencies: list[dict]) -> None:
         """user_competency에 부분 upsert(D-4). 빈 배열은 no-op(삭제 안 함)."""
         if self._sf is None:

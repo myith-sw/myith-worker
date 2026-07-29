@@ -14,6 +14,7 @@ mastery·confidence는 0.0~1.0. >1.0은 데이터 오류로 폐기. evidence는 
 
 from __future__ import annotations
 
+import json
 import logging
 from pathlib import Path
 
@@ -65,43 +66,66 @@ def build_prompt(content: str, skills: list[dict]) -> tuple[str, str]:
 
 
 def _clean_one(item: dict, allowed: set[str], source_norm: str, conf_min: float, ev_max: int):
-    """한 판정에 가드 1~3 + 범위 검증을 적용. 통과하면 4필드 dict, 아니면 None."""
+    """한 판정에 가드 1~3 + 범위 검증. 반환 (4필드 dict | None, 사유).
+
+    사유 ∈ {accepted, out_of_set, no_evidence, low_confidence, schema} — 트레이스 카운트용.
+    """
     code = item.get("skillCode")
     if code not in allowed:  # 가드 1: 닫힌 후보 집합
-        return None
+        return None, "out_of_set"
     evidence = str(item.get("evidence") or "").strip()
     if not evidence or _normalize_ws(evidence) not in source_norm:  # 가드 2: 근거 강제(원문 실재)
-        return None
+        return None, "no_evidence"
     try:
         mastery = float(item.get("mastery"))
         confidence = float(item.get("confidence"))
     except (TypeError, ValueError):
-        return None
+        return None, "schema"
     if confidence < conf_min:  # 가드 3: 신뢰도 임계
-        return None
+        return None, "low_confidence"
     if not (0.0 <= mastery <= 1.0) or not (0.0 <= confidence <= 1.0):  # 범위(>1=데이터 오류)
-        return None
+        return None, "schema"
     return {
         "skillCode": code,
         "mastery": round(mastery, 2),
         "evidence": evidence[:ev_max],
         "confidence": round(confidence, 2),
-    }
+    }, "accepted"
 
 
 def apply_guards(
     raw_items: list[dict], allowed: set[str], source: str, *, conf_min: float, ev_max: int
-) -> list[dict]:
-    """가드 1~3 적용 + skillCode 중복 제거(첫 판정 우선). 순수 함수."""
+) -> tuple[list[dict], dict]:
+    """가드 1~3 적용 + skillCode 중복 제거. 반환 (통과 목록, 트레이스 카운터).
+
+    트레이스는 "LLM이 몇 개 냈고 가드가 몇 개를 왜 버렸는지"의 구조화 근거다(발표·관측용).
+    """
     source_norm = _normalize_ws(source)
     out: list[dict] = []
     seen: set[str] = set()
+    trace = {
+        "input_candidates": len(allowed),  # 닫힌 집합으로 준 스킬 수
+        "llm_returned": len(raw_items),
+        "dropped_out_of_set": 0,
+        "dropped_no_evidence": 0,
+        "dropped_low_confidence": 0,
+        "dropped_schema": 0,
+        "dropped_fabrication": 0,  # competency엔 별도 사실검증 없음(STAR H-2 가드). 형식 일관용 0
+        "dropped_duplicate": 0,
+        "accepted": 0,
+    }
     for item in raw_items:
-        cleaned = _clean_one(item, allowed, source_norm, conf_min, ev_max)
-        if cleaned and cleaned["skillCode"] not in seen:
-            seen.add(cleaned["skillCode"])
-            out.append(cleaned)
-    return out
+        cleaned, reason = _clean_one(item, allowed, source_norm, conf_min, ev_max)
+        if reason != "accepted":
+            trace["dropped_" + reason] += 1
+            continue
+        if cleaned["skillCode"] in seen:
+            trace["dropped_duplicate"] += 1
+            continue
+        seen.add(cleaned["skillCode"])
+        out.append(cleaned)
+        trace["accepted"] += 1
+    return out, trace
 
 
 async def extract_competencies(
@@ -133,13 +157,16 @@ async def extract_competencies(
                 max_tokens=settings.COMPETENCY_MAX_TOKENS,
             )
             items = raw.get("competencies") or []
-            return apply_guards(
+            accepted, trace = apply_guards(
                 items,
                 allowed,
                 content,
                 conf_min=settings.COMPETENCY_CONFIDENCE_MIN,
                 ev_max=settings.EVIDENCE_MAX_LEN,
             )
+            # 구조화 트레이스 — 발표에서 "LLM N개 중 M개 폐기"를 읽을 근거. 로그만(계약·DB 변경 0).
+            logger.info("guard_trace %s", json.dumps(trace, ensure_ascii=False))
+            return accepted
         except Exception as e:  # noqa: BLE001 — 스키마 이탈·파싱·LLM 실패 모두 재시도 대상
             last_err = e
             logger.warning("역량 추출 시도 %d 실패: %s", attempt + 1, e)

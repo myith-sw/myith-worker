@@ -32,14 +32,30 @@ async def handle_ai_enhancement(
     provider: LLMProvider | None,
     publisher: FanoutPublisher,
     *,
+    evidence_reader=None,
     trace_id: str | None = None,
 ) -> dict:
-    """AiEnhancementRequested를 처리하고 AiEnhancementCompleted를 발행. 발행한 봉투를 반환."""
+    """AiEnhancementRequested를 처리하고 AiEnhancementCompleted를 발행. 발행한 봉투를 반환.
+
+    skillCode(nullable)가 있고 evidence_reader가 주어지면 user_competency의 evidence를 읽어 STAR
+    보완의 참고로 넣는다. skillCode 없음·null·행 없음·DB 실패는 전부 **근거 없이 기존 경로**로 진행한다
+    (활동형/사용자정의 퀘스트·구버전 Core 메시지 대응). evidence 조회 실패가 AI 보완을 죽이지 않는다.
+    """
     request_id = payload.get("requestId")  # 순수 UUID. 접두어 없이 그대로 되돌려준다.
     roadmap_id = payload.get("roadmapId")
     quest_id = payload.get("questId")
+    skill_code = payload.get("skillCode")  # nullable — 활동형/사용자정의 퀘스트, 구버전 Core엔 없음
     star = payload.get("star") or {}
     quest_context = payload.get("questContext") or payload.get("style") or ""
+
+    # evidence 조회는 메인 try 밖에서 — 실패해도 FAILED가 아니라 근거 없이 계속(3-5).
+    evidence = None
+    if evidence_reader is not None and isinstance(skill_code, str) and skill_code:
+        try:
+            evidence = await evidence_reader(roadmap_id, skill_code)
+        except Exception as e:  # noqa: BLE001 — DB 조회 실패는 삼키고 근거 없이 진행
+            logger.warning("evidence 조회 실패 → 근거 없이 진행 (requestId=%s): %s", request_id, e)
+            evidence = None
 
     status = "COMPLETED"
     error_code = None
@@ -47,7 +63,7 @@ async def handle_ai_enhancement(
     try:
         if provider is None:
             raise RuntimeError("LLM 공급자 비활성(폴백)")
-        result = await build_star_enhancement(star, quest_context, provider)
+        result = await build_star_enhancement(star, quest_context, provider, evidence=evidence)
     except Exception as e:  # noqa: BLE001 — 어떤 실패든 FAILED로 발행(무한 폴링 방지)
         status = "FAILED"
         error_code = "AI_PROVIDER_ERROR"

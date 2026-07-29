@@ -50,6 +50,56 @@ def _run(coro):
     return asyncio.run(coro)
 
 
+# ── Part 3: evidence 주입 — skillCode nullable · DB 실패 방어 ─────────────────
+
+
+class FakeReader:
+    def __init__(self, mapping=None, *, raises=None):
+        self._mapping = mapping or {}
+        self._raises = raises
+        self.calls = []
+
+    async def __call__(self, roadmap_id, skill_code):
+        self.calls.append((roadmap_id, skill_code))
+        if self._raises:
+            raise self._raises
+        return self._mapping.get(skill_code)
+
+
+def test_evidence_read_when_skillcode_present():
+    reader = FakeReader({"docker": "Docker로 배포했다"})
+    req = {**REQ, "skillCode": "docker"}
+    _run(handle_ai_enhancement(req, FakeProvider(GOOD), FakePublisher(), evidence_reader=reader))
+    assert reader.calls == [(1, "docker")]  # (roadmapId, skillCode)로 조회
+
+
+def test_no_skillcode_skips_evidence_read():  # 회귀: skillCode 필드 없음(구버전 Core)
+    reader = FakeReader({"docker": "x"})
+    env = _run(handle_ai_enhancement(REQ, FakeProvider(GOOD), FakePublisher(), evidence_reader=reader))
+    assert reader.calls == [] and env["payload"]["status"] == "COMPLETED"
+
+
+def test_null_skillcode_skips_evidence_read():  # 활동형 퀘스트 → skillCode null
+    reader = FakeReader({})
+    req = {**REQ, "skillCode": None}
+    env = _run(handle_ai_enhancement(req, FakeProvider(GOOD), FakePublisher(), evidence_reader=reader))
+    assert reader.calls == [] and env["payload"]["status"] == "COMPLETED"
+
+
+def test_no_matching_evidence_row_proceeds():
+    reader = FakeReader({})  # docker 매핑 없음 → None
+    req = {**REQ, "skillCode": "docker"}
+    env = _run(handle_ai_enhancement(req, FakeProvider(GOOD), FakePublisher(), evidence_reader=reader))
+    assert env["payload"]["status"] == "COMPLETED"
+
+
+def test_evidence_read_exception_does_not_fail():  # 🔴 DB 실패가 AI 보완을 죽이지 않는다
+    reader = FakeReader(raises=RuntimeError("db down"))
+    req = {**REQ, "skillCode": "docker"}
+    env = _run(handle_ai_enhancement(req, FakeProvider(GOOD), FakePublisher(), evidence_reader=reader))
+    assert env["payload"]["status"] == "COMPLETED"  # FAILED 아님
+
+
 # ── 🔴 requestId 그대로 되돌려주기 (aie_ 접두어 금지) ───────────────────────
 
 
