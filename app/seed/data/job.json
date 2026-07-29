@@ -4,7 +4,7 @@
     "job_name": "백엔드 개발자",
     "category_code": "it",
     "category_name": "IT",
-    "tagline": "서버와 데이터베이스로 서비스의 심장을 만드는 직무",
+    "tagline": "서버와 데이터베이스를 설계·구현하고 서비스 운영을 담당하는 직무",
     "ncs_detail_code": "20010202",
     "available": true
   },
@@ -13,7 +13,7 @@
     "job_name": "프론트엔드 개발자",
     "category_code": "it",
     "category_name": "IT",
-    "tagline": "사용자가 직접 만나는 화면을 설계하고 구현하는 직무",
+    "tagline": "사용자 화면을 설계하고 웹·앱 인터페이스를 구현하는 직무",
     "ncs_detail_code": "20010202",
     "available": true
   },
@@ -22,7 +22,7 @@
     "job_name": "보안 엔지니어",
     "category_code": "it",
     "category_name": "IT",
-    "tagline": "시스템과 데이터를 위협으로부터 지키는 직무",
+    "tagline": "정보 시스템의 취약점을 진단하고 보안 대책을 수립·운영하는 직무",
     "ncs_detail_code": "20010206",
     "available": true
   },
@@ -31,7 +31,7 @@
     "job_name": "데이터베이스 엔지니어",
     "category_code": "it",
     "category_name": "IT",
-    "tagline": "데이터를 설계하고 성능까지 책임지는 직무",
+    "tagline": "데이터베이스를 설계·구축하고 성능과 무결성을 관리하는 직무",
     "ncs_detail_code": "20010204",
     "available": true
   },
@@ -40,7 +40,7 @@
     "job_name": "인사 담당자",
     "category_code": "management",
     "category_name": "경영-사무",
-    "tagline": "사람을 뽑고 키우고 평가하는, 조직의 기반을 만드는 직무",
+    "tagline": "채용·교육·평가 등 인적자원 관리 업무를 기획하고 운영하는 직무",
     "ncs_detail_code": "02020201",
     "available": true
   },
@@ -49,7 +49,7 @@
     "job_name": "회계 담당자",
     "category_code": "finance",
     "category_name": "금융-회계",
-    "tagline": "숫자로 회사의 상태를 기록하고 설명하는 직무",
+    "tagline": "회계 거래를 기록하고 재무제표를 작성·분석하는 직무",
     "ncs_detail_code": "02030201",
     "available": true
   },
@@ -58,7 +58,7 @@
     "job_name": "디지털 마케터",
     "category_code": "marketing",
     "category_name": "광고-마케팅",
-    "tagline": "시장을 읽고 고객을 찾아 성과로 증명하는 직무",
+    "tagline": "시장과 고객을 분석해 마케팅 전략을 수립하고 성과를 관리하는 직무",
     "ncs_detail_code": "02010301",
     "available": true
   },
@@ -67,7 +67,7 @@
     "job_name": "해외영업 담당자",
     "category_code": "sales",
     "category_name": "영업-해외영업",
-    "tagline": "국경을 넘어 고객을 만들고 계약을 성사시키는 직무",
+    "tagline": "해외 고객을 발굴하고 수출 계약과 무역 실무를 수행하는 직무",
     "ncs_detail_code": "10010102",
     "available": true
   },
@@ -76,7 +76,7 @@
     "job_name": "기계설계 엔지니어",
     "category_code": "production",
     "category_name": "생산-제조",
-    "tagline": "도면으로 부품을 설계하고 검증하는 직무",
+    "tagline": "기계 부품을 설계하고 도면 작성과 설계 검증을 수행하는 직무",
     "ncs_detail_code": "15010201",
     "available": true
   },
@@ -85,7 +85,7 @@
     "job_name": "UI/UX 디자이너",
     "category_code": "design",
     "category_name": "디자인",
-    "tagline": "사용자를 조사해 쓰기 좋은 화면으로 만드는 직무",
+    "tagline": "사용자 조사를 바탕으로 화면 구조와 인터페이스를 설계하는 직무",
     "ncs_detail_code": "20010207",
     "available": true
   }
