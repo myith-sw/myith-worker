@@ -12,10 +12,13 @@ from dataclasses import asdict
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session
 
+from app.config.settings import settings
+from app.ncs.cert_transform import apply_hidden, transform_certifications
 from app.ncs.records import NcsCertRecord
 from app.ncs.source import NcsSource, get_ncs_source
 from app.persistence.database import session_scope
 from app.persistence.models import NcsCertification
+from app.seed.overrides import load_cert_hidden
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger("myith.ncs.certification")
@@ -55,6 +58,10 @@ def dedupe_certifications(records: list[NcsCertRecord]) -> list[NcsCertRecord]:
 
 def load_certifications(session: Session, source: NcsSource) -> int:
     records = dedupe_certifications(source.fetch_certifications())
+    # Part 2: 코드형 이름 → 표시명 정규화 + 버전 중복 collapse (원본 JSON 무수정, cert_code 보존).
+    records = transform_certifications(records, settings.CERT_ASSESSMENT_LABEL)
+    # 검수(review_apply)에서 HIDE 처리한 (능력단위, cert_code)는 노출 제외.
+    records = apply_hidden(records, load_cert_hidden())
     for r in records:
         values = asdict(r)
         stmt = insert(NcsCertification).values(**values)

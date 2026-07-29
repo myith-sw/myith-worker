@@ -89,6 +89,19 @@ class Settings(BaseSettings):
     SCORING_DEFAULT_S: float = 0.5
     NCS_LEVEL_FALLBACK: int = 4  # 미매핑 스킬 N값 대체 기본 수준 (§1-3)
     NCS_API_DELAY_MS: int = 200  # 자격종목 API 호출 간 지연 (Step 2)
+    # ── 정책값: 자격명 정규화 (Part 2, I-3 코드형 이름) ──────────
+    # 시드 cert_name이 `SW개발_L5_25V2`처럼 코드형이라 화면에 그대로 못 쓴다. 로더에서
+    # `SW개발 (과정평가형 L5)`로 표시명만 바꾼다. 원본 JSON은 수정하지 않고 cert_code는 보존.
+    # 같은 능력단위에 같은 (과정,레벨)이 버전만 달리 여러 개 붙으면(예: _20V2·_22V2·_25V3)
+    # 표시명이 동일해져 중복이므로 최신 버전 하나만 남긴다. YYVn(연도+판)이 verX.Y보다 최신(승인 규칙).
+    CERT_ASSESSMENT_LABEL: str = "과정평가형"  # 코드형 자격명에 주입하는 표시 라벨
+    # review_job_certs 검수용 suspect 자동판정 키워드(직무 계열과 무관하면 사람이 눈으로 최종 HIDE 판정).
+    # 완벽할 필요 없다 — 눈에 걸리게만 하면 된다.
+    CERT_SUSPECT_KEYWORDS: list[str] = [
+        "기계", "금형", "용접", "건축", "토목", "전기", "설비", "미용",
+        "조리", "섬유", "자동차", "선박", "항공", "농업", "축산", "임업",
+        "화학", "제철", "주조", "판금", "배관", "도장", "가공", "측량",
+    ]
 
     # ── 정책값: 수집·밴딩·재빌드 임계 (F-1, F-7, F-8, F-10) ──
     COLLECT_SAMPLE_SIZE: int = 50

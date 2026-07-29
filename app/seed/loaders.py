@@ -7,12 +7,13 @@ import json
 import logging
 from pathlib import Path
 
-from sqlalchemy import delete
+from sqlalchemy import delete, update
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session
 
 from app.persistence.models import Job, JobProfile
 from app.seed import SEED_DATA_DIR
+from app.seed.overrides import load_tagline_overrides
 
 logger = logging.getLogger("myith.seed.loaders")
 
@@ -57,9 +58,26 @@ def load_jobs(
             set_={k: v for k, v in values.items() if k != "job_code"},
         )
         session.execute(stmt)
+    # 검수 tagline 오버라이드 반영 (화면 텍스트 검수, review_apply가 채움). 없으면 무영향.
+    _apply_tagline_overrides(session)
     if prune:
         _prune_jobs(session, rows)
     return len(rows)
+
+
+def _apply_tagline_overrides(session: Session) -> int:
+    """review_apply가 채운 tagline을 job에 덮어쓴다. 원본 job.json은 수정하지 않는다.
+
+    파일을 비우면 다음 적재부터 원문(job.json) tagline으로 원복된다(docs/review-apply.md).
+    """
+    overrides = load_tagline_overrides()
+    for job_code, tagline in overrides.items():
+        session.execute(
+            update(Job).where(Job.job_code == job_code).values(tagline=tagline)
+        )
+    if overrides:
+        logger.info("tagline 오버라이드 %d건 반영", len(overrides))
+    return len(overrides)
 
 
 def _prune_jobs(session: Session, rows: list[dict]) -> int:
