@@ -204,7 +204,10 @@ class AnthropicLLMProvider:
 
 
 def _build_client() -> Any | None:
-    provider = (settings.LLM_PROVIDER or "vertex").lower()
+    # 기본값은 anthropic 직접 API다(확정 정정 2026-07-28, I-4·O-3). 폴백 리터럴을 "vertex"로 두면
+    # compose가 ${LLM_PROVIDER:-}로 빈 문자열을 주입할 때(O-3) ("" or "vertex")="vertex"가 되어,
+    # 유효한 LLM_API_KEY가 있어도 GCP_PROJECT_ID 부재로 LLM이 통째로 비활성된다. vertex는 명시 옵트인만.
+    provider = (settings.LLM_PROVIDER or "anthropic").lower()
     try:
         if provider == "vertex":
             if not settings.GCP_PROJECT_ID:
