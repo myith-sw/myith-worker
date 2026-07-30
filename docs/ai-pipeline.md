@@ -73,6 +73,7 @@ LLM 판정이 게이트를 통과하며 줄어든다. 아래 숫자는 [guard-tr
 
 ```mermaid
 flowchart LR
+    NOTE["⚠️ 숫자 = §1 모의 실행값<br/>발표엔 §2 실측으로 교체"]:::note
     L["LLM 판정<br/>12개<br/>analyzer.py:151"]:::llm --> G1{"가드1<br/>닫힌 집합"}:::det
     G1 -->|"10"| G2{"가드2<br/>근거 강제"}:::det
     G1 -. "폐기 2" .-> X1([목록 밖<br/>kubernetes·kafka]):::drop
@@ -86,6 +87,7 @@ flowchart LR
     classDef llm fill:#ffe0b2,stroke:#e65100,stroke-width:2px,color:#000;
     classDef det fill:#bbdefb,stroke:#0d47a1,stroke-width:2px,color:#000;
     classDef drop fill:#eeeeee,stroke:#9e9e9e,stroke-dasharray:5 5,color:#616161;
+    classDef note fill:#fff3cd,stroke:#856404,stroke-width:1px,color:#000;
 ```
 
 > **12개 중 6개 폐기.** 이 그림 하나가 "LLM 출력을 그대로 믿지 않는다"를 증명한다.
