@@ -2,92 +2,74 @@
 
 MYiTH Worker의 AI 사용 흐름. **핵심은 "무엇이 폐기되고, AI 없이도 어떻게 완주하는가"다.**
 LLM은 문구·근거 판정만 하고, 로드맵 구조(레벨·순서)는 결정론(공식)이 정한다(C-2).
-각 노드의 `파일:줄`은 실제 구현 위치다 — 있는 것만 그렸다.
+각 노드의 구현 위치(`파일:줄`)는 판독성을 위해 그림에서 빼고 문서 하단 [근거 목록](#근거-파일줄)에 모았다.
+
+## 그림 1 — 전체 흐름
+
+3초 안에 읽히게 했다 — 주황(LLM)은 **판정만** 하고, 파랑(공식)이 **구조를 정한다.** 상세 분기는 그림 2·3에 있다.
 
 ```mermaid
-flowchart TD
-    IN["사용자 입력<br/>서술형 · GitHub repoUrl · PDF/이미지 fileKey"]:::input
+flowchart TB
+    IN["사용자 입력<br/>서술형 · GitHub · 포트폴리오 PDF"]:::input
 
-    %% ── 입력 해석 (G-4 3단 하이브리드, 페이지 단위) ──
-    IN --> DOC{"충분한 텍스트?<br/>document.py:98"}:::det
-    DOC -->|"1단계 텍스트 충분"| CONTENT
-    DOC -->|"부족"| OCR{"OCR 신뢰도?<br/>ocr.py"}:::llm
-    OCR -->|"자격증명 없음<br/>→ 스킵"| VIS
-    OCR -->|"신뢰도 미달"| VIS
-    OCR -->|"충분"| CONTENT
-    VIS["Vision LLM<br/>키워드만 추출<br/>vision.py:41"]:::llm
-    VIS -->|"성공"| CONTENT
-    VIS -->|"실패"| DROPDOC(["문서 기여 없음"]):::drop
-    GH["GitHub 요약<br/>언어·README·매니페스트<br/>github.py"]:::llm
-    IN --> GH
-    GH -->|"404·비공개·타임아웃"| DROPGH(["스킵"]):::drop
-    GH --> CONTENT
+    IN --> PARSE["입력 해석 3단<br/>텍스트 → OCR → Vision<br/>document.py"]:::mix
+    PARSE --> SET[["닫힌 스킬 목록 고정 주입<br/>job_profile.skills"]]:::det
+    SET --> LLM["LLM 역량 판정<br/>claude-sonnet-5<br/>analyzer.py:128"]:::llm
 
-    CONTENT["산출물 텍스트<br/>서술형 + GitHub + 문서<br/>roadmap_generation.py"]:::det
+    LLM --> GUARD{"5중 가드<br/>닫힌집합 · 근거강제 · 신뢰도<br/>스키마 · 사실검증"}:::det
+    GUARD -. "절반 폐기" .-> DROP(["근거 없는 판정<br/>버림"]):::drop
+    GUARD -->|"근거 있는 것만"| MERGE["user_competency 저장<br/>자가진단과 병합"]:::det
 
-    %% ── LLM 근거 판정 (G-5, 닫힌 분류) ──
-    CONTENT --> SKILLS[["닫힌 스킬 목록 주입<br/>job_profile.skills"]]:::det
-    SKILLS --> LLM["LLM 역량 판정<br/>claude-sonnet-5<br/>analyzer.py:128"]:::llm
+    LLM -. "전면 실패" .-> FB["자가진단만으로 진행"]:::fb
+    FB --> MERGE
 
-    %% ── 가드 5중 ──
-    LLM --> G1{"목록 안?<br/>가드1"}:::det
-    G1 -->|"목록 밖"| D1(["폐기"]):::drop
-    G1 --> G2{"근거가 원문에 실재?<br/>가드2"}:::det
-    G2 -->|"불일치"| D2(["폐기"]):::drop
-    G2 --> G3{"신뢰도 ≥ 임계?<br/>가드3"}:::det
-    G3 -->|"미달"| D3(["폐기"]):::drop
-    G3 --> ACC["user_competency 저장<br/>+ CompetencyExtracted 발행"]:::det
+    MERGE --> DET["결정론 조립 · LLM 관여 0<br/>D = 0.45·S + 0.30·(1−P) + 0.25·N<br/>위상정렬 → Lv 밴딩 → 우선순위"]:::det
+    DET --> OUT["개인 로드맵 완성"]:::out
+    DET -. "선택적" .-> L2["문구 개인화 층2<br/>실패 시 층1 템플릿"]:::llm
+    L2 -.-> OUT
 
-    LLM -.->|"스키마 이탈<br/>가드4 재시도"| LLM
-    LLM -.->|"전면 실패<br/>가드5"| FB["자가진단만으로 조립<br/>(빈 결과 발행)"]:::fallback
-
-    %% ── 결정론 영역 (LLM 없음) ──
-    ACC --> DET["결정론 영역 (LLM 0)<br/>D=0.45S+0.30(1−P)+0.25N<br/>위상정렬 → Lv 밴딩<br/>scoring.py · job_profile"]:::det
-    FB --> DET
-    DET --> QUEST["퀘스트 반영<br/>ALREADY_KNOWN · guidance(H-1)<br/>guidance.py"]:::det
-
-    %% ── H-1 층2 / H-2 (선택적 LLM) ──
-    QUEST -.->|"narrative 있을 때만"| L2["층2 문구 다듬기<br/>claude-sonnet-5<br/>실패→층1 폴백"]:::llm
-    STAR["STAR 자소서 보완<br/>claude-haiku-4-5<br/>star_enhance.py:124"]:::llm
-    STAR -.->|"실패"| SFAIL(["FAILED 발행<br/>화면 안 멈춤"]):::fallback
-
-    classDef llm fill:#ffe0b2,stroke:#e65100,stroke-width:2px,color:#000;
-    classDef det fill:#bbdefb,stroke:#0d47a1,stroke-width:2px,color:#000;
-    classDef drop fill:#eeeeee,stroke:#9e9e9e,stroke-dasharray:5 5,color:#616161;
-    classDef fallback fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px,color:#000;
-    classDef input fill:#fff,stroke:#333,stroke-width:1px,color:#000;
+    classDef llm fill:#ffe0b2,stroke:#e65100,stroke-width:2px,color:#000
+    classDef det fill:#bbdefb,stroke:#0d47a1,stroke-width:2px,color:#000
+    classDef mix fill:#f8bbd0,stroke:#880e4f,stroke-width:2px,color:#000
+    classDef drop fill:#eeeeee,stroke:#9e9e9e,stroke-dasharray:5 5,color:#616161
+    classDef fb fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px,color:#000
+    classDef input fill:#fff,stroke:#333,color:#000
+    classDef out fill:#a5d6a7,stroke:#1b5e20,stroke-width:3px,color:#000
 ```
 
 ## 색 규칙
-- 🟧 **주황 = LLM 노드** — 여기만 AI가 관여한다(근거 판정·문구·Vision·STAR)
-- 🟦 **파랑 = 결정론 노드** — 공식·규칙. **로드맵 구조(레벨·순서)엔 LLM이 없다(C-2)**
+- 🟧 **주황 = LLM 판정** — 역량 판정·문구·Vision. 여기만 AI가 관여한다.
+- 🟦 **파랑 = 결정론** — 공식·규칙. **로드맵 구조(레벨·순서)엔 LLM이 없다(C-2)**
+- 🌸 **분홍 = 입력 해석 3단** — 텍스트→OCR→Vision 혼합
 - ⬜ **회색 점선 = 폐기 경로** — 가드가 걸러내는 것
-- 🟩 **초록 = 폴백 경로** — AI가 죽어도 완주한다(C-3)
+- 🟩 **초록 = 폴백/완성** — AI가 죽어도 완주한다(C-3)
 
 ---
 
-## 그림 2 — 가드 게이트 단면도 (LLM을 믿지 않는다)
+## 그림 2 — 가드 깔때기 (LLM을 믿지 않는다)
 
-LLM 판정이 게이트를 통과하며 줄어든다. 아래 숫자는 [guard-trace-sample.md](guard-trace-sample.md) **§1 모의
-실행값**(입력만 모의, 가드 로직은 실측)이다 — 발표엔 §2 실측으로 교체한다. **폐기된 항목은 옆으로 빠진다.**
+LLM 판정 12개가 가드를 통과하며 6개로 줄어든다. 숫자는 [guard-trace-sample.md](guard-trace-sample.md)
+**§1 모의 실행값**(입력만 모의, 가드 로직은 실측)이며, 그림 안 NOTE에도 표기했다 — 발표엔 §2 실측으로 교체한다.
 
 ```mermaid
-flowchart LR
-    NOTE["⚠️ 숫자 = §1 모의 실행값<br/>발표엔 §2 실측으로 교체"]:::note
-    L["LLM 판정<br/>12개<br/>analyzer.py:151"]:::llm --> G1{"가드1<br/>닫힌 집합"}:::det
-    G1 -->|"10"| G2{"가드2<br/>근거 강제"}:::det
-    G1 -. "폐기 2" .-> X1([목록 밖<br/>kubernetes·kafka]):::drop
-    G2 -->|"6"| G3{"가드3<br/>신뢰도 임계"}:::det
-    G2 -. "폐기 4" .-> X2([근거 원문에 없음<br/>aws·jpa·ts·중복]):::drop
-    G3 -->|"6"| G4{"가드4<br/>스키마·범위"}:::det
-    G3 -. "폐기 0" .-> X3([·]):::drop
-    G4 -->|"6"| ACC["✅ 최종 반영 6개<br/>user_competency"]:::det
-    G4 -. "폐기 0" .-> X4([·]):::drop
+flowchart TB
+    L["LLM 판정 &nbsp;12개"]:::llm
+    L --> G1["가드 1 · 닫힌 집합<br/>목록 밖 스킬 제거"]:::det
+    G1 -->|"남은 10"| G2["가드 2 · 근거 강제<br/>원문에 없는 판정 제거"]:::det
+    G2 -->|"남은 6"| G3["가드 3 · 신뢰도 임계"]:::det
+    G3 -->|"남은 6"| G45["가드 4·5 · 스키마 / 사실검증"]:::det
+    G45 --> ACC["최종 반영 &nbsp;6개<br/>user_competency"]:::ok
 
-    classDef llm fill:#ffe0b2,stroke:#e65100,stroke-width:2px,color:#000;
-    classDef det fill:#bbdefb,stroke:#0d47a1,stroke-width:2px,color:#000;
-    classDef drop fill:#eeeeee,stroke:#9e9e9e,stroke-dasharray:5 5,color:#616161;
-    classDef note fill:#fff3cd,stroke:#856404,stroke-width:1px,color:#000;
+    G1 -. "폐기 2" .-> X1(["kubernetes · kafka<br/>목록에 없음"]):::drop
+    G2 -. "폐기 4" .-> X2(["aws · jpa · typescript · 중복<br/>근거가 원문에 없음"]):::drop
+
+    NOTE["모의 입력 실행값<br/>가드 로직은 실제 코드<br/>발표 시 실측으로 교체"]:::note
+
+    classDef llm fill:#ffe0b2,stroke:#e65100,stroke-width:2px,color:#000
+    classDef det fill:#bbdefb,stroke:#0d47a1,stroke-width:2px,color:#000
+    classDef drop fill:#eeeeee,stroke:#9e9e9e,stroke-dasharray:5 5,color:#616161
+    classDef ok fill:#a5d6a7,stroke:#1b5e20,stroke-width:3px,color:#000
+    classDef note fill:#fff9c4,stroke:#f57f17,stroke-dasharray:4 3,color:#000
 ```
 
 > **12개 중 6개 폐기.** 이 그림 하나가 "LLM 출력을 그대로 믿지 않는다"를 증명한다.
@@ -100,21 +82,25 @@ flowchart LR
 선불 $5 소진(402)·401·429로 LLM이 죽으면 서킷브레이커가 열리고, **초록 경로만으로 로드맵이 완성**된다.
 
 ```mermaid
-flowchart TD
-    DEAD["✕ LLM 전면 사망<br/>402 크레딧소진 · 401 · 429"]:::dead --> BRK["서킷브레이커 OPEN<br/>breaker.py"]:::fb
-    BRK --> EX["역량추출 → 빈 결과<br/>analyzer.py:170"]:::fb
-    EX --> SELF["자가진단만으로 병합<br/>Core ConsistencyScheduler(60초)"]:::fb
-    SELF --> DET["job_profile 사전계산<br/>D=0.45S+0.30(1−P)+0.25N · Lv 밴딩<br/>(LLM 0)"]:::det
-    DET --> DONE(["✅ 로드맵 생성 완주"]):::done
-    BRK --> STAR["STAR 보완 → status:FAILED 발행<br/>ai_enhancement.py"]:::fb
-    STAR --> SDONE(["✅ 화면 스피너 안 멈춤"]):::done
-    BRK --> G["층2 문구 → 층1 규칙 폴백<br/>guidance.py"]:::fb
-    G --> GDONE(["✅ 규칙 기반 안내 문구"]):::done
+flowchart TB
+    DEAD["LLM 전면 사망<br/>402 크레딧 소진 · 401 · 429"]:::dead
+    DEAD --> BRK["AsyncCircuitBreaker OPEN<br/>직접 구현 · 실제 401로 검증"]:::fb
 
-    classDef dead fill:#ffcdd2,stroke:#b71c1c,stroke-width:3px,color:#000;
-    classDef fb fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px,color:#000;
-    classDef det fill:#bbdefb,stroke:#0d47a1,stroke-width:2px,color:#000;
-    classDef done fill:#a5d6a7,stroke:#1b5e20,stroke-width:3px,color:#000;
+    BRK --> EX["역량 추출 → 빈 결과"]:::fb
+    EX --> SELF["자가진단만으로 병합<br/>Core 정합성 스케줄러 60초"]:::fb
+    SELF --> DET["사전 계산된 job_profile<br/>D 공식 · Lv 밴딩 (LLM 0)"]:::det
+    DET --> DONE(["로드맵 생성 완주"]):::done
+
+    BRK --> STAR["STAR 보완 → FAILED 발행"]:::fb
+    STAR --> SDONE(["화면 스피너 안 멈춤"]):::done
+
+    BRK --> G["문구 층2 → 층1 템플릿 폴백"]:::fb
+    G --> GDONE(["규칙 기반 안내 문구 노출"]):::done
+
+    classDef dead fill:#ffcdd2,stroke:#b71c1c,stroke-width:3px,color:#000
+    classDef fb fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px,color:#000
+    classDef det fill:#bbdefb,stroke:#0d47a1,stroke-width:2px,color:#000
+    classDef done fill:#a5d6a7,stroke:#1b5e20,stroke-width:3px,color:#000
 ```
 
 > **AI가 죽어도 로드맵·퀘스트·문구가 전부 나온다.** 401 실호출로 세 경로(역량 []·STAR FAILED·문구 층1)
@@ -122,7 +108,7 @@ flowchart TD
 
 ## 근거 (파일:줄)
 - 3단 문서 파싱: [document.py:98](../app/competency/document.py#L98)
-- OCR(비-LLM, 자격증명 없으면 스킵): [ocr.py](../app/competency/ocr.py)
+- OCR(비-LLM, 자격증명 없으면 스킵 — 데모 범위 밖): [ocr.py](../app/competency/ocr.py)
 - Vision 키워드: [vision.py:41](../app/competency/vision.py#L41)
 - GitHub 요약: [github.py](../app/competency/github.py)
 - 역량 판정(닫힌 분류) + 가드 5중: [analyzer.py:128](../app/competency/analyzer.py#L128)
@@ -132,5 +118,5 @@ flowchart TD
 - 공급자(서킷브레이커·구조화 출력·폴백): [provider.py](../app/llm/provider.py)
 
 > **과장 금지:** F(직무 프로필 빌드) 오케스트레이터는 런타임 미실행 — D·레벨·선후관계는
-> 시드 job_profile에 사전계산돼 있고 Core가 조립 시 읽는다. 위 "결정론 영역"은 그 사전계산
+> 시드 job_profile에 사전계산돼 있고 Core가 조립 시 읽는다. 위 "결정론 조립"은 그 사전계산
 > 공식(scoring.py, 테스트됨)과 조립을 가리킨다.
