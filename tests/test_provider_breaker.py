@@ -9,7 +9,8 @@ import asyncio
 import pytest
 
 from app.competency.analyzer import extract_competencies
-from app.llm.provider import AnthropicLLMProvider, _image_media_type
+from app.llm import provider as provider_mod
+from app.llm.provider import AnthropicLLMProvider, _build_client, _image_media_type
 from app.resilience.breaker import AsyncCircuitBreaker, CircuitOpenError
 
 
@@ -75,4 +76,38 @@ def test_image_media_type_detection():
     assert _image_media_type(b"\xff\xd8\xff\xe0....") == "image/jpeg"
     assert _image_media_type(b"RIFF\x00\x00\x00\x00WEBP....") == "image/webp"
     assert _image_media_type(b"GIF89a....") == "image/gif"
+
+
+# ── 공급자 기본값: anthropic이 기본, vertex는 명시 옵트인만 (HIGH 수정 회귀) ──
+
+
+def _set(monkeypatch, **kw):
+    for k, v in kw.items():
+        monkeypatch.setattr(provider_mod.settings, k, v)
+
+
+def test_build_client_empty_provider_falls_back_to_anthropic_not_vertex(monkeypatch):
+    # compose가 LLM_PROVIDER=""를 주입해도(O-3 ${VAR:-}) vertex로 새면 안 된다.
+    # 유효 키가 있으면 anthropic 클라이언트가 만들어져야 한다(AI가 조용히 꺼지지 않음).
+    _set(monkeypatch, LLM_PROVIDER="", LLM_API_KEY="sk-test", GCP_PROJECT_ID=None)
+    client = _build_client()
+    assert client is not None
+    assert type(client).__name__ == "AsyncAnthropic"  # AsyncAnthropicVertex 아님
+
+
+def test_build_client_none_provider_falls_back_to_anthropic(monkeypatch):
+    _set(monkeypatch, LLM_PROVIDER=None, LLM_API_KEY="sk-test", GCP_PROJECT_ID=None)
+    assert type(_build_client()).__name__ == "AsyncAnthropic"
+
+
+def test_build_client_explicit_vertex_still_honored(monkeypatch):
+    # 명시적 vertex 옵트인은 그대로 동작한다(GCP 없으면 None=비활성). 수정이 vertex 경로를 막지 않음.
+    _set(monkeypatch, LLM_PROVIDER="vertex", LLM_API_KEY="sk-test", GCP_PROJECT_ID=None)
+    assert _build_client() is None
+
+
+def test_build_client_no_api_key_disables(monkeypatch):
+    # anthropic 경로인데 키 없으면 None(규칙 폴백, C-3)
+    _set(monkeypatch, LLM_PROVIDER="anthropic", LLM_API_KEY=None, GCP_PROJECT_ID=None)
+    assert _build_client() is None
     assert _image_media_type(b"unknown") == "image/png"  # 기본
