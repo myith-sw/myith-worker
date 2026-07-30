@@ -49,11 +49,11 @@ flowchart TB
 ## 그림 2 — 가드 깔때기 (LLM을 믿지 않는다)
 
 LLM 판정 12개가 가드를 통과하며 6개로 줄어든다. 숫자는 [guard-trace-sample.md](guard-trace-sample.md)
-**§1 모의 실행값**(입력만 모의, 가드 로직은 실측)이며, 그림 안 NOTE에도 표기했다 — 발표엔 §2 실측으로 교체한다.
+**§1 모의 실행값**(입력만 모의, 가드 로직은 실측)이며, 그림 안 첫 노드(LLM 판정)에도 표기했다 — 발표엔 §2 실측으로 교체한다.
 
 ```mermaid
 flowchart TB
-    L["LLM 판정 &nbsp;12개"]:::llm
+    L["LLM 판정 &nbsp;12개<br/><small>모의 입력 실행값 · 가드 로직은 실제 코드</small>"]:::llm
     L --> G1["가드 1 · 닫힌 집합<br/>목록 밖 스킬 제거"]:::det
     G1 -->|"남은 10"| G2["가드 2 · 근거 강제<br/>원문에 없는 판정 제거"]:::det
     G2 -->|"남은 6"| G3["가드 3 · 신뢰도 임계"]:::det
@@ -63,13 +63,10 @@ flowchart TB
     G1 -. "폐기 2" .-> X1(["kubernetes · kafka<br/>목록에 없음"]):::drop
     G2 -. "폐기 4" .-> X2(["aws · jpa · typescript · 중복<br/>근거가 원문에 없음"]):::drop
 
-    NOTE["모의 입력 실행값<br/>가드 로직은 실제 코드<br/>발표 시 실측으로 교체"]:::note
-
     classDef llm fill:#ffe0b2,stroke:#e65100,stroke-width:2px,color:#000
     classDef det fill:#bbdefb,stroke:#0d47a1,stroke-width:2px,color:#000
     classDef drop fill:#eeeeee,stroke:#9e9e9e,stroke-dasharray:5 5,color:#616161
     classDef ok fill:#a5d6a7,stroke:#1b5e20,stroke-width:3px,color:#000
-    classDef note fill:#fff9c4,stroke:#f57f17,stroke-dasharray:4 3,color:#000
 ```
 
 > **12개 중 6개 폐기.** 이 그림 하나가 "LLM 출력을 그대로 믿지 않는다"를 증명한다.
